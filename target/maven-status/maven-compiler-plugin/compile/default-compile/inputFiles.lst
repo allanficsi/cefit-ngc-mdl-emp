@@ -1,0 +1,17 @@
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/PessoaFisicaDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/empregador/entity/Empregador.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/CargoDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/common/dto/AuditoriaDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/empregador/dto/EmpregadorDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/TelefoneDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/empregador/dto/CnaeDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/ContatoDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/empregador/service/EmpregadorService.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/seguranca/dto/UsuarioDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/CadastroUnicoDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/ExtensaoEnderecoDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/PessoaJuridicaDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/empregador/entity/Cnae.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/cadastroUnico/dto/EnderecoDTO.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/empregador/service/CnaeService.java
+/Users/diego/git/cefit-ngc/src/main/java/br/com/aptare/cefit/correio/CorreioDTO.java
