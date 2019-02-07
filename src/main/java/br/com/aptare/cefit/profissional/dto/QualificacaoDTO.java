@@ -1,6 +1,6 @@
 package br.com.aptare.cefit.profissional.dto;
 
-import br.com.aptare.seguranca.entidade.Auditoria;
+import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 
 public class QualificacaoDTO
 {
@@ -10,7 +10,7 @@ public class QualificacaoDTO
    
    private String flagAtivo;
 
-   private Auditoria auditoria;
+   private AuditoriaDTO auditoria;
 
    public Long getCodigo()
    {
@@ -42,12 +42,12 @@ public class QualificacaoDTO
       this.flagAtivo = flagAtivo;
    }
 
-   public Auditoria getAuditoria()
+   public AuditoriaDTO getAuditoria()
    {
       return auditoria;
    }
 
-   public void setAuditoria(Auditoria auditoria)
+   public void setAuditoria(AuditoriaDTO auditoria)
    {
       this.auditoria = auditoria;
    }

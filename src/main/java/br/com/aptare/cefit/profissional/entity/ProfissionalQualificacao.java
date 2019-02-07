@@ -28,7 +28,6 @@ public class ProfissionalQualificacao implements Serializable
    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_PRF_QLF")
    @SequenceGenerator(name = "SQ_PRF_QLF", sequenceName = "SC_PRF.SQ_PRF_QLF")
    private Long codigo;
-   
 
    @Column(name = "CD_PRF")
    private Long codigoProfissional;
@@ -39,6 +38,10 @@ public class ProfissionalQualificacao implements Serializable
    
    @Column(name = "CD_QLF")
    private Long codigoQualificacao;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_QLF", insertable = false, updatable = false)
+   private Qualificacao qualificacao;
 
    public Long getCodigo()
    {
@@ -78,5 +81,15 @@ public class ProfissionalQualificacao implements Serializable
    public void setProfissional(Profissional profissional)
    {
       this.profissional = profissional;
+   }
+
+   public Qualificacao getQualificacao()
+   {
+      return qualificacao;
+   }
+
+   public void setQualificacao(Qualificacao qualificacao)
+   {
+      this.qualificacao = qualificacao;
    }
 }

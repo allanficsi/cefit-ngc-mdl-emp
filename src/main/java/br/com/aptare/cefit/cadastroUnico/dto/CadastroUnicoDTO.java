@@ -2,6 +2,8 @@ package br.com.aptare.cefit.cadastroUnico.dto;
 
 import java.util.Set;
 
+import br.com.aptare.cefit.common.dto.AuditoriaDTO;
+
 public class CadastroUnicoDTO
 {
    private Long codigo;
@@ -23,6 +25,8 @@ public class CadastroUnicoDTO
    private String cnpj;
    
    private Set<EnderecoDTO> listaEndereco;
+   
+   private AuditoriaDTO auditoria;
 
    public Long getCodigo()
    {
@@ -122,5 +126,15 @@ public class CadastroUnicoDTO
    public void setListaEndereco(Set<EnderecoDTO> listaEndereco)
    {
       this.listaEndereco = listaEndereco;
+   }
+
+   public AuditoriaDTO getAuditoria()
+   {
+      return auditoria;
+   }
+
+   public void setAuditoria(AuditoriaDTO auditoria)
+   {
+      this.auditoria = auditoria;
    }
 }

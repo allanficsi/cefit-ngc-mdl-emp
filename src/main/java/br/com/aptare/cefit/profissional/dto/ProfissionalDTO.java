@@ -5,7 +5,6 @@ import java.util.Set;
 
 import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-import br.com.aptare.cefit.profissional.entity.ProfissionalQualificacao;
 
 public class ProfissionalDTO
 {
@@ -37,7 +36,7 @@ public class ProfissionalDTO
    
    private String flagPsicologo;
    
-   private Set<ProfissionalQualificacao> listaProfissionalQualificacao;
+   private Set<ProfissionalQualificacaoDTO> listaProfissionalQualificacao;
    
    public Long getCodigo()
    {
@@ -179,12 +178,12 @@ public class ProfissionalDTO
       this.flagPsicologo = flagPsicologo;
    }
 
-   public Set<ProfissionalQualificacao> getListaProfissionalQualificacao()
+   public Set<ProfissionalQualificacaoDTO> getListaProfissionalQualificacao()
    {
       return listaProfissionalQualificacao;
    }
 
-   public void setListaProfissionalQualificacao(Set<ProfissionalQualificacao> listaProfissionalQualificacao)
+   public void setListaProfissionalQualificacao(Set<ProfissionalQualificacaoDTO> listaProfissionalQualificacao)
    {
       this.listaProfissionalQualificacao = listaProfissionalQualificacao;
    }

@@ -1,6 +1,7 @@
 package br.com.aptare.cefit.profissional.entity;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
 
@@ -34,6 +36,9 @@ public class Qualificacao implements Serializable
    
    @Column(name = "FG_ATV")
    private String flagAtivo;
+   
+   @Transient
+   private HashMap<Object, String> filtro;
 
    @Embedded
    private Auditoria auditoria;
@@ -76,5 +81,15 @@ public class Qualificacao implements Serializable
    public void setAuditoria(Auditoria auditoria)
    {
       this.auditoria = auditoria;
+   }
+
+   public HashMap<Object, String> getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(HashMap<Object, String> filtro)
+   {
+      this.filtro = filtro;
    }
 }
