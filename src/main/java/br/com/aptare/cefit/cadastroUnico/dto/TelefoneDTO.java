@@ -1,5 +1,7 @@
 package br.com.aptare.cefit.cadastroUnico.dto;
 
+import br.com.aptare.cefit.common.dto.AuditoriaDTO;
+
 public class TelefoneDTO
 {
    private Long codigo;
@@ -16,6 +18,8 @@ public class TelefoneDTO
    
    private String descricaoTipo;
 
+   private AuditoriaDTO auditoria;
+   
    public Long getCodigo()
    {
       return codigo;
@@ -84,5 +88,15 @@ public class TelefoneDTO
    public void setDescricaoTipo(String descricaoTipo)
    {
       this.descricaoTipo = descricaoTipo;
+   }
+
+   public AuditoriaDTO getAuditoria()
+   {
+      return auditoria;
+   }
+
+   public void setAuditoria(AuditoriaDTO auditoria)
+   {
+      this.auditoria = auditoria;
    }
 }

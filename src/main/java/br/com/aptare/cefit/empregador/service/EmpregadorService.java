@@ -10,6 +10,7 @@ import br.com.aptare.cefit.empregador.entity.Empregador;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.seguranca.entidade.Auditoria;
 
 public class EmpregadorService extends AptareService<Empregador>
 {
@@ -130,10 +131,22 @@ public class EmpregadorService extends AptareService<Empregador>
        }
    }
 
-   public Empregador ativarInativar(Session session, Empregador empregador) throws AptareException
+   public Empregador ativarInativar(Session session, Empregador entity) throws AptareException
    {
-       session.update(empregador);
-       return empregador;
+      // Get cargo somente com o codigo
+      Empregador empregador = new Empregador();
+      empregador.setCodigo(entity.getCodigo());
+
+      empregador = this.get(session, empregador, null, null);
+
+      empregador.setSituacao(entity.getSituacao());
+      empregador.setAuditoria(new Auditoria());
+      empregador.getAuditoria().setDataAlteracao(entity.getAuditoria().getDataAlteracao());
+      empregador.getAuditoria().setCodigoUsuarioAlteracao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+
+      session.merge(empregador);
+
+      return empregador;
    }
 
 }
