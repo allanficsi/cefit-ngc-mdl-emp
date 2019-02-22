@@ -1,5 +1,7 @@
 package br.com.aptare.cefit.profissional.service;
 
+import java.util.Date;
+
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -132,8 +134,21 @@ public class ProfissionalService extends AptareService<Profissional>
 
    public Profissional ativarInativar(Session session, Profissional profissional) throws AptareException
    {
-       session.update(profissional);
-       return profissional;
+      Profissional objInativar = new Profissional();
+      objInativar.setCodigo(profissional.getCodigo());
+      
+      objInativar = this.get(objInativar, null, null);
+      
+      if(objInativar != null) 
+      {
+         objInativar.setFlagAtivo("S");
+         objInativar.getAuditoria().setDataAlteracao(new Date());
+         objInativar.getAuditoria().setCodigoUsuarioAlteracao(profissional.getAuditoria().getCodigoUsuarioAlteracao());
+         
+         session.update(objInativar);
+      }
+      
+      return objInativar;
    }
 
 }

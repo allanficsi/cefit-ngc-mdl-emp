@@ -60,7 +60,7 @@ public class TrabalhadorCboService extends AptareService<TrabalhadorCbo>
          // DELETA OS REGISTROS EXISTENTES
          TrabalhadorCbo trabalhadorCbo = new TrabalhadorCbo();
          trabalhadorCbo.setCodigoTrabalhador(codigoTrabalhador);
-         List<TrabalhadorCbo> listaRemove = TrabalhadorCboService.getInstancia().pesquisar(session, trabalhadorCbo, null, null);
+         List<TrabalhadorCbo> listaRemove = this.pesquisar(session, trabalhadorCbo, null, null);
 
          for (TrabalhadorCbo objRemove : listaRemove)
          {
