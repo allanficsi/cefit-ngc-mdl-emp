@@ -28,7 +28,7 @@ public class ItemEspacoService extends AptareService<ItemEspaco>
 
    private ItemEspacoService()
    {
-      adicionarFiltro("descricao", CatalogoRestricoes.IGUAL, "filtro.descricao");      
+      adicionarFiltro("descricao", CatalogoRestricoes.IGUAL, "filtro.descricao");
    }
    
    @Override
