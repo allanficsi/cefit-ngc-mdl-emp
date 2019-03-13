@@ -42,7 +42,7 @@ public class TipoAcaoService extends AptareService<TipoAcao>
       
       tipoAcao = this.get(session, tipoAcao, null, null);
       
-      if(tipoAcao != null && !entity.getDescricao().equals(tipoAcao.getDescricao()))
+      if(tipoAcao != null)
       {
          throw new AptareException("Este Tipo de Ação já existe em nossa base de dados.");
       }
@@ -59,7 +59,6 @@ public class TipoAcaoService extends AptareService<TipoAcao>
       tipoAcao = this.get(session, tipoAcao, null, null);
       
       if(tipoAcao != null 
-            && !entity.getDescricao().equals(tipoAcao.getDescricao())
             && tipoAcao.getCodigo().longValue() != entity.getCodigo().longValue())
       {
          throw new AptareException("Este Tipo de Ação já existe em nossa base de dados.");

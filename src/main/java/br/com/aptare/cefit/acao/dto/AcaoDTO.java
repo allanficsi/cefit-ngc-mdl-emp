@@ -1,5 +1,7 @@
 package br.com.aptare.cefit.acao.dto;
 
+import java.util.Set;
+
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 import br.com.aptare.cefit.espaco.entity.Espaco;
 
@@ -15,6 +17,8 @@ public class AcaoDTO
    
    private Long codigoTipoAcao;
    
+   private TipoAcaoDTO tipoAcao;
+   
    private Long numeroVagas;
    
    private Boolean flagValeTransporte;
@@ -26,6 +30,10 @@ public class AcaoDTO
    private Long codigoAgendamento;
    
    private Long situacao;
+   
+   private Set<AcaoProfissionalDTO> listaAcaoProfissional;
+   
+   private Set<AgendaDTO> listaAgenda;
    
    private AuditoriaDTO auditoria;
 
@@ -147,5 +155,35 @@ public class AcaoDTO
    public void setAuditoria(AuditoriaDTO auditoria)
    {
       this.auditoria = auditoria;
+   }
+
+   public TipoAcaoDTO getTipoAcao()
+   {
+      return tipoAcao;
+   }
+
+   public void setTipoAcao(TipoAcaoDTO tipoAcao)
+   {
+      this.tipoAcao = tipoAcao;
+   }
+
+   public Set<AcaoProfissionalDTO> getListaAcaoProfissional()
+   {
+      return listaAcaoProfissional;
+   }
+
+   public void setListaAcaoProfissional(Set<AcaoProfissionalDTO> listaAcaoProfissional)
+   {
+      this.listaAcaoProfissional = listaAcaoProfissional;
+   }
+
+   public Set<AgendaDTO> getListaAgenda()
+   {
+      return listaAgenda;
+   }
+
+   public void setListaAgenda(Set<AgendaDTO> listaAgenda)
+   {
+      this.listaAgenda = listaAgenda;
    }
 }
