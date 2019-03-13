@@ -2,6 +2,7 @@ package br.com.aptare.cefit.acao.entity;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -63,11 +65,14 @@ public class Acao implements Serializable
    @Column(name = "OBS_ACA")
    private String observacao;
    
-   @Column(name = "CD_AGN")
-   private Long codigoAgendamento;
-   
    @Column(name = "ST_ACA")
    private Long situacao;
+   
+   @OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
+   private Set<Agenda> listaAgenda;   
+   
+   @OneToMany(mappedBy = "acao", fetch = FetchType.LAZY)
+   private Set<AcaoProfissional> listaAcaoProfissional;
    
    @Transient
    private HashMap<Object, String> filtro;
@@ -175,16 +180,6 @@ public class Acao implements Serializable
       this.observacao = observacao;
    }
 
-   public Long getCodigoAgendamento()
-   {
-      return codigoAgendamento;
-   }
-
-   public void setCodigoAgendamento(Long codigoAgendamento)
-   {
-      this.codigoAgendamento = codigoAgendamento;
-   }
-
    public Long getSituacao()
    {
       return situacao;
@@ -214,4 +209,26 @@ public class Acao implements Serializable
    {
       this.auditoria = auditoria;
    }
+
+   public Set<Agenda> getListaAgenda()
+   {
+      return listaAgenda;
+   }
+
+   public void setListaAgenda(Set<Agenda> listaAgenda)
+   {
+      this.listaAgenda = listaAgenda;
+   }
+
+   public Set<AcaoProfissional> getListaAcaoProfissional()
+   {
+      return listaAcaoProfissional;
+   }
+
+   public void setListaAcaoProfissional(Set<AcaoProfissional> listaAcaoProfissional)
+   {
+      this.listaAcaoProfissional = listaAcaoProfissional;
+   }
+
+
 }

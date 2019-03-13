@@ -7,9 +7,12 @@ import java.util.HashMap;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -19,7 +22,7 @@ import org.hibernate.annotations.Proxy;
 import br.com.aptare.seguranca.entidade.Auditoria;
 
 @Entity
-@Table(schema = "SC_ESP", name = "TBL_AGN")
+@Table(schema = "SC_ACA", name = "TBL_AGN")
 @Proxy(lazy = true)
 public class Agenda implements Serializable
 {
@@ -29,11 +32,15 @@ public class Agenda implements Serializable
    @Id
    @Column(name = "CD_AGN")
    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_AGN")
-   @SequenceGenerator(name = "SQ_AGN", sequenceName = "SC_ESP.SQ_AGN")
+   @SequenceGenerator(name = "SQ_AGN", sequenceName = "SC_ACA.SQ_AGN")
    private Long codigo;
 
-   @Column(name = "CD_ESP")
-   private Long codigoEspaco;
+   @Column(name = "CD_ACA")
+   private Long codigoAcao;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_ACA", insertable = false, updatable = false)
+   private Acao acao;  
    
    @Column(name = "DT_AGN")
    private Date dataAgenda;
@@ -72,14 +79,24 @@ public class Agenda implements Serializable
       this.codigo = codigo;
    }
 
-   public Long getCodigoEspaco()
+   public Long getCodigoAcao()
    {
-      return codigoEspaco;
+      return codigoAcao;
    }
 
-   public void setCodigoEspaco(Long codigoEspaco)
+   public void setCodigoAcao(Long codigoAcao)
    {
-      this.codigoEspaco = codigoEspaco;
+      this.codigoAcao = codigoAcao;
+   }
+
+   public Acao getAcao()
+   {
+      return acao;
+   }
+
+   public void setAcao(Acao acao)
+   {
+      this.acao = acao;
    }
 
    public Date getDataAgenda()
