@@ -1,12 +1,15 @@
 package br.com.aptare.cefit.cadastroUnico.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 
-public class ContatoDTO
+public class ContatoDTO implements Serializable
 {
+   private static final long serialVersionUID = 1L;
+
    private Long codigo;
    
    private Long codigoCadastroUnico;

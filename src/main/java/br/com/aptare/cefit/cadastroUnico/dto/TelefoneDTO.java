@@ -1,9 +1,13 @@
 package br.com.aptare.cefit.cadastroUnico.dto;
 
+import java.io.Serializable;
+
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 
-public class TelefoneDTO
+public class TelefoneDTO implements Serializable
 {
+   private static final long serialVersionUID = 1L;
+
    private Long codigo;
    
    private Integer ddd;
@@ -15,6 +19,8 @@ public class TelefoneDTO
    private Long nsuOrigem;
    
    private String flagAtivo;
+   
+   private Boolean flagWhats;
    
    private String descricaoTipo;
 
@@ -98,5 +104,15 @@ public class TelefoneDTO
    public void setAuditoria(AuditoriaDTO auditoria)
    {
       this.auditoria = auditoria;
+   }
+
+   public Boolean getFlagWhats()
+   {
+      return flagWhats;
+   }
+
+   public void setFlagWhats(Boolean flagWhats)
+   {
+      this.flagWhats = flagWhats;
    }
 }

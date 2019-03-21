@@ -45,7 +45,16 @@ public class ProfissionalService extends AptareService<Profissional>
       
       // INSERINDO CADASTRO UNICO
       CadastroUnico cadastroUnico = entity.getCadastroUnico();
-      cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      
+      if(cadastroUnico.getCodigo() != null)
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().alterar(session, cadastroUnico);
+      }
+      else 
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      }
+      
       session.flush();
       
       //INSERINDO TRABALHADOR
@@ -69,15 +78,17 @@ public class ProfissionalService extends AptareService<Profissional>
    @Override
    protected void validarInserir(Session session, Profissional entity) throws AptareException
    {
-      CadastroUnico cadastroUnico = new CadastroUnico();
-      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-      cadastroUnico.setTipoPessoa("F");
-      
-      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
-      
-      if(cadastroUnico != null)
+      if(entity.getCodigoCadastroUnico() != null) 
       {
-         throw new AptareException("Este CPF já existe em nossa base de dados.");
+         Profissional profissional = new Profissional();
+         profissional.setCodigoCadastroUnico(entity.getCodigoCadastroUnico());
+         
+         profissional = this.get(session, profissional, null, null);
+         
+         if(profissional != null)
+         {
+            throw new AptareException("Este profissional já existe em nossa base de dados.");
+         }
       }
    }
    
