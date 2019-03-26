@@ -13,6 +13,7 @@ import br.com.aptare.cefit.profissional.entity.ProfissionalQualificacao;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 
 public class ProfissionalService extends AptareService<Profissional>
 {
@@ -36,6 +37,7 @@ public class ProfissionalService extends AptareService<Profissional>
 
    private ProfissionalService()
    {
+      adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
    
    @Override
@@ -45,7 +47,16 @@ public class ProfissionalService extends AptareService<Profissional>
       
       // INSERINDO CADASTRO UNICO
       CadastroUnico cadastroUnico = entity.getCadastroUnico();
-      cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      
+      if(cadastroUnico.getCodigo() != null)
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().alterar(session, cadastroUnico);
+      }
+      else 
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      }
+      
       session.flush();
       
       //INSERINDO TRABALHADOR
@@ -69,15 +80,17 @@ public class ProfissionalService extends AptareService<Profissional>
    @Override
    protected void validarInserir(Session session, Profissional entity) throws AptareException
    {
-      CadastroUnico cadastroUnico = new CadastroUnico();
-      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-      cadastroUnico.setTipoPessoa("F");
-      
-      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
-      
-      if(cadastroUnico != null)
+      if(entity.getCodigoCadastroUnico() != null) 
       {
-         throw new AptareException("Este CPF já existe em nossa base de dados.");
+         Profissional profissional = new Profissional();
+         profissional.setCodigoCadastroUnico(entity.getCodigoCadastroUnico());
+         
+         profissional = this.get(session, profissional, null, null);
+         
+         if(profissional != null)
+         {
+            throw new AptareException("Este profissional já existe em nossa base de dados.");
+         }
       }
    }
    

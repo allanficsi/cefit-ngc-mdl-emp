@@ -1,10 +1,13 @@
 package br.com.aptare.cefit.cadastroUnico.dto;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-public class PessoaFisicaDTO
+public class PessoaFisicaDTO implements Serializable
 {
+   private static final long serialVersionUID = 1L;
+
    private Long codigoCadastroUnico;
 
    private Long registroGeral;
@@ -33,7 +36,7 @@ public class PessoaFisicaDTO
 
    private String identificadorPrincipal;
    
-   private List<TelefoneDTO> listaTelefone;
+   private Set<TelefoneDTO> listaTelefone;
 
    public Long getCodigoCadastroUnico()
    {
@@ -175,13 +178,14 @@ public class PessoaFisicaDTO
       this.identificadorPrincipal = identificadorPrincipal;
    }
 
-   public List<TelefoneDTO> getListaTelefone()
+   public Set<TelefoneDTO> getListaTelefone()
    {
       return listaTelefone;
    }
 
-   public void setListaTelefone(List<TelefoneDTO> listaTelefone)
+   public void setListaTelefone(Set<TelefoneDTO> listaTelefone)
    {
       this.listaTelefone = listaTelefone;
    }
+
 }

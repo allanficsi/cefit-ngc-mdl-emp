@@ -1,12 +1,14 @@
 package br.com.aptare.cefit.common.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import br.com.aptare.cefit.seguranca.dto.UsuarioDTO;
-import br.com.aptare.seguranca.entidade.Usuario;
 
-public class AuditoriaDTO
+public class AuditoriaDTO implements Serializable
 {
+   private static final long serialVersionUID = 1L;
+
    private Long codigoUsuarioInclusao;
 
    private Date dataInclusao;

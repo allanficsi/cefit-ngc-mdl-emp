@@ -14,6 +14,7 @@ import br.com.aptare.cefit.trabalhador.entity.TrabalhadorDeficiencia;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 
 public class TrabalhadorService extends AptareService<Trabalhador>
 {
@@ -37,6 +38,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
    private TrabalhadorService()
    {
+      adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
    
    @Override
@@ -46,7 +48,16 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       // INSERINDO CADASTRO UNICO
       CadastroUnico cadastroUnico = entity.getCadastroUnico();
-      cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      
+      if(cadastroUnico.getCodigo() != null)
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().alterar(session, cadastroUnico);
+      }
+      else 
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      }
+      
       session.flush();
       
       //INSERINDO TRABALHADOR
@@ -81,15 +92,17 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    @Override
    protected void validarInserir(Session session, Trabalhador entity) throws AptareException
    {
-      CadastroUnico cadastroUnico = new CadastroUnico();
-      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-      cadastroUnico.setTipoPessoa("F");
-      
-      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
-      
-      if(cadastroUnico != null)
+      if(entity.getCodigoCadastroUnico() != null) 
       {
-         throw new AptareException("Este CPF já existe em nossa base de dados.");
+         Trabalhador trabalhador = new Trabalhador();
+         trabalhador.setCodigoCadastroUnico(entity.getCodigoCadastroUnico());
+         
+         trabalhador = this.get(session, trabalhador, null, null);
+         
+         if(trabalhador != null)
+         {
+            throw new AptareException("Este trabalhador já existe em nossa base de dados.");
+         }
       }
    }
    
