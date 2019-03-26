@@ -12,7 +12,7 @@
 		<dependency>
 			<groupId>br.com.aptare</groupId>
 			<artifactId>comum-ngc</artifactId>
-			<version>3.05</version>
+			<version>3.06</version>
 		</dependency>
 	</dependencies>
 </project>
