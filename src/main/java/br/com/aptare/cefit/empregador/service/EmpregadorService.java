@@ -10,6 +10,7 @@ import br.com.aptare.cefit.empregador.entity.Empregador;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 import br.com.aptare.seguranca.entidade.Auditoria;
 
 public class EmpregadorService extends AptareService<Empregador>
@@ -34,6 +35,7 @@ public class EmpregadorService extends AptareService<Empregador>
 
    private EmpregadorService()
    {
+      adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
    
    @Override

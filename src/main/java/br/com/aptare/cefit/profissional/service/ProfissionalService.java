@@ -13,6 +13,7 @@ import br.com.aptare.cefit.profissional.entity.ProfissionalQualificacao;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 
 public class ProfissionalService extends AptareService<Profissional>
 {
@@ -36,6 +37,7 @@ public class ProfissionalService extends AptareService<Profissional>
 
    private ProfissionalService()
    {
+      adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
    
    @Override

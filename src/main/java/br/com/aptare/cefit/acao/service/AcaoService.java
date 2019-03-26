@@ -35,7 +35,8 @@ public class AcaoService extends AptareService<Acao>
 
    private AcaoService()
    {
-      adicionarFiltro("descricao", CatalogoRestricoes.IGUAL, "filtro.descricao");
+      adicionarFiltro("nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "nome");
+      //adicionarFiltro("descricao", CatalogoRestricoes.IGUAL, "filtro.descricao");
    }
    
    @Override

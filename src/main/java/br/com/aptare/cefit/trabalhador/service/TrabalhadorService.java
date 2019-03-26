@@ -14,6 +14,7 @@ import br.com.aptare.cefit.trabalhador.entity.TrabalhadorDeficiencia;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 
 public class TrabalhadorService extends AptareService<Trabalhador>
 {
@@ -37,6 +38,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
    private TrabalhadorService()
    {
+      adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
    
    @Override
