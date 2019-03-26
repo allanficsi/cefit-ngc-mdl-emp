@@ -32,6 +32,7 @@ public class EspacoService extends AptareService<Espaco>
 
    private EspacoService()
    {
+      adicionarFiltro("nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "nome");
       adicionarFiltro("listaEspacoItemEspaco.quantidadeManutencao", CatalogoRestricoes.MAIOR_QUE, "filtro.qtdItensManutencao");
    }
    

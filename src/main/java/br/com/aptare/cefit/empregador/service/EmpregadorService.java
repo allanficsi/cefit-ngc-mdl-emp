@@ -10,6 +10,7 @@ import br.com.aptare.cefit.empregador.entity.Empregador;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 import br.com.aptare.seguranca.entidade.Auditoria;
 
 public class EmpregadorService extends AptareService<Empregador>
@@ -34,6 +35,7 @@ public class EmpregadorService extends AptareService<Empregador>
 
    private EmpregadorService()
    {
+      adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
    
    @Override
@@ -54,17 +56,24 @@ public class EmpregadorService extends AptareService<Empregador>
    @Override
    protected void validarInserir(Session session, Empregador entity) throws AptareException
    {
-      CadastroUnico cadastroUnico = new CadastroUnico();
-      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-      //cadastroUnico.setTipoPessoa("J");
+      Empregador empregador = new Empregador();
+      empregador.setNumeroCei(entity.getNumeroCei());
+      empregador.setCadastroUnico(new CadastroUnico());
+      empregador.getCadastroUnico().setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
       
-      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
+      empregador = this.get(session, empregador, new String[] { "cadastroUnico" }, null);
       
-      if(cadastroUnico != null)
+//      CadastroUnico cadastroUnico = new CadastroUnico();
+//      cadastroUnico.set
+//      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
+//      
+//      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
+      
+      if(empregador != null)
       {
-         if(cadastroUnico.getTipoPessoa().equals("J"))
+         if(empregador.getCadastroUnico().getTipoPessoa().equals("J"))
          {
-            throw new AptareException("Este CNPJ já existe em nossa base de dados.");
+            throw new AptareException("Este empregador já existe em nossa base de dados.");
          }
          else
          {
@@ -74,39 +83,68 @@ public class EmpregadorService extends AptareService<Empregador>
    }
    
    @Override
-   public Empregador alterar(Session session, Empregador entity) throws AptareException
+   public Empregador alterar(Session session, Empregador empregador) throws AptareException
    {
-      this.validarAlterar(session, entity);
+      this.validarAlterar(session, empregador);
       
-      CadastroUnico cadastroUnico = entity.getCadastroUnico();
-      cadastroUnico = CadastroUnicoService.getInstancia().alterar(session, cadastroUnico);
+      CadastroUnico cadastroUnico = empregador.getCadastroUnico();
+      empregador.setCadastroUnico(null);
+
+      cadastroUnico.setAuditoria(empregador.getAuditoria());
+      cadastroUnico = CadastroUnicoService.getInstancia().alterarSemValidacao(session, cadastroUnico);
+      //empregador.setCodigoCadastroUnico(cadastroUnico.getCodigo());
+
       session.flush();
       
-      session.update(entity);
+      session.merge(empregador);
+      
+      empregador.setCadastroUnico(cadastroUnico);
          
-      return entity;
+      return empregador;
    }
    
    @Override
-   protected void validarAlterar(Session session, Empregador entity) throws AptareException
+   protected void validarAlterar(Session session, Empregador empregador) throws AptareException
    {
-      CadastroUnico cadastroUnico = new CadastroUnico();
-      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-      //cadastroUnico.setTipoPessoa("J");
-      
-      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
-      
-      if(cadastroUnico != null
-            && cadastroUnico.getCodigo().intValue() != entity.getCodigoCadastroUnico().intValue())
+      if(empregador.getCadastroUnico() != null 
+            && empregador.getCadastroUnico().getCpfCnpj() != null
+            && empregador.getCadastroUnico().getCpfCnpj().intValue() > 0)
       {
-         if(cadastroUnico.getTipoPessoa().equals("J"))
+         CadastroUnico cadastroUnico = new CadastroUnico();
+         cadastroUnico.setCpfCnpj(empregador.getCadastroUnico().getCpfCnpj());
+         
+         cadastroUnico = CadastroUnicoService.getInstancia().get(session, cadastroUnico, null, null);
+         
+         if(cadastroUnico != null
+               && cadastroUnico.getCodigo() != null
+               && cadastroUnico.getCodigo().intValue() != empregador.getCodigoCadastroUnico().intValue()) 
          {
-            throw new AptareException("Este CNPJ já existe em nossa base de dados.");
+            if(cadastroUnico.getTipoPessoa().equals("J"))
+            {
+               throw new AptareException("Este empregador já existe em nossa base de dados.");
+            }
+            else
+            {
+               throw new AptareException("Este CPF já existe em nossa base de dados.");
+            }
          }
-         else
+      }
+      else 
+      {
+         if(empregador.getNumeroCei() != null && empregador.getNumeroCei().intValue() > 0)
          {
-            throw new AptareException("Este CPF já existe em nossa base de dados.");
-         }
+            Empregador objEmp = new Empregador();
+            objEmp.setNumeroCei(empregador.getNumeroCei());
+            
+            objEmp = this.get(session, objEmp, null, null);
+            
+            if(objEmp != null
+                  && objEmp.getCodigo() != null
+                  && objEmp.getCodigo().intValue() != empregador.getCodigo().intValue())
+            {
+               throw new AptareException("Este empregador já existe em nossa base de dados.");
+            }
+         }         
       }
    }
    
