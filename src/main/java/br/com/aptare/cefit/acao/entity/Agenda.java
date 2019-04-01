@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,8 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
-
-import br.com.aptare.seguranca.entidade.Auditoria;
 
 @Entity
 @Table(schema = "SC_ACA", name = "TBL_AGN")
@@ -60,14 +57,8 @@ public class Agenda implements Serializable
    @Column(name = "NR_HOR_4")
    private String nrHor4;
    
-   @Column(name = "FG_ATV")
-   private String flagAtivo;
-   
    @Transient
    private HashMap<Object, String> filtro;
-
-   @Embedded
-   private Auditoria auditoria;
 
    public Long getCodigo()
    {
@@ -159,16 +150,6 @@ public class Agenda implements Serializable
       this.nrHor4 = nrHor4;
    }
 
-   public String getFlagAtivo()
-   {
-      return flagAtivo;
-   }
-
-   public void setFlagAtivo(String flagAtivo)
-   {
-      this.flagAtivo = flagAtivo;
-   }
-
    public HashMap<Object, String> getFiltro()
    {
       return filtro;
@@ -177,15 +158,5 @@ public class Agenda implements Serializable
    public void setFiltro(HashMap<Object, String> filtro)
    {
       this.filtro = filtro;
-   }
-
-   public Auditoria getAuditoria()
-   {
-      return auditoria;
-   }
-
-   public void setAuditoria(Auditoria auditoria)
-   {
-      this.auditoria = auditoria;
    }
 }

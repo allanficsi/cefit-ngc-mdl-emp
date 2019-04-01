@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Proxy;
 
 import br.com.aptare.cefit.espaco.entity.Espaco;
@@ -37,7 +38,7 @@ public class Acao implements Serializable
    private Long codigo;
 
    @Column(name = "CD_ESP")
-   private Long codigoEspaco;
+   private Long codigoEsp;
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_ESP", insertable = false, updatable = false)
@@ -47,7 +48,7 @@ public class Acao implements Serializable
    private String nome;
    
    @Column(name = "CD_TAC")
-   private Long codigoTipoAcao;
+   private Long codigoTac;
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_TAC", insertable = false, updatable = false)
@@ -64,6 +65,9 @@ public class Acao implements Serializable
    
    @Column(name = "OBS_ACA")
    private String observacao;
+   
+   @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_ACA' AND DMN.VL_CMP_DMN = ST_ACA)")
+   private String descricaoSituacao;
    
    @Column(name = "ST_ACA")
    private Long situacao;
@@ -90,14 +94,14 @@ public class Acao implements Serializable
       this.codigo = codigo;
    }
 
-   public Long getCodigoEspaco()
+   public Long getCodigoEsp()
    {
-      return codigoEspaco;
+      return codigoEsp;
    }
 
-   public void setCodigoEspaco(Long codigoEspaco)
+   public void setCodigoEsp(Long codigoEsp)
    {
-      this.codigoEspaco = codigoEspaco;
+      this.codigoEsp = codigoEsp;
    }
 
    public Espaco getEspaco()
@@ -120,14 +124,14 @@ public class Acao implements Serializable
       this.nome = nome;
    }
 
-   public Long getCodigoTipoAcao()
+   public Long getCodigoTac()
    {
-      return codigoTipoAcao;
+      return codigoTac;
    }
 
-   public void setCodigoTipoAcao(Long codigoTipoAcao)
+   public void setCodigoTac(Long codigoTac)
    {
-      this.codigoTipoAcao = codigoTipoAcao;
+      this.codigoTac = codigoTac;
    }
 
    public TipoAcao getTipoAcao()
@@ -230,5 +234,13 @@ public class Acao implements Serializable
       this.listaAcaoProfissional = listaAcaoProfissional;
    }
 
+   public String getDescricaoSituacao()
+   {
+      return descricaoSituacao;
+   }
 
+   public void setDescricaoSituacao(String descricaoSituacao)
+   {
+      this.descricaoSituacao = descricaoSituacao;
+   }
 }
