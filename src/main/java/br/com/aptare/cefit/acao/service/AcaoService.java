@@ -107,16 +107,26 @@ public class AcaoService extends AptareService<Acao>
             objInserirAgenda.setNrHor3(agenda.getNrHor3());
             objInserirAgenda.setNrHor4(agenda.getNrHor4());
             
-            objInserirAgenda.setAuditoria(new Auditoria());
-            objInserirAgenda.getAuditoria().setCodigoUsuarioInclusao(agenda.getAuditoria().getCodigoUsuarioInclusao());
-            objInserirAgenda.getAuditoria().setDataInclusao(agenda.getAuditoria().getDataInclusao());
-            objInserirAgenda.setFlagAtivo(agenda.getFlagAtivo());
-            
             AgendaService.getInstancia().inserir(session, objInserirAgenda);
          }
       }
       
          
+      return entity;
+   }
+   
+   @Override
+   public Acao alterar(Session session, Acao entity) throws AptareException
+   {
+      // Alterar Acao
+      session.merge(entity);
+      
+      // Deletar todas Acoes Profissional
+      AcaoProfissionalService.getInstancia().atualizarListaAcaoProfissional(session, new ArrayList<AcaoProfissional>(entity.getListaAcaoProfissional()), entity.getCodigo());
+      
+      // Inserir novas Acoes Profissional
+      AgendaService.getInstancia().atualizarAgenda(session, new ArrayList<Agenda>(entity.getListaAgenda()), entity.getCodigo());
+
       return entity;
    }
    

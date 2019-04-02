@@ -1,21 +1,25 @@
 package br.com.aptare.cefit.acao.dto;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-import br.com.aptare.cefit.espaco.entity.Espaco;
+import br.com.aptare.cefit.espaco.dto.EspacoDTO;
 
-public class AcaoDTO
+public class AcaoDTO implements Serializable
 {
+   private static final long serialVersionUID = 1L;
+
    private Long codigo;
 
-   private Long codigoEspaco;
+   private Long codigoEsp;
    
-   private Espaco espaco;
+   private EspacoDTO espaco;
    
    private String nome;
    
-   private Long codigoTipoAcao;
+   private Long codigoTac;
    
    private TipoAcaoDTO tipoAcao;
    
@@ -29,11 +33,15 @@ public class AcaoDTO
    
    private Long codigoAgendamento;
    
+   private String descricaoSituacao;
+   
    private Long situacao;
    
    private Set<AcaoProfissionalDTO> listaAcaoProfissional;
    
    private Set<AgendaDTO> listaAgenda;
+   
+   private List<AgendaDTO> listaAgendaOrdenada;
    
    private AuditoriaDTO auditoria;
 
@@ -47,22 +55,22 @@ public class AcaoDTO
       this.codigo = codigo;
    }
 
-   public Long getCodigoEspaco()
+   public Long getCodigoEsp()
    {
-      return codigoEspaco;
+      return codigoEsp;
    }
 
-   public void setCodigoEspaco(Long codigoEspaco)
+   public void setCodigoEsp(Long codigoEsp)
    {
-      this.codigoEspaco = codigoEspaco;
+      this.codigoEsp = codigoEsp;
    }
 
-   public Espaco getEspaco()
+   public EspacoDTO getEspaco()
    {
       return espaco;
    }
 
-   public void setEspaco(Espaco espaco)
+   public void setEspaco(EspacoDTO espaco)
    {
       this.espaco = espaco;
    }
@@ -77,14 +85,14 @@ public class AcaoDTO
       this.nome = nome;
    }
 
-   public Long getCodigoTipoAcao()
+   public Long getCodigoTac()
    {
-      return codigoTipoAcao;
+      return codigoTac;
    }
 
-   public void setCodigoTipoAcao(Long codigoTipoAcao)
+   public void setCodigoTac(Long codigoTac)
    {
-      this.codigoTipoAcao = codigoTipoAcao;
+      this.codigoTac = codigoTac;
    }
 
    public Long getNumeroVagas()
@@ -185,5 +193,25 @@ public class AcaoDTO
    public void setListaAgenda(Set<AgendaDTO> listaAgenda)
    {
       this.listaAgenda = listaAgenda;
+   }
+
+   public String getDescricaoSituacao()
+   {
+      return descricaoSituacao;
+   }
+
+   public void setDescricaoSituacao(String descricaoSituacao)
+   {
+      this.descricaoSituacao = descricaoSituacao;
+   }
+
+   public List<AgendaDTO> getListaAgendaOrdenada()
+   {
+      return listaAgendaOrdenada;
+   }
+
+   public void setListaAgendaOrdenada(List<AgendaDTO> listaAgendaOrdenada)
+   {
+      this.listaAgendaOrdenada = listaAgendaOrdenada;
    }
 }

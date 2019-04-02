@@ -6,7 +6,7 @@ import java.util.Set;
 import br.com.aptare.cefit.cadastroUnico.dto.EnderecoDTO;
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 
-public class EspacoDTO  implements Serializable
+public class EspacoDTO implements Serializable
 {
    private static final long serialVersionUID = 8059018496629414759L;
 

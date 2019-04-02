@@ -58,7 +58,7 @@ public class TrabalhadorDeficienciaService extends AptareService<TrabalhadorDefi
          // DELETA OS REGISTROS EXISTENTES
          TrabalhadorDeficiencia trabalhadorDeficiencia = new TrabalhadorDeficiencia();
          trabalhadorDeficiencia.setCodigoTrabalhador(codigoTrabalhador);
-         List<TrabalhadorDeficiencia> listaRemove = TrabalhadorDeficienciaService.getInstancia().pesquisar(session, trabalhadorDeficiencia, null, null);
+         List<TrabalhadorDeficiencia> listaRemove = this.pesquisar(session, trabalhadorDeficiencia, null, null);
 
          for (TrabalhadorDeficiencia objRemove : listaRemove)
          {
