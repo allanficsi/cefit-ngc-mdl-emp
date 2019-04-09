@@ -56,7 +56,7 @@ public class AcaoProfissionalService extends AptareService<AcaoProfissional>
       {
          // DELETA OS REGISTROS EXISTENTES
          AcaoProfissional acaoProfissional = new AcaoProfissional();
-         acaoProfissional.setCodigoAcao(codigoAcao);
+         acaoProfissional.setCodigoAca(codigoAcao);
          List<AcaoProfissional> listaRemove = this.pesquisar(session, acaoProfissional, null, null);
 
          for (AcaoProfissional objRemove : listaRemove)
@@ -70,8 +70,8 @@ public class AcaoProfissionalService extends AptareService<AcaoProfissional>
          for (AcaoProfissional objInsert : lista)
          {
             AcaoProfissional objAcaoProfissional = new AcaoProfissional();
-            objAcaoProfissional.setCodigoAcao(codigoAcao);
-            objAcaoProfissional.setCodigoProfissional(objInsert.getProfissional().getCodigo());
+            objAcaoProfissional.setCodigoAca(codigoAcao);
+            objAcaoProfissional.setCodigoPrf(objInsert.getProfissional().getCodigo());
             session.save(objAcaoProfissional);
             session.flush();
          }

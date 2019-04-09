@@ -79,7 +79,7 @@ public class Acao implements Serializable
    private Set<AcaoProfissional> listaAcaoProfissional;
    
    @Transient
-   private HashMap<Object, String> filtro;
+   private HashMap<String, Object> filtro;
 
    @Embedded
    private Auditoria auditoria;
@@ -194,12 +194,12 @@ public class Acao implements Serializable
       this.situacao = situacao;
    }
 
-   public HashMap<Object, String> getFiltro()
+   public HashMap<String, Object> getFiltro()
    {
       return filtro;
    }
 
-   public void setFiltro(HashMap<Object, String> filtro)
+   public void setFiltro(HashMap<String, Object> filtro)
    {
       this.filtro = filtro;
    }

@@ -31,14 +31,14 @@ public class AcaoProfissional implements Serializable
    private Long codigo;
 
    @Column(name = "CD_ACA")
-   private Long codigoAcao;
+   private Long codigoAca;
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_ACA", insertable = false, updatable = false)
    private Acao acao;
    
    @Column(name = "CD_PRF")
-   private Long codigoProfissional;
+   private Long codigoPrf;
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_PRF", insertable = false, updatable = false)
@@ -54,15 +54,6 @@ public class AcaoProfissional implements Serializable
       this.codigo = codigo;
    }
 
-   public Long getCodigoAcao()
-   {
-      return codigoAcao;
-   }
-
-   public void setCodigoAcao(Long codigoAcao)
-   {
-      this.codigoAcao = codigoAcao;
-   }
 
    public Acao getAcao()
    {
@@ -74,14 +65,24 @@ public class AcaoProfissional implements Serializable
       this.acao = acao;
    }
 
-   public Long getCodigoProfissional()
+   public Long getCodigoAca()
    {
-      return codigoProfissional;
+      return codigoAca;
    }
 
-   public void setCodigoProfissional(Long codigoProfissional)
+   public void setCodigoAca(Long codigoAca)
    {
-      this.codigoProfissional = codigoProfissional;
+      this.codigoAca = codigoAca;
+   }
+
+   public Long getCodigoPrf()
+   {
+      return codigoPrf;
+   }
+
+   public void setCodigoPrf(Long codigoPrf)
+   {
+      this.codigoPrf = codigoPrf;
    }
 
    public Profissional getProfissional()
