@@ -6,9 +6,9 @@ public class AcaoProfissionalDTO
 {
    private Long codigo;
 
-   private Long codigoAcao;
+   private Long codigoAca;
    
-   private Long codigoProfissional;
+   private Long codigoPrf;
    
    private ProfissionalDTO profissional;
    
@@ -22,24 +22,24 @@ public class AcaoProfissionalDTO
       this.codigo = codigo;
    }
 
-   public Long getCodigoAcao()
+   public Long getCodigoAca()
    {
-      return codigoAcao;
+      return codigoAca;
    }
 
-   public void setCodigoAcao(Long codigoAcao)
+   public void setCodigoAca(Long codigoAca)
    {
-      this.codigoAcao = codigoAcao;
+      this.codigoAca = codigoAca;
    }
 
-   public Long getCodigoProfissional()
+   public Long getCodigoPrf()
    {
-      return codigoProfissional;
+      return codigoPrf;
    }
 
-   public void setCodigoProfissional(Long codigoProfissional)
+   public void setCodigoPrf(Long codigoPrf)
    {
-      this.codigoProfissional = codigoProfissional;
+      this.codigoPrf = codigoPrf;
    }
 
    public ProfissionalDTO getProfissional()
