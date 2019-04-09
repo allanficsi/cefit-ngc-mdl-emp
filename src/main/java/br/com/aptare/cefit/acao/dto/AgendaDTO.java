@@ -22,8 +22,6 @@ public class AgendaDTO
    
    private String nrHor4;
    
-   private String flagAtivo;
-   
    private AuditoriaDTO auditoria;
 
    public Long getCodigo()
@@ -104,16 +102,6 @@ public class AgendaDTO
    public void setNrHor4(String nrHor4)
    {
       this.nrHor4 = nrHor4;
-   }
-
-   public String getFlagAtivo()
-   {
-      return flagAtivo;
-   }
-
-   public void setFlagAtivo(String flagAtivo)
-   {
-      this.flagAtivo = flagAtivo;
    }
 
    public AuditoriaDTO getAuditoria()

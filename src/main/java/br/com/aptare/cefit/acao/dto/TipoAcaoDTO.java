@@ -1,11 +1,17 @@
 package br.com.aptare.cefit.acao.dto;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.io.Serializable;
+>>>>>>> branch 'develop' of https://gregorioaptare@bitbucket.org/cefit/cefit-ngc.git
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 
-public class TipoAcaoDTO
+public class TipoAcaoDTO implements Serializable
 {
+   private static final long serialVersionUID = 7544590941957672636L;
+
    private Long codigo;
 
    private String descricao;
