@@ -43,7 +43,7 @@ public class ItemEspacoService extends AptareService<ItemEspaco>
       
       if(itemEspaco != null)
       {
-         throw new AptareException("Este Cargo já existe em nossa base de dados.");
+         throw new AptareException("Este Item já existe em nossa base de dados.");
       }
    }
 
@@ -60,7 +60,7 @@ public class ItemEspacoService extends AptareService<ItemEspaco>
       if(itemEspaco != null 
             && itemEspaco.getCodigo().longValue() != entity.getCodigo().longValue())
       {
-         throw new AptareException("Este Cargo já existe em nossa base de dados.");
+         throw new AptareException("Este Item já existe em nossa base de dados.");
       }
    }
    

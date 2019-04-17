@@ -44,7 +44,16 @@ public class EmpregadorService extends AptareService<Empregador>
       this.validarInserir(session, entity);
       
       CadastroUnico cadastroUnico = entity.getCadastroUnico();
-      cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      
+      if(cadastroUnico.getCodigo() != null)
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().alterar(session, cadastroUnico);
+      }
+      else 
+      {
+         cadastroUnico = CadastroUnicoService.getInstancia().inserir(session, cadastroUnico);
+      }
+      
       session.flush();
       
       entity.setCodigoCadastroUnico(cadastroUnico.getCodigo());
@@ -62,12 +71,6 @@ public class EmpregadorService extends AptareService<Empregador>
       empregador.getCadastroUnico().setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
       
       empregador = this.get(session, empregador, new String[] { "cadastroUnico" }, null);
-      
-//      CadastroUnico cadastroUnico = new CadastroUnico();
-//      cadastroUnico.set
-//      cadastroUnico.setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-//      
-//      cadastroUnico = CadastroUnicoService.getInstancia().get(cadastroUnico, null, null);
       
       if(empregador != null)
       {
@@ -92,7 +95,6 @@ public class EmpregadorService extends AptareService<Empregador>
 
       cadastroUnico.setAuditoria(empregador.getAuditoria());
       cadastroUnico = CadastroUnicoService.getInstancia().alterarSemValidacao(session, cadastroUnico);
-      //empregador.setCodigoCadastroUnico(cadastroUnico.getCodigo());
 
       session.flush();
       
