@@ -1,7 +1,9 @@
 package br.com.aptare.cefit.trabalhador.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import br.com.aptare.cefit.trabalhador.entity.TrabalhadorAgenda;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -87,6 +89,27 @@ public class TrabalhadorService extends AptareService<Trabalhador>
             TrabalhadorDeficienciaService.getInstancia().inserir(session, trabalhadorDeficiencia);
          }
       }
+
+       if(entity.getListaTrabalhadorAgenda() != null
+               && entity.getListaTrabalhadorAgenda().size() > 0)
+       {
+           List<TrabalhadorAgenda> listaAgenda = new ArrayList<TrabalhadorAgenda>(entity.getListaTrabalhadorAgenda());
+
+           for (TrabalhadorAgenda agenda : listaAgenda)
+           {
+               System.out.println(agenda.getNrHor1());
+               TrabalhadorAgenda objInserirAgenda = new TrabalhadorAgenda();
+               objInserirAgenda.setCodigoTrabalhador(entity.getCodigo());
+               objInserirAgenda.setNrHor1(agenda.getNrHor1());
+               objInserirAgenda.setNrHor2(agenda.getNrHor2());
+               objInserirAgenda.setNrHor3(agenda.getNrHor3());
+               objInserirAgenda.setNrHor4(agenda.getNrHor4());
+               objInserirAgenda.setFgAtivo(agenda.isFgAtivo());
+               objInserirAgenda.setDiaSemana(agenda.getDiaSemana());
+
+               AgendaService.getInstancia().inserir(session, objInserirAgenda);
+           }
+       }
          
       return entity;
    }
