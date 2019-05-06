@@ -4,14 +4,13 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(schema = "SC_TRB",name = "TBL_AGN")
 @Proxy(lazy = true)
 public class TrabalhadorAgenda implements  Serializable{
 
-    private static final long serialVersionUID = -1166099328752742568L;
+    private static final long serialVersionUID = 1166099328752742568L;
 
     @Id
     @Column(name = "CD_AGN")
@@ -31,11 +30,11 @@ public class TrabalhadorAgenda implements  Serializable{
     @Column(name = "NR_HOR_4")
     private String nrHor4;
 
-    @Column(name = "FG_ATV")
-    private boolean fgAtivo;
+    @Column(name = "FG_SEL")
+    private boolean fgSel;
 
-    @Column(name = "DT_SMN")
-    private Long diaSemana;
+    @Column(name = "FG_DIA")
+    private Long fgDia;
 
     @Column(name = "CD_TRB")
     private Long codigoTrabalhador;
@@ -52,9 +51,9 @@ public class TrabalhadorAgenda implements  Serializable{
         this.codigo = codigo;
     }
 
-    public boolean isFgAtivo() { return fgAtivo; }
+    public boolean isFgSel() { return fgSel; }
 
-    public void setFgAtivo(boolean fgAtivo) { this.fgAtivo = fgAtivo; }
+    public void setFgSel(boolean fgSel) { this.fgSel = fgSel; }
 
     public Long getCodigoTrabalhador() {
         return codigoTrabalhador;
@@ -104,7 +103,7 @@ public class TrabalhadorAgenda implements  Serializable{
         this.nrHor4 = nrHor4;
     }
 
-    public Long getDiaSemana() { return diaSemana; }
+    public Long getFgDia() { return fgDia; }
 
-    public void setDiaSemana(Long diaSemana) { this.diaSemana = diaSemana; }
+    public void setFgDia(Long fgDia) { this.fgDia = fgDia; }
 }

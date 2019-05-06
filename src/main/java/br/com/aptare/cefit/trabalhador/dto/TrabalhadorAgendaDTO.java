@@ -1,9 +1,5 @@
 package br.com.aptare.cefit.trabalhador.dto;
 
-import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
-
-import javax.persistence.*;
-
 public class TrabalhadorAgendaDTO {
 
     private Long codigo;
@@ -16,16 +12,14 @@ public class TrabalhadorAgendaDTO {
 
     private String nrHor4;
 
-    private boolean fgAtivo;
+    private boolean fgSel;
 
-    private Long diaSemana;
+    private Long fgDia;
 
     private Long codigoTrabalhador;
 
 
-    public Long getCodigo() {
-        return codigo;
-    }
+    public Long getCodigo() { return codigo; }
 
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
@@ -63,20 +57,20 @@ public class TrabalhadorAgendaDTO {
         this.nrHor4 = nrHor4;
     }
 
-    public boolean isFgAtivo() {
-        return fgAtivo;
+    public boolean isFgSel() {
+        return fgSel;
     }
 
-    public void setFgAtivo(boolean fgAtivo) {
-        this.fgAtivo = fgAtivo;
+    public void setFgSel(boolean fgSel) {
+        this.fgSel = fgSel;
     }
 
-    public Long getDiaSemana() {
-        return diaSemana;
+    public Long getFgDia() {
+        return fgDia;
     }
 
-    public void setDiaSemana(Long diaSemana) {
-        this.diaSemana = diaSemana;
+    public void setFgDia(Long fgDia) {
+        this.fgDia = fgDia;
     }
 
     public Long getCodigoTrabalhador() {

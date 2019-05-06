@@ -90,6 +90,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
          }
       }
 
+       //INSERINDO AGENDA
        if(entity.getListaTrabalhadorAgenda() != null
                && entity.getListaTrabalhadorAgenda().size() > 0)
        {
@@ -104,10 +105,10 @@ public class TrabalhadorService extends AptareService<Trabalhador>
                objInserirAgenda.setNrHor2(agenda.getNrHor2());
                objInserirAgenda.setNrHor3(agenda.getNrHor3());
                objInserirAgenda.setNrHor4(agenda.getNrHor4());
-               objInserirAgenda.setFgAtivo(agenda.isFgAtivo());
-               objInserirAgenda.setDiaSemana(agenda.getDiaSemana());
+               objInserirAgenda.setFgSel(agenda.isFgSel());
+               objInserirAgenda.setFgDia(agenda.getFgDia());
 
-               AgendaService.getInstancia().inserir(session, objInserirAgenda);
+               TrabalhadorAgendaService.getInstancia().inserir(session, objInserirAgenda);
            }
        }
          
@@ -150,7 +151,10 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       // ALTERANDO DEFICIENCIA
       TrabalhadorDeficienciaService.getInstancia().atualizarListaDeficiencia(session, new ArrayList(entity.getListaTrabalhadorDeficiencia()), entity.getCodigo());
-         
+
+       // ALTERANDO Agenda
+       TrabalhadorAgendaService.getInstancia().atualizarAgenda(session, new ArrayList(entity.getListaTrabalhadorAgenda()), entity.getCodigo());
+
       return entity;
    }
    
