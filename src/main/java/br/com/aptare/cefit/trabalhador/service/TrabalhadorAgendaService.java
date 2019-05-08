@@ -73,23 +73,4 @@ public class TrabalhadorAgendaService extends AptareService<TrabalhadorAgenda> {
         }
     }
 
-
-    @Override
-    public List<TrabalhadorAgenda> pesquisar(Session session, TrabalhadorAgenda filter, String[] juncoes, String[] ordenacoes) throws AptareException {
-        this.validarPesquisar(session, filter);
-        Criteria criteria = this.setarCriteria(session);
-        Map<String, String> juncoesAplicadas = UtilService.aplicarJuncoes(session, criteria, filter, juncoes);
-        //UtilService.aplicarFiltrosPersistentes(criteria, filter, (String)null, juncoesAplicadas, (List)null, this.propriedades);
-        this.aplicarFiltrosTransitorios(criteria, filter, juncoesAplicadas);
-        UtilService.aplicarOrdenacao(criteria, filter, ordenacoes);
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        criteria.setMaxResults(this.getNumeroMaximoRegistros());
-        return criteria.list();
-    }
-    private Criteria setarCriteria(Session session) {
-        ParameterizedTypeImpl type = (ParameterizedTypeImpl)this.getClass().getGenericSuperclass();
-        Class<?> classeEntity = (Class)type.getActualTypeArguments()[0];
-        Criteria criteria = session.createCriteria(classeEntity);
-        return criteria;
-    }
 }

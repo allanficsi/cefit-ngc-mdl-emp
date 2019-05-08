@@ -44,8 +44,8 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    {
       adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
-   
-   @Override
+
+    @Override
    public Trabalhador inserir(Session session, Trabalhador entity) throws AptareException
    {
       this.validarInserir(session, entity);
@@ -98,15 +98,14 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
            for (TrabalhadorAgenda agenda : listaAgenda)
            {
-               System.out.println(agenda.getNrHor1());
                TrabalhadorAgenda objInserirAgenda = new TrabalhadorAgenda();
                objInserirAgenda.setCodigoTrabalhador(entity.getCodigo());
                objInserirAgenda.setNrHor1(agenda.getNrHor1());
                objInserirAgenda.setNrHor2(agenda.getNrHor2());
                objInserirAgenda.setNrHor3(agenda.getNrHor3());
                objInserirAgenda.setNrHor4(agenda.getNrHor4());
-               objInserirAgenda.setFgSel(agenda.isFgSel());
-               objInserirAgenda.setFgDia(agenda.getFgDia());
+               objInserirAgenda.setFlagSel(agenda.getFlagSel());
+               objInserirAgenda.setNrDia(agenda.getNrDia());
 
                TrabalhadorAgendaService.getInstancia().inserir(session, objInserirAgenda);
            }
@@ -152,7 +151,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       // ALTERANDO DEFICIENCIA
       TrabalhadorDeficienciaService.getInstancia().atualizarListaDeficiencia(session, new ArrayList(entity.getListaTrabalhadorDeficiencia()), entity.getCodigo());
 
-       // ALTERANDO Agenda
+       // ALTERANDO AGENDA
        TrabalhadorAgendaService.getInstancia().atualizarAgenda(session, new ArrayList(entity.getListaTrabalhadorAgenda()), entity.getCodigo());
 
       return entity;
@@ -258,4 +257,36 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       session.save(entityTrabalhador);
    }
+
+    public void salvarManutencao(Trabalhador entity) throws AptareException
+    {
+        Session session = getSession();
+        session.setFlushMode(FlushMode.COMMIT);
+        Transaction tx = session.beginTransaction();
+
+        try
+        {
+            this.salvarManutencao(session, entity);
+            tx.commit();
+        }
+        catch (Exception ae)
+        {
+            throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
+        }
+        finally
+        {
+            session.close();
+        }
+    }
+
+    public void salvarManutencao(Session session, Trabalhador entity) throws AptareException
+    {
+        if(entity.getListaTrabalhadorAgenda() != null)
+        {
+            for (TrabalhadorAgenda item : entity.getListaTrabalhadorAgenda())
+            {
+                session.merge(item);
+            }
+        }
+    }
 }

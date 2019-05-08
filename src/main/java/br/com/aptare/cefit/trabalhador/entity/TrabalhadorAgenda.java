@@ -31,10 +31,10 @@ public class TrabalhadorAgenda implements  Serializable{
     private String nrHor4;
 
     @Column(name = "FG_SEL")
-    private boolean fgSel;
+    private Boolean flagSel;
 
-    @Column(name = "FG_DIA")
-    private Long fgDia;
+    @Column(name = "NR_DIA")
+    private Integer nrDia;
 
     @Column(name = "CD_TRB")
     private Long codigoTrabalhador;
@@ -50,10 +50,6 @@ public class TrabalhadorAgenda implements  Serializable{
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
-
-    public boolean isFgSel() { return fgSel; }
-
-    public void setFgSel(boolean fgSel) { this.fgSel = fgSel; }
 
     public Long getCodigoTrabalhador() {
         return codigoTrabalhador;
@@ -103,7 +99,11 @@ public class TrabalhadorAgenda implements  Serializable{
         this.nrHor4 = nrHor4;
     }
 
-    public Long getFgDia() { return fgDia; }
+    public Integer getNrDia() { return nrDia; }
 
-    public void setFgDia(Long fgDia) { this.fgDia = fgDia; }
+    public void setNrDia(Integer nrDia) { this.nrDia = nrDia; }
+
+    public Boolean getFlagSel() { return flagSel; }
+
+    public void setFlagSel(Boolean flagSel) { this.flagSel = flagSel; }
 }

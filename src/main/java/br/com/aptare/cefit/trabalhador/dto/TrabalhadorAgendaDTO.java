@@ -12,9 +12,9 @@ public class TrabalhadorAgendaDTO {
 
     private String nrHor4;
 
-    private boolean fgSel;
+    private Boolean flagSel;
 
-    private Long fgDia;
+    private Integer nrDia;
 
     private Long codigoTrabalhador;
 
@@ -57,21 +57,13 @@ public class TrabalhadorAgendaDTO {
         this.nrHor4 = nrHor4;
     }
 
-    public boolean isFgSel() {
-        return fgSel;
-    }
+    public Boolean getFlagSel() { return flagSel; }
 
-    public void setFgSel(boolean fgSel) {
-        this.fgSel = fgSel;
-    }
+    public void setFlagSel(Boolean flagSel) { this.flagSel = flagSel; }
 
-    public Long getFgDia() {
-        return fgDia;
-    }
+    public Integer getNrDia() { return nrDia; }
 
-    public void setFgDia(Long fgDia) {
-        this.fgDia = fgDia;
-    }
+    public void setNrDia(Integer nrDia) { this.nrDia = nrDia; }
 
     public Long getCodigoTrabalhador() {
         return codigoTrabalhador;
