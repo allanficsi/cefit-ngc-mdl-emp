@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,6 +31,10 @@ public class VagaAgendamento implements Serializable
    @Column(name = "CD_VAG")
    private Long codigoVaga;
    
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_VAG", insertable = false, updatable = false)
+   private Vaga vaga;
+   
    @Column(name = "NR_DIA")
    private Integer numeroDia;
    
@@ -42,6 +49,9 @@ public class VagaAgendamento implements Serializable
    
    @Column(name = "NR_HOR4")
    private Integer numeroHora4;
+   
+   @Column(name = "FG_ATV")
+   private Boolean flagAtivo;
 
    public Long getCodigo()
    {
@@ -111,5 +121,25 @@ public class VagaAgendamento implements Serializable
    public void setNumeroHora4(Integer numeroHora4)
    {
       this.numeroHora4 = numeroHora4;
+   }
+
+   public Vaga getVaga()
+   {
+      return vaga;
+   }
+
+   public void setVaga(Vaga vaga)
+   {
+      this.vaga = vaga;
+   }
+
+   public Boolean getFlagAtivo()
+   {
+      return flagAtivo;
+   }
+
+   public void setFlagAtivo(Boolean flagAtivo)
+   {
+      this.flagAtivo = flagAtivo;
    }
 }

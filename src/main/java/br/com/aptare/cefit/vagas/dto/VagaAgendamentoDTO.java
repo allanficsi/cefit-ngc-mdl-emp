@@ -19,6 +19,8 @@ public class VagaAgendamentoDTO implements Serializable
    private Integer numeroHora3;
    
    private Integer numeroHora4;
+   
+   private Boolean flagAtivo;
 
    public Long getCodigo()
    {
@@ -88,5 +90,15 @@ public class VagaAgendamentoDTO implements Serializable
    public void setNumeroHora4(Integer numeroHora4)
    {
       this.numeroHora4 = numeroHora4;
+   }
+
+   public Boolean getFlagAtivo()
+   {
+      return flagAtivo;
+   }
+
+   public void setFlagAtivo(Boolean flagAtivo)
+   {
+      this.flagAtivo = flagAtivo;
    }
 }

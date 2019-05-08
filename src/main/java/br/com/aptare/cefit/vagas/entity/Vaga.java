@@ -2,6 +2,7 @@ package br.com.aptare.cefit.vagas.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,12 +13,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Proxy;
 
 import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
+import br.com.aptare.cefit.vagas.entity.filtro.FiltroVaga;
 import br.com.aptare.seguranca.entidade.Auditoria;
 
 @Entity
@@ -68,8 +73,20 @@ public class Vaga implements Serializable
    @Column(name = "ST_VAG")
    private Integer situacao;
    
+   @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_VAG' AND DMN.VL_CMP_DMN = ST_VAG)")
+   private String descricaoSituacao;
+   
    @Column(name = "DS_OBS")
    private String observacao;
+   
+   @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
+   private Set<VagaAgendamento> listaVagaAgendamento; 
+   
+   @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
+   private Set<VagaDia> listaVagaDia; 
+   
+   @Transient
+   private FiltroVaga filtro;
 
    @Embedded
    private Auditoria auditoria;
@@ -212,5 +229,45 @@ public class Vaga implements Serializable
    public void setObservacao(String observacao)
    {
       this.observacao = observacao;
+   }
+
+   public Set<VagaAgendamento> getListaVagaAgendamento()
+   {
+      return listaVagaAgendamento;
+   }
+
+   public void setListaVagaAgendamento(Set<VagaAgendamento> listaVagaAgendamento)
+   {
+      this.listaVagaAgendamento = listaVagaAgendamento;
+   }
+
+   public Set<VagaDia> getListaVagaDia()
+   {
+      return listaVagaDia;
+   }
+
+   public void setListaVagaDia(Set<VagaDia> listaVagaDia)
+   {
+      this.listaVagaDia = listaVagaDia;
+   }
+
+   public FiltroVaga getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(FiltroVaga filtro)
+   {
+      this.filtro = filtro;
+   }
+
+   public String getDescricaoSituacao()
+   {
+      return descricaoSituacao;
+   }
+
+   public void setDescricaoSituacao(String descricaoSituacao)
+   {
+      this.descricaoSituacao = descricaoSituacao;
    }
 }

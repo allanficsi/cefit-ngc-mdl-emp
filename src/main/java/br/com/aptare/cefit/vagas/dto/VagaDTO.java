@@ -2,9 +2,11 @@ package br.com.aptare.cefit.vagas.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
+import br.com.aptare.cefit.vagas.dto.filtro.FiltroVagaDTO;
 
 public class VagaDTO implements Serializable
 {
@@ -34,9 +36,18 @@ public class VagaDTO implements Serializable
    
    private Integer situacao;
    
+   private String descricaoSituacao;
+   
    private String observacao;
+   
+   private Set<VagaAgendamentoDTO> listaVagaAgendamento;
+   
+   private Set<VagaDiaDTO> listaVagaDia;
 
    private AuditoriaDTO auditoria;
+   
+   private FiltroVagaDTO filtro;
+   
 
    public Long getCodigo()
    {
@@ -176,5 +187,45 @@ public class VagaDTO implements Serializable
    public void setObservacao(String observacao)
    {
       this.observacao = observacao;
+   }
+
+   public Set<VagaAgendamentoDTO> getListaVagaAgendamento()
+   {
+      return listaVagaAgendamento;
+   }
+
+   public void setListaVagaAgendamento(Set<VagaAgendamentoDTO> listaVagaAgendamento)
+   {
+      this.listaVagaAgendamento = listaVagaAgendamento;
+   }
+
+   public Set<VagaDiaDTO> getListaVagaDia()
+   {
+      return listaVagaDia;
+   }
+
+   public void setListaVagaDia(Set<VagaDiaDTO> listaVagaDia)
+   {
+      this.listaVagaDia = listaVagaDia;
+   }
+
+   public FiltroVagaDTO getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(FiltroVagaDTO filtro)
+   {
+      this.filtro = filtro;
+   }
+
+   public String getDescricaoSituacao()
+   {
+      return descricaoSituacao;
+   }
+
+   public void setDescricaoSituacao(String descricaoSituacao)
+   {
+      this.descricaoSituacao = descricaoSituacao;
    }
 }

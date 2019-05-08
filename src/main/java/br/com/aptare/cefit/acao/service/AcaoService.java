@@ -208,7 +208,7 @@ public class AcaoService extends AptareService<Acao>
          for (AcaoProfissional acaoProfissional : listaAcaoProfissional)
          {
             AcaoProfissional objInserirAcaoProfissional = new AcaoProfissional();
-            objInserirAcaoProfissional.setCodigoAca(entity.getCodigo());
+            objInserirAcaoProfissional.setCodigoAcao(entity.getCodigo());
             objInserirAcaoProfissional.setCodigoPrf(acaoProfissional.getCodigoPrf());
             
             AcaoProfissionalService.getInstancia().inserir(session, objInserirAcaoProfissional);

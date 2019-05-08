@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,6 +31,10 @@ public class VagaDia implements Serializable
 
    @Column(name = "CD_VAG")
    private Long codigoVaga;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_VAG", insertable = false, updatable = false)
+   private Vaga vaga;
    
    @Column(name = "CD_DIA_VAG")
    private Long codigoDia;
@@ -60,5 +67,15 @@ public class VagaDia implements Serializable
    public void setCodigoDia(Long codigoDia)
    {
       this.codigoDia = codigoDia;
+   }
+
+   public Vaga getVaga()
+   {
+      return vaga;
+   }
+
+   public void setVaga(Vaga vaga)
+   {
+      this.vaga = vaga;
    }
 }

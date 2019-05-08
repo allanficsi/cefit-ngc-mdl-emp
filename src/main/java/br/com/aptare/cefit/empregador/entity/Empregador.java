@@ -71,6 +71,9 @@ public class Empregador implements Serializable
    
    @Column(name = "OBS_EMP")
    private String observacao;
+   
+   @Formula("( coalesce(nr_cei::text, '') ||';'|| (select cun.nr_cpf_cnpj_cun ||';'|| cun.nm_cun from sc_cuc.tbl_cun cun where cun.cd_cun = cd_cun) )")
+   private String filtroGenerico;
 
    @Embedded
    private Auditoria auditoria;
@@ -213,5 +216,15 @@ public class Empregador implements Serializable
    public void setDescricaoSituacao(String descricaoSituacao)
    {
       this.descricaoSituacao = descricaoSituacao;
+   }
+
+   public String getFiltroGenerico()
+   {
+      return filtroGenerico;
+   }
+
+   public void setFiltroGenerico(String filtroGenerico)
+   {
+      this.filtroGenerico = filtroGenerico;
    }
 }
