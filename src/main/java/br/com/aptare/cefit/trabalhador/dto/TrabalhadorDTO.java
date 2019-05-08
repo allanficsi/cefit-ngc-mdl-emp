@@ -43,6 +43,8 @@ public class TrabalhadorDTO
    
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
 
+   private Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda;
+
    public Long getCodigo()
    {
       return codigo;
@@ -221,5 +223,13 @@ public class TrabalhadorDTO
    public void setListaTrabalhadorDeficiencia(Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia)
    {
       this.listaTrabalhadorDeficiencia = listaTrabalhadorDeficiencia;
+   }
+
+   public Set<TrabalhadorAgendaDTO> getListaTrabalhadorAgenda() {
+      return listaTrabalhadorAgenda;
+   }
+
+   public void setListaTrabalhadorAgenda(Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda) {
+      this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
 }

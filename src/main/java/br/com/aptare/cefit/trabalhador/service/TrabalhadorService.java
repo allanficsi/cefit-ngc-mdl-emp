@@ -1,7 +1,9 @@
 package br.com.aptare.cefit.trabalhador.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import br.com.aptare.cefit.trabalhador.entity.TrabalhadorAgenda;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,8 +44,8 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    {
       adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
    }
-   
-   @Override
+
+    @Override
    public Trabalhador inserir(Session session, Trabalhador entity) throws AptareException
    {
       this.validarInserir(session, entity);
@@ -87,6 +89,27 @@ public class TrabalhadorService extends AptareService<Trabalhador>
             TrabalhadorDeficienciaService.getInstancia().inserir(session, trabalhadorDeficiencia);
          }
       }
+
+       //INSERINDO AGENDA
+       if(entity.getListaTrabalhadorAgenda() != null
+               && entity.getListaTrabalhadorAgenda().size() > 0)
+       {
+           List<TrabalhadorAgenda> listaAgenda = new ArrayList<TrabalhadorAgenda>(entity.getListaTrabalhadorAgenda());
+
+           for (TrabalhadorAgenda agenda : listaAgenda)
+           {
+               TrabalhadorAgenda objInserirAgenda = new TrabalhadorAgenda();
+               objInserirAgenda.setCodigoTrabalhador(entity.getCodigo());
+               objInserirAgenda.setNrHor1(agenda.getNrHor1());
+               objInserirAgenda.setNrHor2(agenda.getNrHor2());
+               objInserirAgenda.setNrHor3(agenda.getNrHor3());
+               objInserirAgenda.setNrHor4(agenda.getNrHor4());
+               objInserirAgenda.setFlagSel(agenda.getFlagSel());
+               objInserirAgenda.setNrDia(agenda.getNrDia());
+
+               TrabalhadorAgendaService.getInstancia().inserir(session, objInserirAgenda);
+           }
+       }
          
       return entity;
    }
@@ -127,7 +150,10 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       // ALTERANDO DEFICIENCIA
       TrabalhadorDeficienciaService.getInstancia().atualizarListaDeficiencia(session, new ArrayList(entity.getListaTrabalhadorDeficiencia()), entity.getCodigo());
-         
+
+       // ALTERANDO AGENDA
+       TrabalhadorAgendaService.getInstancia().atualizarAgenda(session, new ArrayList(entity.getListaTrabalhadorAgenda()), entity.getCodigo());
+
       return entity;
    }
    
@@ -234,4 +260,36 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       }
       
    }
+
+    public void salvarManutencao(Trabalhador entity) throws AptareException
+    {
+        Session session = getSession();
+        session.setFlushMode(FlushMode.COMMIT);
+        Transaction tx = session.beginTransaction();
+
+        try
+        {
+            this.salvarManutencao(session, entity);
+            tx.commit();
+        }
+        catch (Exception ae)
+        {
+            throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
+        }
+        finally
+        {
+            session.close();
+        }
+    }
+
+    public void salvarManutencao(Session session, Trabalhador entity) throws AptareException
+    {
+        if(entity.getListaTrabalhadorAgenda() != null)
+        {
+            for (TrabalhadorAgenda item : entity.getListaTrabalhadorAgenda())
+            {
+                session.merge(item);
+            }
+        }
+    }
 }

@@ -86,6 +86,9 @@ public class Trabalhador implements Serializable
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorDeficiencia> listaTrabalhadorDeficiencia;
 
+   @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
+   private Set<TrabalhadorAgenda> listaTrabalhadorAgenda;
+
    @Embedded
    private Auditoria auditoria;
 
@@ -267,5 +270,13 @@ public class Trabalhador implements Serializable
    public void setListaTrabalhadorDeficiencia(Set<TrabalhadorDeficiencia> listaTrabalhadorDeficiencia)
    {
       this.listaTrabalhadorDeficiencia = listaTrabalhadorDeficiencia;
+   }
+
+   public Set<TrabalhadorAgenda> getListaTrabalhadorAgenda() {
+      return listaTrabalhadorAgenda;
+   }
+
+   public void setListaTrabalhadorAgenda(Set<TrabalhadorAgenda> listaTrabalhadorAgenda) {
+      this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
 }
