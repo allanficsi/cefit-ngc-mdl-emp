@@ -21,6 +21,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Proxy;
 
+import br.com.aptare.cefit.empregador.entity.Empregador;
+import br.com.aptare.cefit.trabalhador.entity.Cbo;
 import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
 import br.com.aptare.cefit.vagas.entity.filtro.FiltroVaga;
 import br.com.aptare.seguranca.entidade.Auditoria;
@@ -53,16 +55,24 @@ public class Vaga implements Serializable
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_TRB", insertable = false, updatable = false)
-   private Trabalhador trabalhador;
+   private Trabalhador trabalhadorEntity;
    
    @Column(name = "CD_CBO")
    private Long codigoCbo;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_CBO", insertable = false, updatable = false)
+   private Cbo cboEntity;
    
    @Column(name = "DS_CBO")
    private String descricaoCbo;
    
    @Column(name = "CD_EMP")
    private Long codigoEmpregador;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_EMP", insertable = false, updatable = false)
+   private Empregador empregadorEntity;
    
    @Column(name = "DT_INI")
    private Date dataInicio;
@@ -139,16 +149,6 @@ public class Vaga implements Serializable
    public void setCodigoTrabalhador(Long codigoTrabalhador)
    {
       this.codigoTrabalhador = codigoTrabalhador;
-   }
-   
-   public Trabalhador getTrabalhador()
-   {
-      return trabalhador;
-   }
-
-   public void setTrabalhador(Trabalhador trabalhador)
-   {
-      this.trabalhador = trabalhador;
    }
 
    public Long getCodigoCbo()
@@ -269,5 +269,35 @@ public class Vaga implements Serializable
    public void setDescricaoSituacao(String descricaoSituacao)
    {
       this.descricaoSituacao = descricaoSituacao;
+   }
+
+   public Cbo getCboEntity()
+   {
+      return cboEntity;
+   }
+
+   public void setCboEntity(Cbo cboEntity)
+   {
+      this.cboEntity = cboEntity;
+   }
+
+   public Trabalhador getTrabalhadorEntity()
+   {
+      return trabalhadorEntity;
+   }
+
+   public void setTrabalhadorEntity(Trabalhador trabalhadorEntity)
+   {
+      this.trabalhadorEntity = trabalhadorEntity;
+   }
+
+   public Empregador getEmpregadorEntity()
+   {
+      return empregadorEntity;
+   }
+
+   public void setEmpregadorEntity(Empregador empregadorEntity)
+   {
+      this.empregadorEntity = empregadorEntity;
    }
 }

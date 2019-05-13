@@ -2,9 +2,12 @@ package br.com.aptare.cefit.vagas.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
+import br.com.aptare.cefit.empregador.dto.EmpregadorDTO;
+import br.com.aptare.cefit.trabalhador.dto.CboDTO;
 import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
 import br.com.aptare.cefit.vagas.dto.filtro.FiltroVagaDTO;
 
@@ -22,13 +25,17 @@ public class VagaDTO implements Serializable
    
    private Long codigoTrabalhador;
    
-   private TrabalhadorDTO trabalhador;
+   private TrabalhadorDTO trabalhadorEntity;
    
    private Long codigoCbo;
+   
+   private CboDTO cboEntity;
    
    private String descricaoCbo;
    
    private Long codigoEmpregador;
+   
+   private EmpregadorDTO empregadorEntity;
    
    private Date dataInicio;
    
@@ -41,6 +48,8 @@ public class VagaDTO implements Serializable
    private String observacao;
    
    private Set<VagaAgendamentoDTO> listaVagaAgendamento;
+   
+   private List<VagaAgendamentoDTO> listaVagaAgendamentoOrdenada;
    
    private Set<VagaDiaDTO> listaVagaDia;
 
@@ -97,16 +106,6 @@ public class VagaDTO implements Serializable
    public void setCodigoTrabalhador(Long codigoTrabalhador)
    {
       this.codigoTrabalhador = codigoTrabalhador;
-   }
-
-   public TrabalhadorDTO getTrabalhador()
-   {
-      return trabalhador;
-   }
-
-   public void setTrabalhador(TrabalhadorDTO trabalhador)
-   {
-      this.trabalhador = trabalhador;
    }
 
    public Long getCodigoCbo()
@@ -227,5 +226,45 @@ public class VagaDTO implements Serializable
    public void setDescricaoSituacao(String descricaoSituacao)
    {
       this.descricaoSituacao = descricaoSituacao;
+   }
+
+   public CboDTO getCboEntity()
+   {
+      return cboEntity;
+   }
+
+   public void setCboEntity(CboDTO cboEntity)
+   {
+      this.cboEntity = cboEntity;
+   }
+
+   public TrabalhadorDTO getTrabalhadorEntity()
+   {
+      return trabalhadorEntity;
+   }
+
+   public void setTrabalhadorEntity(TrabalhadorDTO trabalhadorEntity)
+   {
+      this.trabalhadorEntity = trabalhadorEntity;
+   }
+
+   public EmpregadorDTO getEmpregadorEntity()
+   {
+      return empregadorEntity;
+   }
+
+   public void setEmpregadorEntity(EmpregadorDTO empregadorEntity)
+   {
+      this.empregadorEntity = empregadorEntity;
+   }
+
+   public List<VagaAgendamentoDTO> getListaVagaAgendamentoOrdenada()
+   {
+      return listaVagaAgendamentoOrdenada;
+   }
+
+   public void setListaVagaAgendamentoOrdenada(List<VagaAgendamentoDTO> listaVagaAgendamentoOrdenada)
+   {
+      this.listaVagaAgendamentoOrdenada = listaVagaAgendamentoOrdenada;
    }
 }

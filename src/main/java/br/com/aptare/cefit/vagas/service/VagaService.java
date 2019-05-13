@@ -65,5 +65,21 @@ public class VagaService extends AptareService<Vaga>
          
       return entity;
    }
+   
+   @Override
+   public Vaga alterar(Session session, Vaga entity) throws AptareException
+   {
+      // Vaga
+      session.merge(entity);
+      
+      // Atualizar Agendamentos
+      VagaAgendamentoService.getInstancia().atualizarListaVagaAgendamento(session, new ArrayList<VagaAgendamento>(entity.getListaVagaAgendamento()), entity.getCodigo());
+      
+      // Atualizar Dias
+      VagaDiaService.getInstancia().atualizarListaVagaDia(session, new ArrayList<VagaDia>(entity.getListaVagaDia()), entity.getCodigo());
+    
+         
+      return entity;
+   }
 
 }
