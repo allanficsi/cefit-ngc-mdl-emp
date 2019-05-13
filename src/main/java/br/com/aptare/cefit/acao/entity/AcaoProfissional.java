@@ -31,7 +31,7 @@ public class AcaoProfissional implements Serializable
    private Long codigo;
 
    @Column(name = "CD_ACA")
-   private Long codigoAca;
+   private Long codigoAcao;
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_ACA", insertable = false, updatable = false)
@@ -65,14 +65,14 @@ public class AcaoProfissional implements Serializable
       this.acao = acao;
    }
 
-   public Long getCodigoAca()
+   public Long getCodigoAcao()
    {
-      return codigoAca;
+      return codigoAcao;
    }
 
-   public void setCodigoAca(Long codigoAca)
+   public void setCodigoAcao(Long codigoAcao)
    {
-      this.codigoAca = codigoAca;
+      this.codigoAcao = codigoAcao;
    }
 
    public Long getCodigoPrf()

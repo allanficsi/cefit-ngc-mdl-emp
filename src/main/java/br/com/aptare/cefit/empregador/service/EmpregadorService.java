@@ -36,6 +36,7 @@ public class EmpregadorService extends AptareService<Empregador>
    private EmpregadorService()
    {
       adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
+      adicionarFiltro("filtroGenerico", CatalogoRestricoes.FAZ_PARTE, "filtroGenerico");
    }
    
    @Override
