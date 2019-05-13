@@ -68,6 +68,7 @@ public class VagaDiaService extends AptareService<VagaDia>
          for (VagaDia objInsert : lista)
          {
             objInsert.setCodigoVaga(codigoVaga);
+            session.save(objInsert);
             session.flush();
          }
       }
