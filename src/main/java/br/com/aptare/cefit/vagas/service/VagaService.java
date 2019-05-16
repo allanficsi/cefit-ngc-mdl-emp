@@ -1,15 +1,20 @@
 package br.com.aptare.cefit.vagas.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.FlushMode;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import br.com.aptare.cefit.vagas.entity.Vaga;
 import br.com.aptare.cefit.vagas.entity.VagaAgendamento;
 import br.com.aptare.cefit.vagas.entity.VagaDia;
+import br.com.aptare.cefit.vagas.entity.VagaLog;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
+import br.com.aptare.fda.exception.TratamentoPadraoErro;
 import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 
 public class VagaService extends AptareService<Vaga>
@@ -80,6 +85,56 @@ public class VagaService extends AptareService<Vaga>
     
          
       return entity;
+   }
+   
+   public Vaga alterarSituacaoVaga(Vaga entity) throws AptareException
+   {
+       Session session = getSession();
+       session.setFlushMode(FlushMode.COMMIT);
+       Transaction tx = session.beginTransaction();
+       
+       try
+       {
+           Vaga retorno = this.alterarSituacaoVaga(session, entity);
+           tx.commit();
+           return retorno;
+       }
+       catch (Exception ae)
+       {
+           throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
+       }
+       finally
+       {
+           session.close();
+       }
+   }
+
+   public Vaga alterarSituacaoVaga(Session session, Vaga entity) throws AptareException
+   {
+      // Get vaga somente com o codigo
+      Vaga vaga = new Vaga();
+      vaga.setCodigo(entity.getCodigo());
+      
+      vaga = this.get(session, vaga, null, null);
+      
+      // Inserindo Log de Acao
+      VagaLog vagaLog = new VagaLog();
+      vagaLog.setSituacaoAnterior(vaga.getSituacao().longValue());
+      vagaLog.setSituacaoNova(entity.getSituacao().longValue());
+      vagaLog.setDataOperacao(new Date());
+      vagaLog.setCodigoUsuarioOperacao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+      VagaLogService.getInstancia().inserir(session, vagaLog);
+      
+      // Alterndo Acao
+      vaga.setSituacao(entity.getSituacao());
+      vaga.setFlagRealizada(entity.getFlagRealizada());
+      vaga.setValorPago(entity.getValorPago());
+      vaga.getAuditoria().setDataAlteracao(new Date());
+      vaga.getAuditoria().setCodigoUsuarioAlteracao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+      
+      session.merge(vaga);
+      
+      return vaga;
    }
 
 }

@@ -47,6 +47,10 @@ public class VagaDTO implements Serializable
    
    private String observacao;
    
+   private Boolean flagRealizada;
+   
+   private Double valorPago;
+   
    private Set<VagaAgendamentoDTO> listaVagaAgendamento;
    
    private List<VagaAgendamentoDTO> listaVagaAgendamentoOrdenada;
@@ -266,5 +270,25 @@ public class VagaDTO implements Serializable
    public void setListaVagaAgendamentoOrdenada(List<VagaAgendamentoDTO> listaVagaAgendamentoOrdenada)
    {
       this.listaVagaAgendamentoOrdenada = listaVagaAgendamentoOrdenada;
+   }
+
+   public Boolean getFlagRealizada()
+   {
+      return flagRealizada;
+   }
+
+   public void setFlagRealizada(Boolean flagRealizada)
+   {
+      this.flagRealizada = flagRealizada;
+   }
+
+   public Double getValorPago()
+   {
+      return valorPago;
+   }
+
+   public void setValorPago(Double valorPago)
+   {
+      this.valorPago = valorPago;
    }
 }
