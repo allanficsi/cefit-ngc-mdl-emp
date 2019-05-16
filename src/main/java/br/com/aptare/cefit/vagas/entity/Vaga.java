@@ -89,6 +89,12 @@ public class Vaga implements Serializable
    @Column(name = "DS_OBS")
    private String observacao;
    
+   @Column(name = "FG_REA_VAG")
+   private Boolean flagRealizada;
+   
+   @Column(name = "VL_PAG_VAG")
+   private Double valorPago;
+   
    @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
    private Set<VagaAgendamento> listaVagaAgendamento; 
    
@@ -299,5 +305,25 @@ public class Vaga implements Serializable
    public void setEmpregadorEntity(Empregador empregadorEntity)
    {
       this.empregadorEntity = empregadorEntity;
+   }
+
+   public Boolean getFlagRealizada()
+   {
+      return flagRealizada;
+   }
+
+   public void setFlagRealizada(Boolean flagRealizada)
+   {
+      this.flagRealizada = flagRealizada;
+   }
+
+   public Double getValorPago()
+   {
+      return valorPago;
+   }
+
+   public void setValorPago(Double valorPago)
+   {
+      this.valorPago = valorPago;
    }
 }
