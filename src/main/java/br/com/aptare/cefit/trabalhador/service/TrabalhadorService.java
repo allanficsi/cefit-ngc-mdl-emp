@@ -1,18 +1,17 @@
 package br.com.aptare.cefit.trabalhador.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import br.com.aptare.cefit.trabalhador.entity.TrabalhadorAgenda;
+import br.com.aptare.cefit.trabalhador.entity.*;
+import org.apache.commons.collections4.bag.TransformedBag;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.aptare.cadastroUnico.entidade.CadastroUnico;
 import br.com.aptare.cadastroUnico.servico.CadastroUnicoService;
-import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
-import br.com.aptare.cefit.trabalhador.entity.TrabalhadorCbo;
-import br.com.aptare.cefit.trabalhador.entity.TrabalhadorDeficiencia;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
@@ -30,6 +29,18 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    public static int SITUACAO_PENDENTE = 1;
    public static int SITUACAO_ATIVA = 2;
    public static int SITUACAO_INATIVA = 3;
+
+   //SITUAÇÃO DE INGRESSO NO PROGRAMA
+   public static int PENDENTE_DE_AVALIACAO=1;
+   public static int PENDENTE_DE_VALIDACAO=2;
+   public static int ENCAMINHADO_PARA_A_AVALIACAO=3;
+   public static int ENCAMINHADO_PARA_A_CAPACITACAO=4;
+   public static int ENCAMINHADO_PARA_A_ENTREVISTA_OCUPACIONAL=5;
+   public static int RESTRICAO_POR_AVALIACAO=6;
+   public static int RESTRICAO_POR_CAPACITACAO=7;
+   public static int RESTRICAO_POR_ENTREVISTA_OCUPACIONAL=8;
+   public static int APROVADO=9;
+   public static int EXCLUIDO=10;
 
    public static TrabalhadorService getInstancia()
    {
@@ -291,5 +302,64 @@ public class TrabalhadorService extends AptareService<Trabalhador>
                 session.merge(item);
             }
         }
+    }
+
+    public Trabalhador alterarSituacaoDeIngresso(Trabalhador entity) throws AptareException
+    {
+        Session session = getSession();
+        session.setFlushMode(FlushMode.COMMIT);
+        Transaction tx = session.beginTransaction();
+
+        try
+        {
+            Trabalhador retorno = this.alterarSituacaoDeIngresso(session, entity);
+            tx.commit();
+            return retorno;
+        }
+        catch (Exception ae)
+        {
+            throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
+        }
+        finally
+        {
+            session.close();
+        }
+    }
+
+    public Trabalhador alterarSituacaoDeIngresso(Session session, Trabalhador entity) throws AptareException
+    {
+        // Get tipoacao somente com o codigo
+        Trabalhador trabalhador = new Trabalhador();
+        trabalhador.setCodigo(entity.getCodigo());
+
+        trabalhador = this.get(session, trabalhador, null, null);
+
+        // Inserindo Log de Trabalhador
+        TrabalhadorLog trabalhadorLog = new TrabalhadorLog();
+        trabalhadorLog.setSituacaoAnterior(trabalhador.getSituacaoIngresso());
+        trabalhadorLog.setSituacaoNova(entity.getSituacaoIngresso());
+        trabalhadorLog.setDataOperacao(new Date());
+        trabalhadorLog.setCodigoUsuarioOperacao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+        TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);
+
+        // Alterando Situção De Ingresso
+        trabalhador.setSituacaoIngresso(entity.getSituacaoIngresso());
+
+        //ALTERANDO SITUÇÃO
+        if(entity.getSituacao()!=null) {
+            trabalhador.setSituacao(entity.getSituacao());
+        }
+
+        trabalhador.setMotivoAtivacao(entity.getMotivoAtivacao());
+        trabalhador.setMotivoInativacao(entity.getMotivoInativacao());
+        trabalhador.setObservacao(entity.getObservacao());
+
+        trabalhador.getAuditoria().setDataAlteracao(new Date());
+        trabalhador.getAuditoria().setCodigoUsuarioAlteracao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+
+        session.merge(trabalhador);
+
+
+        return trabalhador;
     }
 }
