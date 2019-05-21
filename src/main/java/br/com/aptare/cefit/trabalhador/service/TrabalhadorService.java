@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.aptare.cefit.trabalhador.entity.*;
-import org.apache.commons.collections4.bag.TransformedBag;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -336,8 +335,8 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
         // Inserindo Log de Trabalhador
         TrabalhadorLog trabalhadorLog = new TrabalhadorLog();
-        trabalhadorLog.setSituacaoAnterior(trabalhador.getSituacaoIngresso());
-        trabalhadorLog.setSituacaoNova(entity.getSituacaoIngresso());
+        trabalhadorLog.setSituacaoIncAnterior(trabalhador.getSituacaoIngresso());
+        trabalhadorLog.setSituacaoIncNova(entity.getSituacaoIngresso());
         trabalhadorLog.setDataOperacao(new Date());
         trabalhadorLog.setCodigoUsuarioOperacao(entity.getAuditoria().getCodigoUsuarioAlteracao());
         TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);
@@ -347,6 +346,9 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
         //ALTERANDO SITUÇÃO
         if(entity.getSituacao()!=null) {
+            trabalhadorLog.setSituacaoAnterior(trabalhador.getSituacao());
+            trabalhadorLog.setSituacaoNova(entity.getSituacao());
+
             trabalhador.setSituacao(entity.getSituacao());
         }
 

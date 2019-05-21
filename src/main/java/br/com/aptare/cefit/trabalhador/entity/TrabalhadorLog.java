@@ -1,6 +1,5 @@
 package br.com.aptare.cefit.trabalhador.entity;
 
-import javassist.SerialVersionUID;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
@@ -21,9 +20,15 @@ public class TrabalhadorLog implements Serializable {
     private Long codigo;
 
     @Column(name = "ST_INC_PGR_ANT")
-    private Integer situacaoAnterior;
+    private Integer situacaoIncAnterior;
 
     @Column(name = "ST_INC_PGR_NOV")
+    private Integer situacaoIncNova;
+
+    @Column(name = "ST_TRB_ANT")
+    private Integer situacaoAnterior;
+
+    @Column(name = "ST_TRB_NOV")
     private Integer situacaoNova;
 
     @Column(name = "DT_OPR")
@@ -32,28 +37,24 @@ public class TrabalhadorLog implements Serializable {
     @Column(name = "CD_USR_OPR")
     private Long codigoUsuarioOperacao;
 
-    public Long getCodigo() {
-        return codigo;
+    public Long getCodigo() { return codigo; }
+
+    public void setCodigo(Long codigo) { this.codigo = codigo; }
+
+    public Integer getSituacaoIncAnterior() {
+        return situacaoIncAnterior;
     }
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+    public void setSituacaoIncAnterior(Integer situacaoIncAnterior) {
+        this.situacaoIncAnterior = situacaoIncAnterior;
     }
 
-    public Integer getSituacaoAnterior() {
-        return situacaoAnterior;
+    public Integer getSituacaoIncNova() {
+        return situacaoIncNova;
     }
 
-    public void setSituacaoAnterior(Integer situacaoAnterior) {
-        this.situacaoAnterior = situacaoAnterior;
-    }
-
-    public Integer getSituacaoNova() {
-        return situacaoNova;
-    }
-
-    public void setSituacaoNova(Integer situacaoNova) {
-        this.situacaoNova = situacaoNova;
+    public void setSituacaoIncNova(Integer situacaoIncNova) {
+        this.situacaoIncNova = situacaoIncNova;
     }
 
     public Date getDataOperacao() {
@@ -71,4 +72,12 @@ public class TrabalhadorLog implements Serializable {
     public void setCodigoUsuarioOperacao(Long codigoUsuarioOperacao) {
         this.codigoUsuarioOperacao = codigoUsuarioOperacao;
     }
+
+    public Integer getSituacaoAnterior() { return situacaoAnterior; }
+
+    public void setSituacaoAnterior(Integer situacaoAnterior) { this.situacaoAnterior = situacaoAnterior; }
+
+    public Integer getSituacaoNova() { return situacaoNova; }
+
+    public void setSituacaoNova(Integer situacaoNova) { this.situacaoNova = situacaoNova; }
 }
