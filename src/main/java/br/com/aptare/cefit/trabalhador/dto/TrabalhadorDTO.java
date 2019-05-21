@@ -38,7 +38,11 @@ public class TrabalhadorDTO
    private Long numeroInss;
 
    private AuditoriaDTO auditoria;
-   
+
+   private String motivoInativacao;
+
+   private String motivoAtivacao;
+
    private Set<TrabalhadorCboDTO> listaTrabalhadorCbo;
    
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
@@ -73,6 +77,16 @@ public class TrabalhadorDTO
    public void setCadastroUnico(CadastroUnicoDTO cadastroUnico)
    {
       this.cadastroUnico = cadastroUnico;
+   }
+
+   public String getMotivoInativacao() { return motivoInativacao; }
+
+   public void setMotivoInativacao(String motivoInativacao) { this.motivoInativacao = motivoInativacao; }
+
+   public String getMotivoAtivacao() { return motivoAtivacao; }
+
+   public void setMotivoAtivacao(String motivoAtivacao) {
+      this.motivoAtivacao = motivoAtivacao;
    }
 
    public Long getNumeroPis()
