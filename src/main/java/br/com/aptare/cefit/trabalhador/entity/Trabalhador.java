@@ -73,7 +73,10 @@ public class Trabalhador implements Serializable
 
    @Column(name = "DS_MTV_ATV_TRB")
    private String motivoAtivacao;
-   
+
+   @Column(name = "TP_TRB")
+   private String tipoTrabalhador;
+
    @Column(name = "UF_CTPS")
    private String ufCtps;
    
@@ -152,6 +155,10 @@ public class Trabalhador implements Serializable
    {
       return dataEmissaoCtps;
    }
+
+   public String getTipoTrabalhador() { return tipoTrabalhador; }
+
+   public void setTipoTrabalhador(String tipoTrabalhador) { this.tipoTrabalhador = tipoTrabalhador; }
 
    public void setDataEmissaoCtps(Date dataEmissaoCtps)
    {

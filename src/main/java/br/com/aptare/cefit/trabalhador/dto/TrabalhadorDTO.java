@@ -43,6 +43,8 @@ public class TrabalhadorDTO
 
    private String motivoAtivacao;
 
+   private String tipoTrabalhador;
+
    private Set<TrabalhadorCboDTO> listaTrabalhadorCbo;
    
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
@@ -208,6 +210,10 @@ public class TrabalhadorDTO
    {
       this.numeroInscricaoPrefeitura = numeroInscricaoPrefeitura;
    }
+
+   public String getTipoTrabalhador() { return tipoTrabalhador; }
+
+   public void setTipoTrabalhador(String tipoTrabalhador) { this.tipoTrabalhador = tipoTrabalhador; }
 
    public Long getNumeroInss()
    {
