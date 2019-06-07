@@ -79,9 +79,15 @@ public class Vaga implements Serializable
    
    @Column(name = "DT_FIM")
    private Date dataFim;
+
+   @Column(name = "DT_LMT")
+   private Date dataLimite;
    
    @Column(name = "ST_VAG")
    private Integer situacao;
+
+   @Column(name = "DRC_VAG")
+   private Integer direcionamento;
    
    @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_VAG' AND DMN.VL_CMP_DMN = ST_VAG)")
    private String descricaoSituacao;
@@ -91,7 +97,10 @@ public class Vaga implements Serializable
    
    @Column(name = "FG_REA_VAG")
    private Boolean flagRealizada;
-   
+
+   @Column(name = "FG_CNT_EXB")
+   private Boolean flagControleExibicao;
+
    @Column(name = "VL_PAG_VAG")
    private Double valorPago;
    
@@ -207,6 +216,10 @@ public class Vaga implements Serializable
       this.dataFim = dataFim;
    }
 
+   public Date getDataLimite() { return dataLimite; }
+
+   public void setDataLimite(Date dataLimite) { this.dataLimite = dataLimite; }
+
    public Integer getSituacao()
    {
       return situacao;
@@ -307,6 +320,10 @@ public class Vaga implements Serializable
       this.empregadorEntity = empregadorEntity;
    }
 
+   public Boolean getFlagControleExibicao() { return flagControleExibicao; }
+
+   public void setFlagControleExibicao(Boolean flagControleExibicao) { this.flagControleExibicao = flagControleExibicao; }
+
    public Boolean getFlagRealizada()
    {
       return flagRealizada;
@@ -315,6 +332,14 @@ public class Vaga implements Serializable
    public void setFlagRealizada(Boolean flagRealizada)
    {
       this.flagRealizada = flagRealizada;
+   }
+
+   public Integer getDirecionamento() {
+      return direcionamento;
+   }
+
+   public void setDirecionamento(Integer direcionamento) {
+      this.direcionamento = direcionamento;
    }
 
    public Double getValorPago()
