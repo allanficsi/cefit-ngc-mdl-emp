@@ -40,14 +40,20 @@ public class VagaDTO implements Serializable
    private Date dataInicio;
    
    private Date dataFim;
-   
+
+   private Date dataLimite;
+
    private Integer situacao;
-   
+
+   private Integer direcionamento;
+
    private String descricaoSituacao;
    
    private String observacao;
    
    private Boolean flagRealizada;
+
+   private Boolean flagControleExibicao;
    
    private Double valorPago;
    
@@ -162,6 +168,14 @@ public class VagaDTO implements Serializable
       this.dataFim = dataFim;
    }
 
+   public Date getDataLimite() {
+      return dataLimite;
+   }
+
+   public void setDataLimite(Date dataLimite) {
+      this.dataLimite = dataLimite;
+   }
+
    public Integer getSituacao()
    {
       return situacao;
@@ -170,6 +184,14 @@ public class VagaDTO implements Serializable
    public void setSituacao(Integer situacao)
    {
       this.situacao = situacao;
+   }
+
+   public Integer getDirecionamento() {
+      return direcionamento;
+   }
+
+   public void setDirecionamento(Integer direcionamento) {
+      this.direcionamento = direcionamento;
    }
 
    public AuditoriaDTO getAuditoria()
@@ -280,6 +302,14 @@ public class VagaDTO implements Serializable
    public void setFlagRealizada(Boolean flagRealizada)
    {
       this.flagRealizada = flagRealizada;
+   }
+
+   public Boolean getFlagControleExibicao() {
+      return flagControleExibicao;
+   }
+
+   public void setFlagControleExibicao(Boolean flagControleExibicao) {
+      this.flagControleExibicao = flagControleExibicao;
    }
 
    public Double getValorPago()
