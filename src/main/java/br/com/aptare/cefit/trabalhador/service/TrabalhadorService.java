@@ -40,6 +40,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    public static int RESTRICAO_POR_ENTREVISTA_OCUPACIONAL=8;
    public static int APROVADO=9;
    public static int EXCLUIDO=10;
+   public static int APROVADO_NA_AVALIACAO=11;
 
    public static TrabalhadorService getInstancia()
    {
@@ -327,7 +328,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
     public Trabalhador alterarSituacaoDeIngresso(Session session, Trabalhador entity) throws AptareException
     {
-        // Get tipoacao somente com o codigo
+        // Get trabalahdor somente com o codigo
         Trabalhador trabalhador = new Trabalhador();
         trabalhador.setCodigo(entity.getCodigo());
 
@@ -335,13 +336,20 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
         // Inserindo Log de Trabalhador
         TrabalhadorLog trabalhadorLog = new TrabalhadorLog();
+        trabalhadorLog.setCodigoTrabalhador(trabalhador.getCodigo());
         trabalhadorLog.setSituacaoIncAnterior(trabalhador.getSituacaoIngresso());
         trabalhadorLog.setSituacaoIncNova(entity.getSituacaoIngresso());
         trabalhadorLog.setDataOperacao(new Date());
         trabalhadorLog.setCodigoUsuarioOperacao(entity.getAuditoria().getCodigoUsuarioAlteracao());
-        TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);
 
-        // Alterando Situção De Ingresso
+
+        if (entity.getListaTrabalhadorLog() != null) {
+            entity.getListaTrabalhadorLog().forEach(element -> {
+                trabalhadorLog.setObservacaoSitucaoIngresso(element.getObservacaoSitucaoIngresso());
+            });
+        }
+
+        // ATUALIZANDO ENTIDADE TRABALHADOR
         trabalhador.setSituacaoIngresso(entity.getSituacaoIngresso());
 
         //ALTERANDO SITUÇÃO
@@ -350,6 +358,10 @@ public class TrabalhadorService extends AptareService<Trabalhador>
             trabalhadorLog.setSituacaoNova(entity.getSituacao());
 
             trabalhador.setSituacao(entity.getSituacao());
+        }else
+        {
+            trabalhadorLog.setSituacaoAnterior(trabalhador.getSituacao());
+            trabalhadorLog.setSituacaoNova(trabalhador.getSituacao());
         }
 
         trabalhador.setMotivoAtivacao(entity.getMotivoAtivacao());
@@ -359,7 +371,8 @@ public class TrabalhadorService extends AptareService<Trabalhador>
         trabalhador.getAuditoria().setDataAlteracao(new Date());
         trabalhador.getAuditoria().setCodigoUsuarioAlteracao(entity.getAuditoria().getCodigoUsuarioAlteracao());
 
-        session.merge(trabalhador);
+        TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);//SALVA TRBALAHADOR LOG
+        session.merge(trabalhador);//ATUALIZA TRABALHADOR
 
 
         return trabalhador;

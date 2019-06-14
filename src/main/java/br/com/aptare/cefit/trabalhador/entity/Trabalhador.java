@@ -74,8 +74,11 @@ public class Trabalhador implements Serializable
    @Column(name = "DS_MTV_ATV_TRB")
    private String motivoAtivacao;
 
-   @Column(name = "TP_TRB")
-   private String tipoTrabalhador;
+   @Column(name = "FG_TRB_INF")
+   private Boolean flagTrabalhadorInformal;
+
+   @Column(name = "FG_TRB_FRM")
+   private Boolean flagTrabalhadorFormal;
 
    @Column(name = "UF_CTPS")
    private String ufCtps;
@@ -97,6 +100,9 @@ public class Trabalhador implements Serializable
 
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorAgenda> listaTrabalhadorAgenda;
+
+   @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
+   private Set<TrabalhadorLog> listaTrabalhadorLog;
 
    @Embedded
    private Auditoria auditoria;
@@ -155,10 +161,6 @@ public class Trabalhador implements Serializable
    {
       return dataEmissaoCtps;
    }
-
-   public String getTipoTrabalhador() { return tipoTrabalhador; }
-
-   public void setTipoTrabalhador(String tipoTrabalhador) { this.tipoTrabalhador = tipoTrabalhador; }
 
    public void setDataEmissaoCtps(Date dataEmissaoCtps)
    {
@@ -300,4 +302,28 @@ public class Trabalhador implements Serializable
    public void setListaTrabalhadorAgenda(Set<TrabalhadorAgenda> listaTrabalhadorAgenda) {
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
+
+   public Set<TrabalhadorLog> getListaTrabalhadorLog() {
+      return listaTrabalhadorLog;
+   }
+
+   public void setListaTrabalhadorLog(Set<TrabalhadorLog> listaTrabalhadorLog) {
+      this.listaTrabalhadorLog = listaTrabalhadorLog;
+   }
+
+    public Boolean getFlagTrabalhadorInformal() {
+        return flagTrabalhadorInformal;
+    }
+
+    public void setFlagTrabalhadorInformal(Boolean flagTrabalhadorInformal) {
+        this.flagTrabalhadorInformal = flagTrabalhadorInformal;
+    }
+
+    public Boolean getFlagTrabalhadorFormal() {
+        return flagTrabalhadorFormal;
+    }
+
+    public void setFlagTrabalhadorFormal(Boolean flagTrabalhadorFormal) {
+        this.flagTrabalhadorFormal = flagTrabalhadorFormal;
+    }
 }
