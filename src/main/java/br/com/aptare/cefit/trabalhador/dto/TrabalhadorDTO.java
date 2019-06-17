@@ -1,9 +1,11 @@
 package br.com.aptare.cefit.trabalhador.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
+import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
 
 public class TrabalhadorDTO
 {
@@ -43,13 +45,19 @@ public class TrabalhadorDTO
 
    private String motivoAtivacao;
 
-   private String tipoTrabalhador;
+   private Boolean flagTrabalhadorInformal;
+
+   private Boolean flagTrabalhadorFormal;
 
    private Set<TrabalhadorCboDTO> listaTrabalhadorCbo;
    
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
 
    private Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda;
+
+   private Set<TrabalhadorLogDTO> listaTrabalhadorLog;
+
+   private List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada;
 
    public Long getCodigo()
    {
@@ -211,10 +219,6 @@ public class TrabalhadorDTO
       this.numeroInscricaoPrefeitura = numeroInscricaoPrefeitura;
    }
 
-   public String getTipoTrabalhador() { return tipoTrabalhador; }
-
-   public void setTipoTrabalhador(String tipoTrabalhador) { this.tipoTrabalhador = tipoTrabalhador; }
-
    public Long getNumeroInss()
    {
       return numeroInss;
@@ -252,4 +256,36 @@ public class TrabalhadorDTO
    public void setListaTrabalhadorAgenda(Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda) {
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
+
+   public Set<TrabalhadorLogDTO> getListaTrabalhadorLog() {
+      return listaTrabalhadorLog;
+   }
+
+   public void setListaTrabalhadorLog(Set<TrabalhadorLogDTO> listaTrabalhadorLog) {
+      this.listaTrabalhadorLog = listaTrabalhadorLog;
+   }
+
+   public List<TrabalhadorLogDTO> getListaTrabalhadorLogOrdenada() {
+      return listaTrabalhadorLogOrdenada;
+   }
+
+   public void setListaTrabalhadorLogOrdenada(List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada) {
+      this.listaTrabalhadorLogOrdenada = listaTrabalhadorLogOrdenada;
+   }
+
+    public Boolean getFlagTrabalhadorInformal() {
+        return flagTrabalhadorInformal;
+    }
+
+    public void setFlagTrabalhadorInformal(Boolean flagTrabalhadorInformal) {
+        this.flagTrabalhadorInformal = flagTrabalhadorInformal;
+    }
+
+    public Boolean getFlagTrabalhadorFormal() {
+        return flagTrabalhadorFormal;
+    }
+
+    public void setFlagTrabalhadorFormal(Boolean flagTrabalhadorFormal) {
+        this.flagTrabalhadorFormal = flagTrabalhadorFormal;
+    }
 }
