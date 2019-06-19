@@ -1,6 +1,7 @@
 package br.com.aptare.cefit.acao.dto;
 
 import java.util.List;
+import java.io.Serializable;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 
