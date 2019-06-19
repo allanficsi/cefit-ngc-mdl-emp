@@ -11,6 +11,9 @@ import org.hibernate.Transaction;
 
 import br.com.aptare.cadastroUnico.entidade.CadastroUnico;
 import br.com.aptare.cadastroUnico.servico.CadastroUnicoService;
+import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
+import br.com.aptare.cefit.trabalhador.entity.TrabalhadorCbo;
+import br.com.aptare.cefit.trabalhador.entity.TrabalhadorDeficiencia;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
@@ -242,36 +245,33 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       bancoUsuario = UsuarioService.getInstancia().get(session, bancoUsuario, null, null);
       
-      Trabalhador bancoTrabalhador = new Trabalhador();
-      bancoTrabalhador.setCadastroUnico(new CadastroUnico());
-      bancoTrabalhador.getCadastroUnico().setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
-      
-      bancoTrabalhador = super.get(session, bancoTrabalhador, null, null);
-      
-      if (bancoUsuario != null
-            && bancoTrabalhador != null)
+      if (bancoUsuario != null)
       {
-         throw new AptareException("msg.geral", new String[] {"Já existe um usuário e trabalhador para este CPF."});
+         throw new AptareException("msg.geral", new String[] {"Já existe usuário com este CPF."});
       }
       
-      if (bancoUsuario == null)
+      Trabalhador entityTrabalhador = new Trabalhador();
+      entityTrabalhador.setCadastroUnico(new CadastroUnico());
+      entityTrabalhador.getCadastroUnico().setCpfCnpj(entity.getCadastroUnico().getCpfCnpj());
+      
+      entityTrabalhador = super.get(session, entityTrabalhador, null, null);
+      
+      if (entityTrabalhador != null)
       {
-         // inserir usuario
-         entity = UsuarioService.getInstancia().inserir(session, entity);
-         session.flush();
+         throw new AptareException("msg.geral", new String[] {"Já existe um trabalhador com este CPF."});
       }
       
-      if (bancoTrabalhador == null)
-      {
-         // inserir trabalhador
-         Trabalhador entityTrabalhador = new Trabalhador();
-         entityTrabalhador.setCodigoCadastroUnico(entity.getCodigoCadastroUnico());
-         entityTrabalhador.setSituacao(SITUACAO_PENDENTE);
-         entityTrabalhador.setAuditoria(entity.getAuditoria());
-         
-         session.save(entityTrabalhador);
-      }
+      // inserir usuario
+      entity = UsuarioService.getInstancia().inserir(session, entity);
+      session.flush();
       
+      // inserir trabalhador
+      entityTrabalhador = new Trabalhador();
+      entityTrabalhador.setCodigoCadastroUnico(entity.getCodigoCadastroUnico());
+      entityTrabalhador.setSituacao(SITUACAO_PENDENTE);
+      entityTrabalhador.setAuditoria(entity.getAuditoria());
+      
+      session.save(entityTrabalhador);
    }
 
     public void salvarManutencao(Trabalhador entity) throws AptareException
