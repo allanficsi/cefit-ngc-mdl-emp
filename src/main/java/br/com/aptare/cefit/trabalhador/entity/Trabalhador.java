@@ -76,8 +76,17 @@ public class Trabalhador implements Serializable
    @Column(name = "DS_MTV_ATV_TRB")
    private String motivoAtivacao;
 
-   @Column(name = "TP_TRB")
-   private String tipoTrabalhador;
+   @Column(name = "DS_MTV_INT_TRB")
+   private String motivoInativacao;
+
+   @Column(name = "DS_MTV_ATV_TRB")
+   private String motivoAtivacao;
+
+   @Column(name = "FG_TRB_INF")
+   private Boolean flagTrabalhadorInformal;
+
+   @Column(name = "FG_TRB_FRM")
+   private Boolean flagTrabalhadorFormal;
 
    @Column(name = "UF_CTPS")
    private String ufCtps;
@@ -99,6 +108,9 @@ public class Trabalhador implements Serializable
 
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorAgenda> listaTrabalhadorAgenda;
+   
+   @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
+   private Set<TrabalhadorLog> listaTrabalhadorLog;
 
    @Embedded
    private Auditoria auditoria;
