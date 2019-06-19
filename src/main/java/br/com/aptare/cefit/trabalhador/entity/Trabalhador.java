@@ -45,16 +45,16 @@ public class Trabalhador implements Serializable
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_CUN", insertable = false, updatable = false)
    private CadastroUnico cadastroUnico;
-   
+
    @Column(name = "NR_PIS")
    private Long numeroPis;
-   
+
    @Column(name = "NR_CTPS")
    private Long numeroCtps;
-   
+
    @Column(name = "DT_EMS_CTPS")
    private Date dataEmissaoCtps;
-   
+
    @Column(name = "ST_TRB")
    private Integer situacao;
 
@@ -66,15 +66,9 @@ public class Trabalhador implements Serializable
 
    @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_INC_PGR' AND DMN.VL_CMP_DMN = ST_ING_PGR)")
    private String descricaoSituacaoIngresso;
-   
+
    @Column(name = "OBS_TRB")
    private String observacao;
-
-   @Column(name = "DS_MTV_INT_TRB")
-   private String motivoInativacao;
-
-   @Column(name = "DS_MTV_ATV_TRB")
-   private String motivoAtivacao;
 
    @Column(name = "DS_MTV_INT_TRB")
    private String motivoInativacao;
@@ -90,7 +84,7 @@ public class Trabalhador implements Serializable
 
    @Column(name = "UF_CTPS")
    private String ufCtps;
-   
+
    @Column(name = "NR_SER_CTPS")
    private Long numeroSerieCtps;
 
@@ -99,22 +93,22 @@ public class Trabalhador implements Serializable
 
    @Column(name = "NR_INSS")
    private Long numeroInss;
-   
+
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorCbo> listaTrabalhadorCbo;
-   
+
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorDeficiencia> listaTrabalhadorDeficiencia;
 
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorAgenda> listaTrabalhadorAgenda;
-   
+
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorLog> listaTrabalhadorLog;
 
    @Embedded
    private Auditoria auditoria;
-   
+
    @Transient
    private HashMap<String, Object> filtroMap;
 
@@ -172,10 +166,6 @@ public class Trabalhador implements Serializable
    {
       return dataEmissaoCtps;
    }
-
-   public String getTipoTrabalhador() { return tipoTrabalhador; }
-
-   public void setTipoTrabalhador(String tipoTrabalhador) { this.tipoTrabalhador = tipoTrabalhador; }
 
    public void setDataEmissaoCtps(Date dataEmissaoCtps)
    {
@@ -282,13 +272,25 @@ public class Trabalhador implements Serializable
       this.numeroInss = numeroInss;
    }
 
-   public String getMotivoInativacao() { return motivoInativacao;  }
+   public String getMotivoInativacao()
+   {
+      return motivoInativacao;
+   }
 
-   public void setMotivoInativacao(String motivoInativacao) { this.motivoInativacao = motivoInativacao; }
+   public void setMotivoInativacao(String motivoInativacao)
+   {
+      this.motivoInativacao = motivoInativacao;
+   }
 
-   public String getMotivoAtivacao() { return motivoAtivacao; }
+   public String getMotivoAtivacao()
+   {
+      return motivoAtivacao;
+   }
 
-   public void setMotivoAtivacao(String motivoAtivacao) { this.motivoAtivacao = motivoAtivacao; }
+   public void setMotivoAtivacao(String motivoAtivacao)
+   {
+      this.motivoAtivacao = motivoAtivacao;
+   }
 
    public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
    {
@@ -310,11 +312,13 @@ public class Trabalhador implements Serializable
       this.listaTrabalhadorDeficiencia = listaTrabalhadorDeficiencia;
    }
 
-   public Set<TrabalhadorAgenda> getListaTrabalhadorAgenda() {
+   public Set<TrabalhadorAgenda> getListaTrabalhadorAgenda()
+   {
       return listaTrabalhadorAgenda;
    }
 
-   public void setListaTrabalhadorAgenda(Set<TrabalhadorAgenda> listaTrabalhadorAgenda) {
+   public void setListaTrabalhadorAgenda(Set<TrabalhadorAgenda> listaTrabalhadorAgenda)
+   {
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
 
@@ -326,5 +330,35 @@ public class Trabalhador implements Serializable
    public void setFiltroMap(HashMap<String, Object> filtroMap)
    {
       this.filtroMap = filtroMap;
+   }
+
+   public Boolean getFlagTrabalhadorInformal()
+   {
+      return flagTrabalhadorInformal;
+   }
+
+   public void setFlagTrabalhadorInformal(Boolean flagTrabalhadorInformal)
+   {
+      this.flagTrabalhadorInformal = flagTrabalhadorInformal;
+   }
+
+   public Boolean getFlagTrabalhadorFormal()
+   {
+      return flagTrabalhadorFormal;
+   }
+
+   public void setFlagTrabalhadorFormal(Boolean flagTrabalhadorFormal)
+   {
+      this.flagTrabalhadorFormal = flagTrabalhadorFormal;
+   }
+
+   public Set<TrabalhadorLog> getListaTrabalhadorLog()
+   {
+      return listaTrabalhadorLog;
+   }
+
+   public void setListaTrabalhadorLog(Set<TrabalhadorLog> listaTrabalhadorLog)
+   {
+      this.listaTrabalhadorLog = listaTrabalhadorLog;
    }
 }

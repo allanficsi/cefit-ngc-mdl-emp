@@ -1,6 +1,7 @@
 package br.com.aptare.cefit.trabalhador.dto;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
@@ -235,16 +236,6 @@ public class TrabalhadorDTO implements Serializable
       this.numeroInscricaoPrefeitura = numeroInscricaoPrefeitura;
    }
 
-   public String getTipoTrabalhador()
-   {
-      return tipoTrabalhador;
-   }
-
-   public void setTipoTrabalhador(String tipoTrabalhador)
-   {
-      this.tipoTrabalhador = tipoTrabalhador;
-   }
-
    public Long getNumeroInss()
    {
       return numeroInss;
@@ -293,5 +284,45 @@ public class TrabalhadorDTO implements Serializable
    public void setTelefoneExtenso(String telefoneExtenso)
    {
       this.telefoneExtenso = telefoneExtenso;
+   }
+
+   public Boolean getFlagTrabalhadorInformal()
+   {
+      return flagTrabalhadorInformal;
+   }
+
+   public void setFlagTrabalhadorInformal(Boolean flagTrabalhadorInformal)
+   {
+      this.flagTrabalhadorInformal = flagTrabalhadorInformal;
+   }
+
+   public Boolean getFlagTrabalhadorFormal()
+   {
+      return flagTrabalhadorFormal;
+   }
+
+   public void setFlagTrabalhadorFormal(Boolean flagTrabalhadorFormal)
+   {
+      this.flagTrabalhadorFormal = flagTrabalhadorFormal;
+   }
+
+   public Set<TrabalhadorLogDTO> getListaTrabalhadorLog()
+   {
+      return listaTrabalhadorLog;
+   }
+
+   public void setListaTrabalhadorLog(Set<TrabalhadorLogDTO> listaTrabalhadorLog)
+   {
+      this.listaTrabalhadorLog = listaTrabalhadorLog;
+   }
+
+   public List<TrabalhadorLogDTO> getListaTrabalhadorLogOrdenada()
+   {
+      return listaTrabalhadorLogOrdenada;
+   }
+
+   public void setListaTrabalhadorLogOrdenada(List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada)
+   {
+      this.listaTrabalhadorLogOrdenada = listaTrabalhadorLogOrdenada;
    }
 }
