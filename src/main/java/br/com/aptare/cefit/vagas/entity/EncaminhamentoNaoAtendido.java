@@ -38,7 +38,7 @@ public class EncaminhamentoNaoAtendido implements Serializable
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_TRB", insertable = false, updatable = false)
-   private Trabalhador trabalhadorEntity;
+   private Trabalhador trabalhador;
    
    @Column(name = "CD_VAG")
    private Long codigoVaga;
@@ -73,14 +73,14 @@ public class EncaminhamentoNaoAtendido implements Serializable
       this.codigoTrabalhador = codigoTrabalhador;
    }
 
-   public Trabalhador getTrabalhadorEntity()
+   public Trabalhador getTrabalhador()
    {
-      return trabalhadorEntity;
+      return trabalhador;
    }
 
-   public void setTrabalhadorEntity(Trabalhador trabalhadorEntity)
+   public void setTrabalhador(Trabalhador trabalhador)
    {
-      this.trabalhadorEntity = trabalhadorEntity;
+      this.trabalhador = trabalhador;
    }
 
    public Long getCodigoVaga()

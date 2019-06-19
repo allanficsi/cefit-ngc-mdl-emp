@@ -3,8 +3,7 @@ package br.com.aptare.cefit.vagas.dto;
 import java.io.Serializable;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
-import br.com.aptare.cefit.vagas.entity.Vaga;
+import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
 
 public class EncaminhamentoNaoAtendidoDTO implements Serializable
 {
@@ -14,11 +13,11 @@ public class EncaminhamentoNaoAtendidoDTO implements Serializable
 
    private Long codigoTrabalhador;
    
-   private Trabalhador trabalhadorEntity;
+   private TrabalhadorDTO trabalhador;
    
    private Long codigoVaga;
    
-   private Vaga vagaEntity;
+   private VagaDTO vagaEntity;
    
    private AuditoriaDTO auditoria;
 
@@ -42,14 +41,14 @@ public class EncaminhamentoNaoAtendidoDTO implements Serializable
       this.codigoTrabalhador = codigoTrabalhador;
    }
 
-   public Trabalhador getTrabalhadorEntity()
+   public TrabalhadorDTO getTrabalhador()
    {
-      return trabalhadorEntity;
+      return trabalhador;
    }
 
-   public void setTrabalhadorEntity(Trabalhador trabalhadorEntity)
+   public void setTrabalhador(TrabalhadorDTO trabalhador)
    {
-      this.trabalhadorEntity = trabalhadorEntity;
+      this.trabalhador = trabalhador;
    }
 
    public Long getCodigoVaga()
@@ -62,12 +61,12 @@ public class EncaminhamentoNaoAtendidoDTO implements Serializable
       this.codigoVaga = codigoVaga;
    }
 
-   public Vaga getVagaEntity()
+   public VagaDTO getVagaEntity()
    {
       return vagaEntity;
    }
 
-   public void setVagaEntity(Vaga vagaEntity)
+   public void setVagaEntity(VagaDTO vagaEntity)
    {
       this.vagaEntity = vagaEntity;
    }

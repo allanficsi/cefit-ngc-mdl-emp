@@ -54,6 +54,8 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    private TrabalhadorService()
    {
       adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
+      adicionarFiltro("listaTrabalhadorCbocbolistaVaga.codigo", CatalogoRestricoes.IGUAL, "filtroMap.codigoVaga");
+      adicionarFiltro("codigo", CatalogoRestricoes.NAO_UM_DOS, "filtroMap.codigoTrabalhadorNotIN");
    }
 
     @Override

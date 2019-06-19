@@ -110,6 +110,9 @@ public class Vaga implements Serializable
    @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
    private Set<VagaDia> listaVagaDia; 
    
+   @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
+   private Set<Encaminhamento> listaEncaminhamento;
+   
    @Transient
    private FiltroVaga filtro;
 
@@ -350,5 +353,15 @@ public class Vaga implements Serializable
    public void setValorPago(Double valorPago)
    {
       this.valorPago = valorPago;
+   }
+
+   public Set<Encaminhamento> getListaEncaminhamento()
+   {
+      return listaEncaminhamento;
+   }
+
+   public void setListaEncaminhamento(Set<Encaminhamento> listaEncaminhamento)
+   {
+      this.listaEncaminhamento = listaEncaminhamento;
    }
 }

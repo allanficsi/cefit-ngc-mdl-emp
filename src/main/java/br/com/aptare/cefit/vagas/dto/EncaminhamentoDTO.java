@@ -1,10 +1,10 @@
 package br.com.aptare.cefit.vagas.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
-import br.com.aptare.cefit.vagas.entity.Vaga;
+import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
 
 public class EncaminhamentoDTO implements Serializable
 {
@@ -14,11 +14,17 @@ public class EncaminhamentoDTO implements Serializable
 
    private Long codigoTrabalhador;
    
-   private Trabalhador trabalhadorEntity;
+   private TrabalhadorDTO trabalhador;
    
    private Long codigoVaga;
    
-   private Vaga vagaEntity;
+   private VagaDTO vaga;
+   
+   private String flagAtivo;
+   
+   private Date dataCancelamento;
+   
+   private Long codigoUsuarioCancelamento;
    
    private AuditoriaDTO auditoria;
 
@@ -42,16 +48,6 @@ public class EncaminhamentoDTO implements Serializable
       this.codigoTrabalhador = codigoTrabalhador;
    }
 
-   public Trabalhador getTrabalhadorEntity()
-   {
-      return trabalhadorEntity;
-   }
-
-   public void setTrabalhadorEntity(Trabalhador trabalhadorEntity)
-   {
-      this.trabalhadorEntity = trabalhadorEntity;
-   }
-
    public Long getCodigoVaga()
    {
       return codigoVaga;
@@ -62,16 +58,6 @@ public class EncaminhamentoDTO implements Serializable
       this.codigoVaga = codigoVaga;
    }
 
-   public Vaga getVagaEntity()
-   {
-      return vagaEntity;
-   }
-
-   public void setVagaEntity(Vaga vagaEntity)
-   {
-      this.vagaEntity = vagaEntity;
-   }
-
    public AuditoriaDTO getAuditoria()
    {
       return auditoria;
@@ -80,5 +66,55 @@ public class EncaminhamentoDTO implements Serializable
    public void setAuditoria(AuditoriaDTO auditoria)
    {
       this.auditoria = auditoria;
+   }
+
+   public TrabalhadorDTO getTrabalhador()
+   {
+      return trabalhador;
+   }
+
+   public void setTrabalhador(TrabalhadorDTO trabalhador)
+   {
+      this.trabalhador = trabalhador;
+   }
+
+   public VagaDTO getVaga()
+   {
+      return vaga;
+   }
+
+   public void setVaga(VagaDTO vaga)
+   {
+      this.vaga = vaga;
+   }
+
+   public String getFlagAtivo()
+   {
+      return flagAtivo;
+   }
+
+   public void setFlagAtivo(String flagAtivo)
+   {
+      this.flagAtivo = flagAtivo;
+   }
+
+   public Date getDataCancelamento()
+   {
+      return dataCancelamento;
+   }
+
+   public void setDataCancelamento(Date dataCancelamento)
+   {
+      this.dataCancelamento = dataCancelamento;
+   }
+
+   public Long getCodigoUsuarioCancelamento()
+   {
+      return codigoUsuarioCancelamento;
+   }
+
+   public void setCodigoUsuarioCancelamento(Long codigoUsuarioCancelamento)
+   {
+      this.codigoUsuarioCancelamento = codigoUsuarioCancelamento;
    }
 }

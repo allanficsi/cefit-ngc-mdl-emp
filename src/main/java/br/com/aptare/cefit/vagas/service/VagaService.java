@@ -33,7 +33,9 @@ public class VagaService extends AptareService<Vaga>
    private VagaService()
    {
       adicionarFiltro("tipoVaga", CatalogoRestricoes.UM_DOS, "filtro.tipoVagaIN");
+      adicionarFiltro("listaEncaminhamento.flagAtivo", CatalogoRestricoes.DIFERENTE_OU_NULO, "filtro.flagAtivoDiferenteEncaminhamento");
    }
+ 
    
    @Override
    public Vaga inserir(Session session, Vaga entity) throws AptareException
