@@ -11,30 +11,25 @@ public class TrabalhadorLogDTO
 
     private Long codigo;
 
-
     private Integer situacaoIncAnterior;
-
 
     private Integer situacaoIncNova;
 
-
     private Integer situacaoAnterior;
-
 
     private Integer situacaoNova;
 
-
     private Date dataOperacao;
-
 
     private Long codigoUsuarioOperacao;
 
-
     private String observacaoSitucaoIngresso;
 
+    private String motivoInativacaoAtivacao;
 
     private Long codigoTrabalhador;
 
+    private String observacaoInativacaoAtivacao;
 
     public Long getCodigo() {
         return codigo;
@@ -106,5 +101,21 @@ public class TrabalhadorLogDTO
 
     public void setCodigoTrabalhador(Long codigoTrabalhador) {
         this.codigoTrabalhador = codigoTrabalhador;
+    }
+
+    public String getMotivoInativacaoAtivacao() {
+        return motivoInativacaoAtivacao;
+    }
+
+    public void setMotivoInativacaoAtivacao(String motivoInativacaoAtivacao) {
+        this.motivoInativacaoAtivacao = motivoInativacaoAtivacao;
+    }
+
+    public String getObservacaoInativacaoAtivacao() {
+        return observacaoInativacaoAtivacao;
+    }
+
+    public void setObservacaoInativacaoAtivacao(String observacaoInativacaoAtivacao) {
+        this.observacaoInativacaoAtivacao = observacaoInativacaoAtivacao;
     }
 }

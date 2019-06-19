@@ -34,6 +34,12 @@ public class TrabalhadorLog implements Serializable {
     @Column(name = "DT_OPR")
     private Date dataOperacao;
 
+    @Column(name = "DS_MTV_INT_ATV_TRB")
+    private String motivoInativacaoAtivacao;
+
+    @Column(name = "DS_OBS_INT_ATV_TRB")
+    private String observacaoInativacaoAtivacao;
+
     @Column(name = "CD_USR_OPR")
     private Long codigoUsuarioOperacao;
 
@@ -113,5 +119,21 @@ public class TrabalhadorLog implements Serializable {
 
     public void setTrabalhador(Trabalhador trabalhador) {
         this.trabalhador = trabalhador;
+    }
+
+    public String getMotivoInativacaoAtivacao() {
+        return motivoInativacaoAtivacao;
+    }
+
+    public void setMotivoInativacaoAtivacao(String motivoInativacaoAtivacao) {
+        this.motivoInativacaoAtivacao = motivoInativacaoAtivacao;
+    }
+
+    public String getObservacaoInativacaoAtivacao() {
+        return observacaoInativacaoAtivacao;
+    }
+
+    public void setObservacaoInativacaoAtivacao(String observacaoInativacaoAtivacao) {
+        this.observacaoInativacaoAtivacao = observacaoInativacaoAtivacao;
     }
 }

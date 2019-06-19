@@ -330,7 +330,7 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
     public Trabalhador alterarSituacaoDeIngresso(Session session, Trabalhador entity) throws AptareException
     {
-        // Get trabalahdor somente com o codigo
+        // Get trabalhador somente com o codigo
         Trabalhador trabalhador = new Trabalhador();
         trabalhador.setCodigo(entity.getCodigo());
 
@@ -348,6 +348,9 @@ public class TrabalhadorService extends AptareService<Trabalhador>
         if (entity.getListaTrabalhadorLog() != null) {
             entity.getListaTrabalhadorLog().forEach(element -> {
                 trabalhadorLog.setObservacaoSitucaoIngresso(element.getObservacaoSitucaoIngresso());
+                trabalhadorLog.setMotivoInativacaoAtivacao(element.getMotivoInativacaoAtivacao());
+                trabalhadorLog.setObservacaoInativacaoAtivacao(element.getObservacaoInativacaoAtivacao());
+
             });
         }
 
@@ -366,14 +369,10 @@ public class TrabalhadorService extends AptareService<Trabalhador>
             trabalhadorLog.setSituacaoNova(trabalhador.getSituacao());
         }
 
-        trabalhador.setMotivoAtivacao(entity.getMotivoAtivacao());
-        trabalhador.setMotivoInativacao(entity.getMotivoInativacao());
-        trabalhador.setObservacao(entity.getObservacao());
-
         trabalhador.getAuditoria().setDataAlteracao(new Date());
         trabalhador.getAuditoria().setCodigoUsuarioAlteracao(entity.getAuditoria().getCodigoUsuarioAlteracao());
 
-        TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);//SALVA TRBALAHADOR LOG
+        TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);//SALVA TRABALHADOR LOG
         session.merge(trabalhador);//ATUALIZA TRABALHADOR
 
 

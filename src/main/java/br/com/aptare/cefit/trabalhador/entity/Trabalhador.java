@@ -67,15 +67,6 @@ public class Trabalhador implements Serializable
    @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_INC_PGR' AND DMN.VL_CMP_DMN = ST_ING_PGR)")
    private String descricaoSituacaoIngresso;
 
-   @Column(name = "OBS_TRB")
-   private String observacao;
-
-   @Column(name = "DS_MTV_INT_TRB")
-   private String motivoInativacao;
-
-   @Column(name = "DS_MTV_ATV_TRB")
-   private String motivoAtivacao;
-
    @Column(name = "FG_TRB_INF")
    private Boolean flagTrabalhadorInformal;
 
@@ -212,16 +203,6 @@ public class Trabalhador implements Serializable
       this.descricaoSituacaoIngresso = descricaoSituacaoIngresso;
    }
 
-   public String getObservacao()
-   {
-      return observacao;
-   }
-
-   public void setObservacao(String observacao)
-   {
-      this.observacao = observacao;
-   }
-
    public Auditoria getAuditoria()
    {
       return auditoria;
@@ -272,27 +253,7 @@ public class Trabalhador implements Serializable
       this.numeroInss = numeroInss;
    }
 
-   public String getMotivoInativacao()
-   {
-      return motivoInativacao;
-   }
-
-   public void setMotivoInativacao(String motivoInativacao)
-   {
-      this.motivoInativacao = motivoInativacao;
-   }
-
-   public String getMotivoAtivacao()
-   {
-      return motivoAtivacao;
-   }
-
-   public void setMotivoAtivacao(String motivoAtivacao)
-   {
-      this.motivoAtivacao = motivoAtivacao;
-   }
-
-   public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
+     public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
    {
       return listaTrabalhadorCbo;
    }
