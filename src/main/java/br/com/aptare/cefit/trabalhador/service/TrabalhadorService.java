@@ -1,7 +1,10 @@
 package br.com.aptare.cefit.trabalhador.service;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import br.com.aptare.cefit.trabalhador.entity.*;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -29,6 +32,19 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    public static int SITUACAO_ATIVA = 2;
    public static int SITUACAO_INATIVA = 3;
 
+   //SITUAÇÃO DE INGRESSO NO PROGRAMA
+   public static int PENDENTE_DE_AVALIACAO=1;
+   public static int PENDENTE_DE_VALIDACAO=2;
+   public static int ENCAMINHADO_PARA_A_AVALIACAO=3;
+   public static int ENCAMINHADO_PARA_A_CAPACITACAO=4;
+   public static int ENCAMINHADO_PARA_A_ENTREVISTA_OCUPACIONAL=5;
+   public static int RESTRICAO_POR_AVALIACAO=6;
+   public static int RESTRICAO_POR_CAPACITACAO=7;
+   public static int RESTRICAO_POR_ENTREVISTA_OCUPACIONAL=8;
+   public static int APROVADO=9;
+   public static int EXCLUIDO=10;
+   public static int APROVADO_NA_AVALIACAO=11;
+
    public static TrabalhadorService getInstancia()
    {
       if (instancia == null)
@@ -41,9 +57,11 @@ public class TrabalhadorService extends AptareService<Trabalhador>
    private TrabalhadorService()
    {
       adicionarFiltro("cadastroUnico.nome", CatalogoRestricoes.FAZ_PARTE_SEM_ACENTO, "cadastroUnico.nome");
+      adicionarFiltro("listaTrabalhadorCbocbolistaVaga.codigo", CatalogoRestricoes.IGUAL, "filtroMap.codigoVaga");
+      adicionarFiltro("codigo", CatalogoRestricoes.NAO_UM_DOS, "filtroMap.codigoTrabalhadorNotIN");
    }
-   
-   @Override
+
+    @Override
    public Trabalhador inserir(Session session, Trabalhador entity) throws AptareException
    {
       this.validarInserir(session, entity);
@@ -87,6 +105,27 @@ public class TrabalhadorService extends AptareService<Trabalhador>
             TrabalhadorDeficienciaService.getInstancia().inserir(session, trabalhadorDeficiencia);
          }
       }
+
+       //INSERINDO AGENDA
+       if(entity.getListaTrabalhadorAgenda() != null
+               && entity.getListaTrabalhadorAgenda().size() > 0)
+       {
+           List<TrabalhadorAgenda> listaAgenda = new ArrayList<TrabalhadorAgenda>(entity.getListaTrabalhadorAgenda());
+
+           for (TrabalhadorAgenda agenda : listaAgenda)
+           {
+               TrabalhadorAgenda objInserirAgenda = new TrabalhadorAgenda();
+               objInserirAgenda.setCodigoTrabalhador(entity.getCodigo());
+               objInserirAgenda.setNrHor1(agenda.getNrHor1());
+               objInserirAgenda.setNrHor2(agenda.getNrHor2());
+               objInserirAgenda.setNrHor3(agenda.getNrHor3());
+               objInserirAgenda.setNrHor4(agenda.getNrHor4());
+               objInserirAgenda.setFlagSel(agenda.getFlagSel());
+               objInserirAgenda.setNrDia(agenda.getNrDia());
+
+               TrabalhadorAgendaService.getInstancia().inserir(session, objInserirAgenda);
+           }
+       }
          
       return entity;
    }
@@ -127,7 +166,10 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       // ALTERANDO DEFICIENCIA
       TrabalhadorDeficienciaService.getInstancia().atualizarListaDeficiencia(session, new ArrayList(entity.getListaTrabalhadorDeficiencia()), entity.getCodigo());
-         
+
+       // ALTERANDO AGENDA
+       TrabalhadorAgendaService.getInstancia().atualizarAgenda(session, new ArrayList(entity.getListaTrabalhadorAgenda()), entity.getCodigo());
+
       return entity;
    }
    
@@ -231,4 +273,110 @@ public class TrabalhadorService extends AptareService<Trabalhador>
       
       session.save(entityTrabalhador);
    }
+
+    public void salvarManutencao(Trabalhador entity) throws AptareException
+    {
+        Session session = getSession();
+        session.setFlushMode(FlushMode.COMMIT);
+        Transaction tx = session.beginTransaction();
+
+        try
+        {
+            this.salvarManutencao(session, entity);
+            tx.commit();
+        }
+        catch (Exception ae)
+        {
+            throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
+        }
+        finally
+        {
+            session.close();
+        }
+    }
+
+    public void salvarManutencao(Session session, Trabalhador entity) throws AptareException
+    {
+        if(entity.getListaTrabalhadorAgenda() != null)
+        {
+            for (TrabalhadorAgenda item : entity.getListaTrabalhadorAgenda())
+            {
+                session.merge(item);
+            }
+        }
+    }
+
+    public Trabalhador alterarSituacaoDeIngresso(Trabalhador entity) throws AptareException
+    {
+        Session session = getSession();
+        session.setFlushMode(FlushMode.COMMIT);
+        Transaction tx = session.beginTransaction();
+
+        try
+        {
+            Trabalhador retorno = this.alterarSituacaoDeIngresso(session, entity);
+            tx.commit();
+            return retorno;
+        }
+        catch (Exception ae)
+        {
+            throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
+        }
+        finally
+        {
+            session.close();
+        }
+    }
+
+    public Trabalhador alterarSituacaoDeIngresso(Session session, Trabalhador entity) throws AptareException
+    {
+        // Get trabalahdor somente com o codigo
+        Trabalhador trabalhador = new Trabalhador();
+        trabalhador.setCodigo(entity.getCodigo());
+
+        trabalhador = this.get(session, trabalhador, null, null);
+
+        // Inserindo Log de Trabalhador
+        TrabalhadorLog trabalhadorLog = new TrabalhadorLog();
+        trabalhadorLog.setCodigoTrabalhador(trabalhador.getCodigo());
+        trabalhadorLog.setSituacaoIncAnterior(trabalhador.getSituacaoIngresso());
+        trabalhadorLog.setSituacaoIncNova(entity.getSituacaoIngresso());
+        trabalhadorLog.setDataOperacao(new Date());
+        trabalhadorLog.setCodigoUsuarioOperacao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+
+
+        if (entity.getListaTrabalhadorLog() != null) {
+            entity.getListaTrabalhadorLog().forEach(element -> {
+                trabalhadorLog.setObservacaoSitucaoIngresso(element.getObservacaoSitucaoIngresso());
+            });
+        }
+
+        // ATUALIZANDO ENTIDADE TRABALHADOR
+        trabalhador.setSituacaoIngresso(entity.getSituacaoIngresso());
+
+        //ALTERANDO SITUÇÃO
+        if(entity.getSituacao()!=null) {
+            trabalhadorLog.setSituacaoAnterior(trabalhador.getSituacao());
+            trabalhadorLog.setSituacaoNova(entity.getSituacao());
+
+            trabalhador.setSituacao(entity.getSituacao());
+        }else
+        {
+            trabalhadorLog.setSituacaoAnterior(trabalhador.getSituacao());
+            trabalhadorLog.setSituacaoNova(trabalhador.getSituacao());
+        }
+
+        trabalhador.setMotivoAtivacao(entity.getMotivoAtivacao());
+        trabalhador.setMotivoInativacao(entity.getMotivoInativacao());
+        trabalhador.setObservacao(entity.getObservacao());
+
+        trabalhador.getAuditoria().setDataAlteracao(new Date());
+        trabalhador.getAuditoria().setCodigoUsuarioAlteracao(entity.getAuditoria().getCodigoUsuarioAlteracao());
+
+        TrabalhadorLogService.getInstancia().inserir(session, trabalhadorLog);//SALVA TRBALAHADOR LOG
+        session.merge(trabalhador);//ATUALIZA TRABALHADOR
+
+
+        return trabalhador;
+    }
 }
