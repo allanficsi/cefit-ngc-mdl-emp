@@ -40,7 +40,7 @@ public class TrabalhadorDTO implements Serializable
    private Long numeroSerieCtps;
 
    private Long numeroInscricaoPrefeitura;
-
+   
    private Long numeroInss;
 
    private AuditoriaDTO auditoria;
@@ -48,8 +48,10 @@ public class TrabalhadorDTO implements Serializable
    private String motivoInativacao;
 
    private String motivoAtivacao;
+   
+   private Boolean flagTrabalhadorInformal;
 
-   private String tipoTrabalhador;
+   private Boolean flagTrabalhadorFormal;
 
    private String telefoneExtenso;
 
@@ -58,6 +60,10 @@ public class TrabalhadorDTO implements Serializable
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
 
    private Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda;
+   
+   private Set<TrabalhadorLogDTO> listaTrabalhadorLog;
+
+   private List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada;
 
    public Long getCodigo()
    {
