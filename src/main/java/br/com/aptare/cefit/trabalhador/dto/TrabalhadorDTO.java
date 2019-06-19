@@ -1,26 +1,30 @@
 package br.com.aptare.cefit.trabalhador.dto;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.Set;
 
 import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
 
-public class TrabalhadorDTO
+public class TrabalhadorDTO implements Serializable
 {
+   /**
+    * 
+    */
+   private static final long serialVersionUID = 1L;
+
    private Long codigo;
 
    private Long codigoCadastroUnico;
 
    private CadastroUnicoDTO cadastroUnico;
-   
+
    private Long numeroPis;
-   
+
    private Long numeroCtps;
-   
+
    private Long dataEmissaoCtps;
-   
+
    private Integer situacao;
 
    private String descricaoSituacao;
@@ -28,15 +32,15 @@ public class TrabalhadorDTO
    private Integer situacaoIngresso;
 
    private String descricaoSituacaoIngresso;
-   
+
    private String observacao;
-   
+
    private String ufCtps;
-   
+
    private Long numeroSerieCtps;
 
    private Long numeroInscricaoPrefeitura;
-
+   
    private Long numeroInss;
 
    private AuditoriaDTO auditoria;
@@ -44,17 +48,19 @@ public class TrabalhadorDTO
    private String motivoInativacao;
 
    private String motivoAtivacao;
-
+   
    private Boolean flagTrabalhadorInformal;
 
    private Boolean flagTrabalhadorFormal;
 
+   private String telefoneExtenso;
+
    private Set<TrabalhadorCboDTO> listaTrabalhadorCbo;
-   
+
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
 
    private Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda;
-
+   
    private Set<TrabalhadorLogDTO> listaTrabalhadorLog;
 
    private List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada;
@@ -89,13 +95,23 @@ public class TrabalhadorDTO
       this.cadastroUnico = cadastroUnico;
    }
 
-   public String getMotivoInativacao() { return motivoInativacao; }
+   public String getMotivoInativacao()
+   {
+      return motivoInativacao;
+   }
 
-   public void setMotivoInativacao(String motivoInativacao) { this.motivoInativacao = motivoInativacao; }
+   public void setMotivoInativacao(String motivoInativacao)
+   {
+      this.motivoInativacao = motivoInativacao;
+   }
 
-   public String getMotivoAtivacao() { return motivoAtivacao; }
+   public String getMotivoAtivacao()
+   {
+      return motivoAtivacao;
+   }
 
-   public void setMotivoAtivacao(String motivoAtivacao) {
+   public void setMotivoAtivacao(String motivoAtivacao)
+   {
       this.motivoAtivacao = motivoAtivacao;
    }
 
@@ -219,6 +235,16 @@ public class TrabalhadorDTO
       this.numeroInscricaoPrefeitura = numeroInscricaoPrefeitura;
    }
 
+   public String getTipoTrabalhador()
+   {
+      return tipoTrabalhador;
+   }
+
+   public void setTipoTrabalhador(String tipoTrabalhador)
+   {
+      this.tipoTrabalhador = tipoTrabalhador;
+   }
+
    public Long getNumeroInss()
    {
       return numeroInss;
@@ -249,43 +275,23 @@ public class TrabalhadorDTO
       this.listaTrabalhadorDeficiencia = listaTrabalhadorDeficiencia;
    }
 
-   public Set<TrabalhadorAgendaDTO> getListaTrabalhadorAgenda() {
+   public Set<TrabalhadorAgendaDTO> getListaTrabalhadorAgenda()
+   {
       return listaTrabalhadorAgenda;
    }
 
-   public void setListaTrabalhadorAgenda(Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda) {
+   public void setListaTrabalhadorAgenda(Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda)
+   {
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
 
-   public Set<TrabalhadorLogDTO> getListaTrabalhadorLog() {
-      return listaTrabalhadorLog;
+   public String getTelefoneExtenso()
+   {
+      return telefoneExtenso;
    }
 
-   public void setListaTrabalhadorLog(Set<TrabalhadorLogDTO> listaTrabalhadorLog) {
-      this.listaTrabalhadorLog = listaTrabalhadorLog;
+   public void setTelefoneExtenso(String telefoneExtenso)
+   {
+      this.telefoneExtenso = telefoneExtenso;
    }
-
-   public List<TrabalhadorLogDTO> getListaTrabalhadorLogOrdenada() {
-      return listaTrabalhadorLogOrdenada;
-   }
-
-   public void setListaTrabalhadorLogOrdenada(List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada) {
-      this.listaTrabalhadorLogOrdenada = listaTrabalhadorLogOrdenada;
-   }
-
-    public Boolean getFlagTrabalhadorInformal() {
-        return flagTrabalhadorInformal;
-    }
-
-    public void setFlagTrabalhadorInformal(Boolean flagTrabalhadorInformal) {
-        this.flagTrabalhadorInformal = flagTrabalhadorInformal;
-    }
-
-    public Boolean getFlagTrabalhadorFormal() {
-        return flagTrabalhadorFormal;
-    }
-
-    public void setFlagTrabalhadorFormal(Boolean flagTrabalhadorFormal) {
-        this.flagTrabalhadorFormal = flagTrabalhadorFormal;
-    }
 }
