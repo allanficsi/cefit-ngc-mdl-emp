@@ -1,6 +1,7 @@
 package br.com.aptare.cefit.vagas.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -38,14 +39,23 @@ public class Encaminhamento implements Serializable
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_TRB", insertable = false, updatable = false)
-   private Trabalhador trabalhadorEntity;
+   private Trabalhador trabalhador;
    
    @Column(name = "CD_VAG")
    private Long codigoVaga;
    
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_VAG", insertable = false, updatable = false)
-   private Vaga vagaEntity;
+   private Vaga vaga;
+   
+   @Column(name = "FG_ATV_ENC")
+   private String flagAtivo;
+   
+   @Column(name = "DT_CNC_USR")
+   private Date dataCancelamento;
+   
+   @Column(name = "CD_CNC_USR")
+   private Long codigoUsuarioCancelamento;
    
    @Embedded
    private Auditoria auditoria;
@@ -70,16 +80,6 @@ public class Encaminhamento implements Serializable
       this.codigoTrabalhador = codigoTrabalhador;
    }
 
-   public Trabalhador getTrabalhadorEntity()
-   {
-      return trabalhadorEntity;
-   }
-
-   public void setTrabalhadorEntity(Trabalhador trabalhadorEntity)
-   {
-      this.trabalhadorEntity = trabalhadorEntity;
-   }
-
    public Long getCodigoVaga()
    {
       return codigoVaga;
@@ -90,14 +90,24 @@ public class Encaminhamento implements Serializable
       this.codigoVaga = codigoVaga;
    }
 
-   public Vaga getVagaEntity()
+   public Trabalhador getTrabalhador()
    {
-      return vagaEntity;
+      return trabalhador;
    }
 
-   public void setVagaEntity(Vaga vagaEntity)
+   public void setTrabalhador(Trabalhador trabalhador)
    {
-      this.vagaEntity = vagaEntity;
+      this.trabalhador = trabalhador;
+   }
+
+   public Vaga getVaga()
+   {
+      return vaga;
+   }
+
+   public void setVaga(Vaga vaga)
+   {
+      this.vaga = vaga;
    }
 
    public Auditoria getAuditoria()
@@ -108,5 +118,35 @@ public class Encaminhamento implements Serializable
    public void setAuditoria(Auditoria auditoria)
    {
       this.auditoria = auditoria;
+   }
+
+   public String getFlagAtivo()
+   {
+      return flagAtivo;
+   }
+
+   public void setFlagAtivo(String flagAtivo)
+   {
+      this.flagAtivo = flagAtivo;
+   }
+
+   public Date getDataCancelamento()
+   {
+      return dataCancelamento;
+   }
+
+   public void setDataCancelamento(Date dataCancelamento)
+   {
+      this.dataCancelamento = dataCancelamento;
+   }
+
+   public Long getCodigoUsuarioCancelamento()
+   {
+      return codigoUsuarioCancelamento;
+   }
+
+   public void setCodigoUsuarioCancelamento(Long codigoUsuarioCancelamento)
+   {
+      this.codigoUsuarioCancelamento = codigoUsuarioCancelamento;
    }
 }

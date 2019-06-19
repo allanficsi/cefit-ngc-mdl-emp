@@ -2,6 +2,7 @@ package br.com.aptare.cefit.trabalhador.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Proxy;
@@ -100,6 +102,9 @@ public class Trabalhador implements Serializable
 
    @Embedded
    private Auditoria auditoria;
+   
+   @Transient
+   private HashMap<String, Object> filtroMap;
 
    public Long getCodigo()
    {
@@ -299,5 +304,15 @@ public class Trabalhador implements Serializable
 
    public void setListaTrabalhadorAgenda(Set<TrabalhadorAgenda> listaTrabalhadorAgenda) {
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
+   }
+
+   public HashMap<String, Object> getFiltroMap()
+   {
+      return filtroMap;
+   }
+
+   public void setFiltroMap(HashMap<String, Object> filtroMap)
+   {
+      this.filtroMap = filtroMap;
    }
 }

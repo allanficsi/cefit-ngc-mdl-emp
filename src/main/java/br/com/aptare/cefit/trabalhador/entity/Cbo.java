@@ -1,13 +1,18 @@
 package br.com.aptare.cefit.trabalhador.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
+
+import br.com.aptare.cefit.vagas.entity.Vaga;
 
 @Entity
 @Table(schema = "SC_TRB", name = "TBL_CBO")
@@ -26,6 +31,10 @@ public class Cbo implements Serializable
 
    @Column(name = "NM_COD_CBO")
    private String nomeCodigo;
+   
+   @OneToMany(mappedBy = "cboEntity", fetch = FetchType.LAZY)
+   private Set<Vaga> listaVaga;
+   
 
    public Long getCodigo()
    {
@@ -56,4 +65,16 @@ public class Cbo implements Serializable
    {
       this.nomeCodigo = nomeCodigo;
    }
+
+   public Set<Vaga> getListaVaga()
+   {
+      return listaVaga;
+   }
+
+   public void setListaVaga(Set<Vaga> listaVaga)
+   {
+      this.listaVaga = listaVaga;
+   }
+
+   
 }
