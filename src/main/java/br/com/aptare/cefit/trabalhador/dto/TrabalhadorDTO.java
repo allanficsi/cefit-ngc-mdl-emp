@@ -34,8 +34,6 @@ public class TrabalhadorDTO implements Serializable
 
    private String descricaoSituacaoIngresso;
 
-   private String observacao;
-
    private String ufCtps;
 
    private Long numeroSerieCtps;
@@ -46,10 +44,6 @@ public class TrabalhadorDTO implements Serializable
 
    private AuditoriaDTO auditoria;
 
-   private String motivoInativacao;
-
-   private String motivoAtivacao;
-   
    private Boolean flagTrabalhadorInformal;
 
    private Boolean flagTrabalhadorFormal;
@@ -94,26 +88,6 @@ public class TrabalhadorDTO implements Serializable
    public void setCadastroUnico(CadastroUnicoDTO cadastroUnico)
    {
       this.cadastroUnico = cadastroUnico;
-   }
-
-   public String getMotivoInativacao()
-   {
-      return motivoInativacao;
-   }
-
-   public void setMotivoInativacao(String motivoInativacao)
-   {
-      this.motivoInativacao = motivoInativacao;
-   }
-
-   public String getMotivoAtivacao()
-   {
-      return motivoAtivacao;
-   }
-
-   public void setMotivoAtivacao(String motivoAtivacao)
-   {
-      this.motivoAtivacao = motivoAtivacao;
    }
 
    public Long getNumeroPis()
@@ -184,16 +158,6 @@ public class TrabalhadorDTO implements Serializable
    public void setDescricaoSituacaoIngresso(String descricaoSituacaoIngresso)
    {
       this.descricaoSituacaoIngresso = descricaoSituacaoIngresso;
-   }
-
-   public String getObservacao()
-   {
-      return observacao;
-   }
-
-   public void setObservacao(String observacao)
-   {
-      this.observacao = observacao;
    }
 
    public AuditoriaDTO getAuditoria()
