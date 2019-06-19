@@ -2,6 +2,7 @@ package br.com.aptare.cefit.trabalhador.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Proxy;
@@ -74,6 +76,12 @@ public class Trabalhador implements Serializable
    @Column(name = "DS_MTV_ATV_TRB")
    private String motivoAtivacao;
 
+   @Column(name = "DS_MTV_INT_TRB")
+   private String motivoInativacao;
+
+   @Column(name = "DS_MTV_ATV_TRB")
+   private String motivoAtivacao;
+
    @Column(name = "FG_TRB_INF")
    private Boolean flagTrabalhadorInformal;
 
@@ -100,12 +108,15 @@ public class Trabalhador implements Serializable
 
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorAgenda> listaTrabalhadorAgenda;
-
+   
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorLog> listaTrabalhadorLog;
 
    @Embedded
    private Auditoria auditoria;
+   
+   @Transient
+   private HashMap<String, Object> filtroMap;
 
    public Long getCodigo()
    {
@@ -161,6 +172,10 @@ public class Trabalhador implements Serializable
    {
       return dataEmissaoCtps;
    }
+
+   public String getTipoTrabalhador() { return tipoTrabalhador; }
+
+   public void setTipoTrabalhador(String tipoTrabalhador) { this.tipoTrabalhador = tipoTrabalhador; }
 
    public void setDataEmissaoCtps(Date dataEmissaoCtps)
    {
@@ -303,27 +318,13 @@ public class Trabalhador implements Serializable
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
    }
 
-   public Set<TrabalhadorLog> getListaTrabalhadorLog() {
-      return listaTrabalhadorLog;
+   public HashMap<String, Object> getFiltroMap()
+   {
+      return filtroMap;
    }
 
-   public void setListaTrabalhadorLog(Set<TrabalhadorLog> listaTrabalhadorLog) {
-      this.listaTrabalhadorLog = listaTrabalhadorLog;
+   public void setFiltroMap(HashMap<String, Object> filtroMap)
+   {
+      this.filtroMap = filtroMap;
    }
-
-    public Boolean getFlagTrabalhadorInformal() {
-        return flagTrabalhadorInformal;
-    }
-
-    public void setFlagTrabalhadorInformal(Boolean flagTrabalhadorInformal) {
-        this.flagTrabalhadorInformal = flagTrabalhadorInformal;
-    }
-
-    public Boolean getFlagTrabalhadorFormal() {
-        return flagTrabalhadorFormal;
-    }
-
-    public void setFlagTrabalhadorFormal(Boolean flagTrabalhadorFormal) {
-        this.flagTrabalhadorFormal = flagTrabalhadorFormal;
-    }
 }
