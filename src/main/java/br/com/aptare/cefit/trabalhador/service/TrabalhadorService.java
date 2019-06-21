@@ -346,12 +346,11 @@ public class TrabalhadorService extends AptareService<Trabalhador>
 
 
         if (entity.getListaTrabalhadorLog() != null) {
-            entity.getListaTrabalhadorLog().forEach(element -> {
+            for (TrabalhadorLog element : entity.getListaTrabalhadorLog()) {
                 trabalhadorLog.setObservacaoSitucaoIngresso(element.getObservacaoSitucaoIngresso());
                 trabalhadorLog.setMotivoInativacaoAtivacao(element.getMotivoInativacaoAtivacao());
                 trabalhadorLog.setObservacaoInativacaoAtivacao(element.getObservacaoInativacaoAtivacao());
-
-            });
+            }
         }
 
         // ATUALIZANDO ENTIDADE TRABALHADOR
