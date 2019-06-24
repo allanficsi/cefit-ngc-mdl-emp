@@ -1,5 +1,7 @@
 package br.com.aptare.cefit.seguranca.dto;
 
+import br.com.aptare.cefit.empregador.dto.EmpregadorDTO;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,6 +24,8 @@ public class UsuarioDTO implements Serializable
    private Date dataNascimento;
    
    private Long cpf;
+
+   private EmpregadorDTO empregador;
    
    public Long getCodigo()
    {
@@ -101,5 +105,13 @@ public class UsuarioDTO implements Serializable
    public void setCpf(Long cpf)
    {
       this.cpf = cpf;
+   }
+
+   public EmpregadorDTO getEmpregador() {
+      return empregador;
+   }
+
+   public void setEmpregador(EmpregadorDTO empregador) {
+      this.empregador = empregador;
    }
 }

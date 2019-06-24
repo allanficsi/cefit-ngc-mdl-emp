@@ -14,5 +14,15 @@
 			<artifactId>comum-ngc</artifactId>
 			<version>3.06</version>
 		</dependency>
+		<dependency>
+			<groupId>org.passay</groupId>
+			<artifactId>passay</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>2.0.2.RELEASE</version>
+		</dependency>
 	</dependencies>
 </project>
