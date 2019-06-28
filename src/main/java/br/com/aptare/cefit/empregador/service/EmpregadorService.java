@@ -5,6 +5,7 @@ import br.com.aptare.cadastroUnico.servico.CadastroUnicoService;
 import br.com.aptare.cefit.email.service.EmailService;
 import br.com.aptare.cefit.email.service.SenhaService;
 import br.com.aptare.cefit.empregador.entity.Empregador;
+import br.com.aptare.cefit.utilNgc.CriptoMD5;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
@@ -12,6 +13,7 @@ import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 import br.com.aptare.seguranca.entidade.Auditoria;
 import br.com.aptare.seguranca.entidade.Usuario;
 import br.com.aptare.seguranca.servico.UsuarioService;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -44,6 +46,16 @@ public class EmpregadorService extends AptareService<Empregador> {
    public Empregador inserir(Session session, Empregador entity) throws AptareException {
       this.validarInserir(session, entity);
 
+
+     // CadastroUnico objCadastroUnico = new CadastroUnico();
+
+      // objCadastroUnico.setEmail(entity.getCadastroUnico().getEmail());
+
+//      objCadastroUnico = CadastroUnicoService.getInstancia().get(session,objCadastroUnico,null,null);
+//
+////      if(objCadastroUnico != null){
+////         throw new AptareException("Um empregador Com esse E-Mail já existe em nossa base de dados.");
+////      }
       CadastroUnico cadastroUnico = entity.getCadastroUnico();
 
       if (cadastroUnico.getCodigo() != null) {
@@ -55,10 +67,13 @@ public class EmpregadorService extends AptareService<Empregador> {
       session.flush();
 
       entity.setCodigoCadastroUnico(cadastroUnico.getCodigo());
+      session.save(entity);
 
+      //CRIANDO NOVO USUARIO
       Usuario usuario = new Usuario();
-      String senhaGeradaAleatoria = SenhaService.getInstancia().gerarSenhaAleatoria();// GERANDO SENHA 8 DIGITOS
 
+      // GERANDO SENHA 8 DIGITOS
+      String senhaGeradaAleatoria = SenhaService.getInstancia().gerarSenhaAleatoria();
 
       //VERIFICA TIPO DE PESSOA SE É 'J' OU 'F'
       if (entity.getCadastroUnico().getTipoPessoa().equals("F")) {
@@ -67,27 +82,31 @@ public class EmpregadorService extends AptareService<Empregador> {
       } else {
          if (entity.getCadastroUnico().getCnpj() != null) {
             usuario.setLogin(entity.getCadastroUnico().getCnpj());
-         } else
+         } else {
             usuario.setLogin(entity.getNumeroCei().toString());//todo getNumeroCei é um Long e nao uma string
+         }
       }
+
 
       //POPULANDO USUSARIO
       usuario.setNome(entity.getCadastroUnico().getNome());
-      usuario.setSenha(senhaGeradaAleatoria);
+      usuario.setSenha(CriptoMD5.stringHexa(senhaGeradaAleatoria));
       usuario.setCodigoCadastroUnico(entity.getCodigoCadastroUnico());
       usuario.setSituacao(UsuarioService.SITUACAO_ATIVO);
       usuario.setFlagAdministrador("N");
       usuario.setAuditoria(new Auditoria());
       usuario.getAuditoria().setCodigoUsuarioInclusao(1L);
       usuario.getAuditoria().setDataInclusao(new Date());
-      usuario.getAuditoria().setDataInclusao(new Date());
-      usuario.setCadastroUnico(entity.getCadastroUnico());
+     // usuario.getAuditoria().setDataInclusao(new Date());
+//      usuario.setCadastroUnico(entity.getCadastroUnico());
 
+      session.save(usuario);
 
-      Usuario usuariocadastrado = UsuarioService.getInstancia().inserir(session, usuario);
+      //Usuario usuariocadastrado = UsuarioService.getInstancia().inserir(session, usuario);
 
-      session.save(entity);
-      EmailService.getInstancia().enviarEmailNotificacao(entity.getCadastroUnico().getEmail(),usuario.getLogin(),senhaGeradaAleatoria,false);
+      EmailService.getInstancia()
+              .enviarEmailNotificacao(entity.getCadastroUnico().getEmail(),usuario.getLogin(),senhaGeradaAleatoria,false);
+
       return entity;
    }
 
@@ -194,77 +213,5 @@ public class EmpregadorService extends AptareService<Empregador> {
 
       return empregador;
    }
-
-
-   public Empregador resetarSenha(Empregador entity) throws AptareException
-   {
-      Session session = getSession();
-      session.setFlushMode(FlushMode.COMMIT);
-      Transaction tx = session.beginTransaction();
-
-      try
-      {
-         Empregador retorno = this.resetarSenha(session, entity);
-         tx.commit();
-         return retorno;
-      }
-      catch (Exception ae)
-      {
-         throw TratamentoPadraoErro.getInstancia().catchHBEdicaoSession(ae, tx);
-      }
-      finally
-      {
-         session.close();
-      }
-   }
-
-   private Empregador resetarSenha(Session session, Empregador entity) throws AptareException {
-      CadastroUnico cadastroUnico = new CadastroUnico();
-      cadastroUnico.setEmail(entity.getCadastroUnico().getEmail());
-
-     CadastroUnico entyCadastroUnico = CadastroUnicoService.getInstancia().get(session,cadastroUnico,null,null);
-
-      if (entyCadastroUnico == null)
-      {
-         throw new AptareException("msg.geral", new String[] {"E-mail não encontrado."});
-      }
-
-      Usuario usuario = new Usuario();
-      usuario.setCodigoCadastroUnico(entyCadastroUnico.getCodigo());
-
-      //GET USUARIO
-      Usuario entityUsuario = UsuarioService.getInstancia().get(usuario,new String[] {"cadastroUnico.pessoaJuridica*.listaContato*.cargo*",
-              "cadastroUnico.pessoaJuridica*.listaContato*.listaTelefone*.auditoria*",
-              "cadastroUnico.pessoaFisica*.listaTelefone*.auditoria*",
-              "cadastroUnico.listaEndereco.correio*",
-              "cadastroUnico.listaEndereco.extensaoEndereco*",
-              "auditoria.usuarioInclusao","listaUsuarioGrupo*"},null);
-
-      this.completarResetarSenha(entityUsuario,session,entyCadastroUnico.getEmail());
-
-      return entity;
-   }
-
-   private void completarResetarSenha(Usuario entityUsuario, Session session, String email) throws AptareException {
-
-      String novaSenha = SenhaService.getInstancia().gerarSenhaAleatoria();
-      String senhaAntiga = entityUsuario.getSenha();
-
-      //CRIANDO FILTRO
-//      FiltroUsuario filtroUsuario = new FiltroUsuario();
-//      filtroUsuario.setSenhaAntiga(senhaAntiga);
-
-      entityUsuario.setSenha(novaSenha);
-      entityUsuario.getAuditoria().setCodigoUsuarioAlteracao(entityUsuario.getCodigo());
-      entityUsuario.getAuditoria().setDataAlteracao(new Date());
-
-
-      UsuarioService.getInstancia().alterar(session,entityUsuario);
-
-      EmailService.getInstancia().enviarEmailNotificacao(email,entityUsuario.getLogin(),novaSenha,true);
-
-
-   }
-
 
 }

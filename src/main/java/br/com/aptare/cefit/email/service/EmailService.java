@@ -29,7 +29,7 @@ public class EmailService extends AptareService<Email> {
         Email mail = new Email();
         if(flagRecuperarSenha){
             mail.setSubject("Recuperação De Senha");
-            mail.setContent("Bem vindo ao Cefit! abaixo segue login e a nova  senha." + "\n\n"+"Login: "+ login + "\n" + "Senha: "+ senha);
+            mail.setContent("Bem vindo ao Cefit! abaixo a sua nova  senha." + "\n\n" + "Senha: "+ senha);
         }else {
             mail.setSubject("Confirmação De Cadastro");
             mail.setContent("Bem vindo ao Cefit! abaixo segue login e senha." + "\n\n"+"Login: "+ login + "\n" + "Senha: "+ senha);
