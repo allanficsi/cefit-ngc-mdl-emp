@@ -1,4 +1,4 @@
-package br.com.aptare.cefit.utilNgc;
+package br.com.aptare.cefit.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

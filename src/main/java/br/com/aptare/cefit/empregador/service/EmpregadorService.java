@@ -5,7 +5,7 @@ import br.com.aptare.cadastroUnico.servico.CadastroUnicoService;
 import br.com.aptare.cefit.email.service.EmailService;
 import br.com.aptare.cefit.email.service.SenhaService;
 import br.com.aptare.cefit.empregador.entity.Empregador;
-import br.com.aptare.cefit.utilNgc.CriptoMD5;
+import br.com.aptare.cefit.util.CriptoMD5;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
@@ -13,7 +13,6 @@ import br.com.aptare.fda.hibernate.CatalogoRestricoes;
 import br.com.aptare.seguranca.entidade.Auditoria;
 import br.com.aptare.seguranca.entidade.Usuario;
 import br.com.aptare.seguranca.servico.UsuarioService;
-import org.apache.commons.codec.digest.Md5Crypt;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -47,15 +46,6 @@ public class EmpregadorService extends AptareService<Empregador> {
       this.validarInserir(session, entity);
 
 
-     // CadastroUnico objCadastroUnico = new CadastroUnico();
-
-      // objCadastroUnico.setEmail(entity.getCadastroUnico().getEmail());
-
-//      objCadastroUnico = CadastroUnicoService.getInstancia().get(session,objCadastroUnico,null,null);
-//
-////      if(objCadastroUnico != null){
-////         throw new AptareException("Um empregador Com esse E-Mail já existe em nossa base de dados.");
-////      }
       CadastroUnico cadastroUnico = entity.getCadastroUnico();
 
       if (cadastroUnico.getCodigo() != null) {
@@ -83,10 +73,9 @@ public class EmpregadorService extends AptareService<Empregador> {
          if (entity.getCadastroUnico().getCnpj() != null) {
             usuario.setLogin(entity.getCadastroUnico().getCnpj());
          } else {
-            usuario.setLogin(entity.getNumeroCei().toString());//todo getNumeroCei é um Long e nao uma string
+            usuario.setLogin(entity.getNumeroCei().toString());
          }
       }
-
 
       //POPULANDO USUSARIO
       usuario.setNome(entity.getCadastroUnico().getNome());
@@ -97,15 +86,11 @@ public class EmpregadorService extends AptareService<Empregador> {
       usuario.setAuditoria(new Auditoria());
       usuario.getAuditoria().setCodigoUsuarioInclusao(1L);
       usuario.getAuditoria().setDataInclusao(new Date());
-     // usuario.getAuditoria().setDataInclusao(new Date());
-//      usuario.setCadastroUnico(entity.getCadastroUnico());
 
       session.save(usuario);
 
-      //Usuario usuariocadastrado = UsuarioService.getInstancia().inserir(session, usuario);
-
-      EmailService.getInstancia()
-              .enviarEmailNotificacao(entity.getCadastroUnico().getEmail(),usuario.getLogin(),senhaGeradaAleatoria,false);
+      EmailService.getInstancia().enviarEmailNotificacao
+                      (entity.getCadastroUnico().getEmail(),usuario.getLogin(),senhaGeradaAleatoria,false);
 
       return entity;
    }
