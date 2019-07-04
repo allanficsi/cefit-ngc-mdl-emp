@@ -1,6 +1,8 @@
 package br.com.aptare.cefit.empregador.service;
 
 import br.com.aptare.cadastroUnico.entidade.CadastroUnico;
+import br.com.aptare.cadastroUnico.entidade.Endereco;
+import br.com.aptare.cadastroUnico.entidade.Telefone;
 import br.com.aptare.cadastroUnico.servico.CadastroUnicoService;
 import br.com.aptare.cefit.email.service.EmailService;
 import br.com.aptare.cefit.email.service.SenhaService;
@@ -89,9 +91,11 @@ public class EmpregadorService extends AptareService<Empregador> {
 
       session.save(usuario);
 
-      EmailService.getInstancia().enviarEmailNotificacao
-                      (entity.getCadastroUnico().getEmail(),usuario.getLogin(),senhaGeradaAleatoria,false);
-
+      //VERIFICA SE POSSUI E-MAIL OU NÃO PARA ENVIAR LOGIN E SENHA
+      if (entity.getCadastroUnico().getEmail() != null) {
+         EmailService.getInstancia().enviarEmailNotificacao
+                 (entity.getCadastroUnico().getEmail(), usuario.getLogin(), senhaGeradaAleatoria, false);
+      }
       return entity;
    }
 
@@ -120,14 +124,26 @@ public class EmpregadorService extends AptareService<Empregador> {
       CadastroUnico cadastroUnico = empregador.getCadastroUnico();
       empregador.setCadastroUnico(null);
 
+      //SETANDO O setNsuOrigem NO ENDEREÇO
+      for (Endereco elements:  cadastroUnico.getListaEndereco()) {
+         elements.setNsuOrigem(cadastroUnico.getCodigo());
+      }
+
+      //VERIFICANDO TIPO DE PESSOA
+      if (cadastroUnico.getTipoPessoa().equals("F")) {
+         //SETANDO O setNsuOrigem NO TELEFONE
+         for (Telefone elements : cadastroUnico.getPessoaFisica().getListaTelefone()) {
+            elements.setNsuOrigem(cadastroUnico.getCodigo());
+         }
+      }
       cadastroUnico.setAuditoria(empregador.getAuditoria());
       cadastroUnico = CadastroUnicoService.getInstancia().alterarSemValidacao(session, cadastroUnico);
 
       session.flush();
 
+      empregador.setCadastroUnico(cadastroUnico);
       session.merge(empregador);
 
-      empregador.setCadastroUnico(cadastroUnico);
 
       return empregador;
    }
