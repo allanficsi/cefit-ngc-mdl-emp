@@ -25,8 +25,8 @@ public class UsuarioDTO implements Serializable
    
    private Long cpf;
 
-   private EmpregadorDTO empregador;
-   
+   private Long codigoTrabalhador;
+
    public Long getCodigo()
    {
       return codigo;
@@ -107,11 +107,11 @@ public class UsuarioDTO implements Serializable
       this.cpf = cpf;
    }
 
-   public EmpregadorDTO getEmpregador() {
-      return empregador;
+   public Long getCodigoTrabalhador() {
+      return codigoTrabalhador;
    }
 
-   public void setEmpregador(EmpregadorDTO empregador) {
-      this.empregador = empregador;
+   public void setCodigoTrabalhador(Long codigoTrabalhador) {
+      this.codigoTrabalhador = codigoTrabalhador;
    }
 }
