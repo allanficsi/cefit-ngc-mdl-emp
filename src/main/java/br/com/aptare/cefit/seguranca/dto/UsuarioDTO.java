@@ -1,7 +1,5 @@
 package br.com.aptare.cefit.seguranca.dto;
 
-import br.com.aptare.cefit.empregador.dto.EmpregadorDTO;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,19 +8,19 @@ public class UsuarioDTO implements Serializable
    private static final long serialVersionUID = -3869083358867288336L;
 
    private Long codigo;
-   
+
    private String nome;
 
    private String login;
 
    private String senha;
-   
+
    private Long codigoCadastroUnico;
-   
+
    private Long celular;
-   
+
    private Date dataNascimento;
-   
+
    private Long cpf;
 
    private Long codigoTrabalhador;
@@ -107,11 +105,13 @@ public class UsuarioDTO implements Serializable
       this.cpf = cpf;
    }
 
-   public Long getCodigoTrabalhador() {
+   public Long getCodigoTrabalhador()
+   {
       return codigoTrabalhador;
    }
 
-   public void setCodigoTrabalhador(Long codigoTrabalhador) {
+   public void setCodigoTrabalhador(Long codigoTrabalhador)
+   {
       this.codigoTrabalhador = codigoTrabalhador;
    }
 }
