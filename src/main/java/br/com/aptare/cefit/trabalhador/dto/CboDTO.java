@@ -3,9 +3,9 @@ package br.com.aptare.cefit.trabalhador.dto;
 public class CboDTO
 {
    private Long codigo;
-   
+
    private String nome;
-   
+
    private String nomeCodigo;
 
    public Long getCodigo()
@@ -37,5 +37,5 @@ public class CboDTO
    {
       this.nomeCodigo = nomeCodigo;
    }
-   
+
 }

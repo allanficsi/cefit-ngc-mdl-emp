@@ -54,6 +54,9 @@ public class Empregador implements Serializable
    @Column(name = "CD_PEM")
    private Long codigoPorteEmpresa;
 
+   @Column(name = "CD_STR_ECN")
+   private Long codigoSetorEconomia;
+
    @Column(name = "DT_ATU_PEM")
    private Date dataAtualizacaoPorteEmpresa;
 
@@ -65,13 +68,13 @@ public class Empregador implements Serializable
 
    @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_EMP' AND DMN.VL_CMP_DMN = ST_EMP)")
    private String descricaoSituacao;
-   
+
    @Column(name = "NR_CEI")
    private Long numeroCei;
-   
+
    @Column(name = "OBS_EMP")
    private String observacao;
-   
+
    @Formula("( coalesce(nr_cei::text, '') ||';'|| (select cun.nr_cpf_cnpj_cun ||';'|| cun.nm_cun from sc_cuc.tbl_cun cun where cun.cd_cun = cd_cun) )")
    private String filtroGenerico;
 
@@ -146,6 +149,14 @@ public class Empregador implements Serializable
    public void setCodigoPorteEmpresa(Long codigoPorteEmpresa)
    {
       this.codigoPorteEmpresa = codigoPorteEmpresa;
+   }
+
+   public Long getCodigoSetorEconomia() {
+      return codigoSetorEconomia;
+   }
+
+   public void setCodigoSetorEconomia(Long codigoSetorEconomia) {
+      this.codigoSetorEconomia = codigoSetorEconomia;
    }
 
    public Date getDataAtualizacaoPorteEmpresa()
@@ -227,4 +238,5 @@ public class Empregador implements Serializable
    {
       this.filtroGenerico = filtroGenerico;
    }
+
 }

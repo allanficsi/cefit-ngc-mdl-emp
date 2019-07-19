@@ -85,6 +85,9 @@ public class Trabalhador implements Serializable
    @Column(name = "NR_INSS")
    private Long numeroInss;
 
+   @Column(name = "OBS_TRB")
+   private String observacao;
+
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorCbo> listaTrabalhadorCbo;
 
@@ -97,8 +100,20 @@ public class Trabalhador implements Serializable
    @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
    private Set<TrabalhadorLog> listaTrabalhadorLog;
 
+   @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
+   private Set<TrabalhadorRejeicao> listaTrabalhadorRejeicao;
+
+   @OneToMany(mappedBy = "trabalhador", fetch = FetchType.LAZY)
+   private Set<TrabalhadorPresenca> listaTrabalhadorPresenca;
+
    @Embedded
    private Auditoria auditoria;
+
+   @Transient
+   private Long codigoCbo;
+
+   @Transient
+   private Date dataHoraPresenca;
 
    @Transient
    private HashMap<String, Object> filtroMap;
@@ -253,7 +268,7 @@ public class Trabalhador implements Serializable
       this.numeroInss = numeroInss;
    }
 
-     public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
+   public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
    {
       return listaTrabalhadorCbo;
    }
@@ -281,6 +296,32 @@ public class Trabalhador implements Serializable
    public void setListaTrabalhadorAgenda(Set<TrabalhadorAgenda> listaTrabalhadorAgenda)
    {
       this.listaTrabalhadorAgenda = listaTrabalhadorAgenda;
+   }
+
+   public Set<TrabalhadorLog> getListaTrabalhadorLog()
+   {
+      return listaTrabalhadorLog;
+   }
+
+   public void setListaTrabalhadorLog(Set<TrabalhadorLog> listaTrabalhadorLog)
+   {
+      this.listaTrabalhadorLog = listaTrabalhadorLog;
+   }
+
+   public Set<TrabalhadorRejeicao> getListaTrabalhadorRejeicao() {
+      return listaTrabalhadorRejeicao;
+   }
+
+   public void setListaTrabalhadorRejeicao(Set<TrabalhadorRejeicao> listaTrabalhadorRejeicao) {
+      this.listaTrabalhadorRejeicao = listaTrabalhadorRejeicao;
+   }
+
+   public Set<TrabalhadorPresenca> getListaTrabalhadorPresenca() {
+      return listaTrabalhadorPresenca;
+   }
+
+   public void setListaTrabalhadorPresenca(Set<TrabalhadorPresenca> listaTrabalhadorPresenca) {
+      this.listaTrabalhadorPresenca = listaTrabalhadorPresenca;
    }
 
    public HashMap<String, Object> getFiltroMap()
@@ -313,13 +354,33 @@ public class Trabalhador implements Serializable
       this.flagTrabalhadorFormal = flagTrabalhadorFormal;
    }
 
-   public Set<TrabalhadorLog> getListaTrabalhadorLog()
+   public String getObservacao()
    {
-      return listaTrabalhadorLog;
+      return observacao;
    }
 
-   public void setListaTrabalhadorLog(Set<TrabalhadorLog> listaTrabalhadorLog)
+   public void setObservacao(String observacao)
    {
-      this.listaTrabalhadorLog = listaTrabalhadorLog;
+      this.observacao = observacao;
+   }
+
+   public Long getCodigoCbo()
+   {
+      return codigoCbo;
+   }
+
+   public void setCodigoCbo(Long codigoCbo)
+   {
+      this.codigoCbo = codigoCbo;
+   }
+
+   public Date getDataHoraPresenca()
+   {
+      return dataHoraPresenca;
+   }
+
+   public void setDataHoraPresenca(Date dataHoraPresenca)
+   {
+      this.dataHoraPresenca = dataHoraPresenca;
    }
 }

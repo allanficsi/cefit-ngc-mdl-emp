@@ -1,6 +1,7 @@
 package br.com.aptare.cefit.vagas.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,13 +32,20 @@ public class VagaDia implements Serializable
 
    @Column(name = "CD_VAG")
    private Long codigoVaga;
-   
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_VAG", insertable = false, updatable = false)
    private Vaga vaga;
-   
-   @Column(name = "CD_DIA_VAG")
-   private Long codigoDia;
+
+   @Column(name = "DT_VAG")
+   private Date data;
+
+   @Column(name = "NR_HOR1")
+   private String horarioEntrada;
+
+   @Column(name = "NR_HOR2")
+   private String horarioSaida;
+
 
    public Long getCodigo()
    {
@@ -59,16 +67,6 @@ public class VagaDia implements Serializable
       this.codigoVaga = codigoVaga;
    }
 
-   public Long getCodigoDia()
-   {
-      return codigoDia;
-   }
-
-   public void setCodigoDia(Long codigoDia)
-   {
-      this.codigoDia = codigoDia;
-   }
-
    public Vaga getVaga()
    {
       return vaga;
@@ -77,5 +75,35 @@ public class VagaDia implements Serializable
    public void setVaga(Vaga vaga)
    {
       this.vaga = vaga;
+   }
+
+   public Date getData()
+   {
+      return data;
+   }
+
+   public void setData(Date data)
+   {
+      this.data = data;
+   }
+
+   public String getHorarioEntrada()
+   {
+      return horarioEntrada;
+   }
+
+   public void setHorarioEntrada(String horarioEntrada)
+   {
+      this.horarioEntrada = horarioEntrada;
+   }
+
+   public String getHorarioSaida()
+   {
+      return horarioSaida;
+   }
+
+   public void setHorarioSaida(String horarioSaida)
+   {
+      this.horarioSaida = horarioSaida;
    }
 }

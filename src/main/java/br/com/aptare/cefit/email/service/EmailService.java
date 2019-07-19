@@ -42,17 +42,6 @@ public class EmailService extends AptareService<Email> {
 
     private void sendSimpleMessage(final Email email){
 
-//        spring.mail.default-encoding=UTF-8
-//        spring.mail.host=smtp.gmail.com
-//        spring.mail.username=cefitsignac@gmail.com
-//                spring.mail.password=allan1992torres
-//        spring.mail.port=587
-//        spring.mail.protocol=smtp
-//        spring.mail.test-connection=false
-//        spring.mail.properties.mail.smtp.auth=true
-//        spring.mail.properties.mail.smtp.starttls.enable=true
-
-
         emailSender = new JavaMailSenderImpl();
         emailSender.setHost("smtp.gmail.com");
         emailSender.setPort(587);

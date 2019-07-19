@@ -10,7 +10,7 @@ public class EmpregadorDTO
    private Long codigo;
 
    private Long codigoCadastroUnico;
-   
+
    private CadastroUnicoDTO cadastroUnico;
 
    private Long codigoCnae;
@@ -21,18 +21,20 @@ public class EmpregadorDTO
 
    private Long codigoPorteEmpresa;
 
+   private Long codigoSetorEconomia;
+
    private Date dataAtualizacaoPorteEmpresa;
 
    private Long codigoUsuarioAtualizacaoProteEmpresa;
-   
+
    private AuditoriaDTO auditoria;
 
    private Integer situacao;
-   
+
    private String descricaoSituacao;
-   
+
    private Long numeroCei;
-   
+
    private String observacao;
 
 
@@ -94,6 +96,14 @@ public class EmpregadorDTO
    public void setCodigoPorteEmpresa(Long codigoPorteEmpresa)
    {
       this.codigoPorteEmpresa = codigoPorteEmpresa;
+   }
+
+   public Long getCodigoSetorEconomia() {
+      return codigoSetorEconomia;
+   }
+
+   public void setCodigoSetorEconomia(Long codigoSetorEconomia) {
+      this.codigoSetorEconomia = codigoSetorEconomia;
    }
 
    public Date getDataAtualizacaoPorteEmpresa()

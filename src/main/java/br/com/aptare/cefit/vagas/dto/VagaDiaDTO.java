@@ -1,6 +1,7 @@
 package br.com.aptare.cefit.vagas.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class VagaDiaDTO implements Serializable
 {
@@ -9,8 +10,13 @@ public class VagaDiaDTO implements Serializable
    private Long codigo;
 
    private Long codigoVaga;
-   
-   private Long codigoDia;
+
+   private Date data;
+
+   private String horarioEntrada;
+
+   private String horarioSaida;
+
 
    public Long getCodigo()
    {
@@ -32,13 +38,33 @@ public class VagaDiaDTO implements Serializable
       this.codigoVaga = codigoVaga;
    }
 
-   public Long getCodigoDia()
+   public Date getData()
    {
-      return codigoDia;
+      return data;
    }
 
-   public void setCodigoDia(Long codigoDia)
+   public void setData(Date data)
    {
-      this.codigoDia = codigoDia;
+      this.data = data;
+   }
+
+   public String getHorarioEntrada()
+   {
+      return horarioEntrada;
+   }
+
+   public void setHorarioEntrada(String horarioEntrada)
+   {
+      this.horarioEntrada = horarioEntrada;
+   }
+
+   public String getHorarioSaida()
+   {
+      return horarioSaida;
+   }
+
+   public void setHorarioSaida(String horarioSaida)
+   {
+      this.horarioSaida = horarioSaida;
    }
 }

@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Proxy;
 
+import br.com.aptare.cadastroUnico.entidade.Endereco;
 import br.com.aptare.cefit.empregador.entity.Empregador;
 import br.com.aptare.cefit.trabalhador.entity.Cbo;
 import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
@@ -43,58 +44,58 @@ public class Vaga implements Serializable
 
    @Column(name = "DS_VAG")
    private String descricao;
-   
+
    @Column(name = "TP_VAG")
    private String tipoVaga;
-   
+
    @Column(name = "TP_DS_VAG")
    private String tipoDescricaoVaga;
-   
+
    @Column(name = "CD_TRB")
    private Long codigoTrabalhador;
-   
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_TRB", insertable = false, updatable = false)
    private Trabalhador trabalhadorEntity;
-   
+
    @Column(name = "CD_CBO")
    private Long codigoCbo;
-   
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_CBO", insertable = false, updatable = false)
    private Cbo cboEntity;
-   
+
    @Column(name = "DS_CBO")
    private String descricaoCbo;
-   
+
    @Column(name = "CD_EMP")
    private Long codigoEmpregador;
-   
+
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_EMP", insertable = false, updatable = false)
-   private Empregador empregadorEntity;
-   
+   private Empregador empregador;
+
    @Column(name = "DT_INI")
    private Date dataInicio;
-   
+
    @Column(name = "DT_FIM")
    private Date dataFim;
 
    @Column(name = "DT_LMT")
    private Date dataLimite;
-   
+
    @Column(name = "ST_VAG")
    private Integer situacao;
 
    @Column(name = "DRC_VAG")
    private Integer direcionamento;
-   
+
    @Formula("(SELECT DMN.NM_VLR_DMN FROM SC_GRL.TBL_DMN DMN WHERE DMN.NM_CMP_DMN = 'ST_VAG' AND DMN.VL_CMP_DMN = ST_VAG)")
    private String descricaoSituacao;
-   
+
    @Column(name = "DS_OBS")
    private String observacao;
-   
+
    @Column(name = "FG_REA_VAG")
    private Boolean flagRealizada;
 
@@ -103,16 +104,20 @@ public class Vaga implements Serializable
 
    @Column(name = "VL_PAG_VAG")
    private Double valorPago;
-   
+
+   @Column(name = "CD_EDR")
+   private Long codigoEndereco;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "CD_EDR", insertable = false, updatable = false)
+   private Endereco endereco;
+
    @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
-   private Set<VagaAgendamento> listaVagaAgendamento; 
-   
-   @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
-   private Set<VagaDia> listaVagaDia; 
-   
+   private Set<VagaDia> listaVagaDia;
+
    @OneToMany(mappedBy = "vaga", fetch = FetchType.LAZY)
    private Set<Encaminhamento> listaEncaminhamento;
-   
+
    @Transient
    private FiltroVaga filtro;
 
@@ -219,9 +224,15 @@ public class Vaga implements Serializable
       this.dataFim = dataFim;
    }
 
-   public Date getDataLimite() { return dataLimite; }
+   public Date getDataLimite()
+   {
+      return dataLimite;
+   }
 
-   public void setDataLimite(Date dataLimite) { this.dataLimite = dataLimite; }
+   public void setDataLimite(Date dataLimite)
+   {
+      this.dataLimite = dataLimite;
+   }
 
    public Integer getSituacao()
    {
@@ -251,16 +262,6 @@ public class Vaga implements Serializable
    public void setObservacao(String observacao)
    {
       this.observacao = observacao;
-   }
-
-   public Set<VagaAgendamento> getListaVagaAgendamento()
-   {
-      return listaVagaAgendamento;
-   }
-
-   public void setListaVagaAgendamento(Set<VagaAgendamento> listaVagaAgendamento)
-   {
-      this.listaVagaAgendamento = listaVagaAgendamento;
    }
 
    public Set<VagaDia> getListaVagaDia()
@@ -313,19 +314,25 @@ public class Vaga implements Serializable
       this.trabalhadorEntity = trabalhadorEntity;
    }
 
-   public Empregador getEmpregadorEntity()
+   public Empregador getEmpregador()
    {
-      return empregadorEntity;
+      return empregador;
    }
 
-   public void setEmpregadorEntity(Empregador empregadorEntity)
+   public void setEmpregador(Empregador empregador)
    {
-      this.empregadorEntity = empregadorEntity;
+      this.empregador = empregador;
    }
 
-   public Boolean getFlagControleExibicao() { return flagControleExibicao; }
+   public Boolean getFlagControleExibicao()
+   {
+      return flagControleExibicao;
+   }
 
-   public void setFlagControleExibicao(Boolean flagControleExibicao) { this.flagControleExibicao = flagControleExibicao; }
+   public void setFlagControleExibicao(Boolean flagControleExibicao)
+   {
+      this.flagControleExibicao = flagControleExibicao;
+   }
 
    public Boolean getFlagRealizada()
    {
@@ -337,11 +344,13 @@ public class Vaga implements Serializable
       this.flagRealizada = flagRealizada;
    }
 
-   public Integer getDirecionamento() {
+   public Integer getDirecionamento()
+   {
       return direcionamento;
    }
 
-   public void setDirecionamento(Integer direcionamento) {
+   public void setDirecionamento(Integer direcionamento)
+   {
       this.direcionamento = direcionamento;
    }
 
@@ -364,4 +373,25 @@ public class Vaga implements Serializable
    {
       this.listaEncaminhamento = listaEncaminhamento;
    }
+
+   public Long getCodigoEndereco()
+   {
+      return codigoEndereco;
+   }
+
+   public void setCodigoEndereco(Long codigoEndereco)
+   {
+      this.codigoEndereco = codigoEndereco;
+   }
+
+   public Endereco getEndereco()
+   {
+      return endereco;
+   }
+
+   public void setEndereco(Endereco endereco)
+   {
+      this.endereco = endereco;
+   }
+
 }

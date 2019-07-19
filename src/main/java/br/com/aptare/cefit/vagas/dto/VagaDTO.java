@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import br.com.aptare.cefit.cadastroUnico.dto.EnderecoDTO;
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 import br.com.aptare.cefit.empregador.dto.EmpregadorDTO;
 import br.com.aptare.cefit.trabalhador.dto.CboDTO;
@@ -16,29 +17,29 @@ public class VagaDTO implements Serializable
    private static final long serialVersionUID = 8059018496629414759L;
 
    private Long codigo;
-   
+
    private String descricao;
 
    private String tipoVaga;
-   
+
    private String tipoDescricaoVaga;
-   
+
    private Long codigoTrabalhador;
-   
+
    private TrabalhadorDTO trabalhadorEntity;
-   
+
    private Long codigoCbo;
-   
+
    private CboDTO cboEntity;
-   
+
    private String descricaoCbo;
-   
+
    private Long codigoEmpregador;
-   
-   private EmpregadorDTO empregadorEntity;
-   
+
+   private EmpregadorDTO empregador;
+
    private Date dataInicio;
-   
+
    private Date dataFim;
 
    private Date dataLimite;
@@ -48,25 +49,27 @@ public class VagaDTO implements Serializable
    private Integer direcionamento;
 
    private String descricaoSituacao;
-   
+
    private String observacao;
-   
+
    private Boolean flagRealizada;
 
    private Boolean flagControleExibicao;
-   
+
    private Double valorPago;
-   
-   private Set<VagaAgendamentoDTO> listaVagaAgendamento;
-   
+
+   private Long codigoEndereco;
+
+   private EnderecoDTO endereco;
+
    private List<VagaAgendamentoDTO> listaVagaAgendamentoOrdenada;
-   
+
    private Set<VagaDiaDTO> listaVagaDia;
 
    private AuditoriaDTO auditoria;
-   
+
    private FiltroVagaDTO filtro;
-   
+
 
    public Long getCodigo()
    {
@@ -77,7 +80,7 @@ public class VagaDTO implements Serializable
    {
       this.codigo = codigo;
    }
-   
+
    public String getDescricao()
    {
       return descricao;
@@ -214,16 +217,6 @@ public class VagaDTO implements Serializable
       this.observacao = observacao;
    }
 
-   public Set<VagaAgendamentoDTO> getListaVagaAgendamento()
-   {
-      return listaVagaAgendamento;
-   }
-
-   public void setListaVagaAgendamento(Set<VagaAgendamentoDTO> listaVagaAgendamento)
-   {
-      this.listaVagaAgendamento = listaVagaAgendamento;
-   }
-
    public Set<VagaDiaDTO> getListaVagaDia()
    {
       return listaVagaDia;
@@ -274,14 +267,14 @@ public class VagaDTO implements Serializable
       this.trabalhadorEntity = trabalhadorEntity;
    }
 
-   public EmpregadorDTO getEmpregadorEntity()
+   public EmpregadorDTO getEmpregador()
    {
-      return empregadorEntity;
+      return empregador;
    }
 
-   public void setEmpregadorEntity(EmpregadorDTO empregadorEntity)
+   public void setEmpregador(EmpregadorDTO empregador)
    {
-      this.empregadorEntity = empregadorEntity;
+      this.empregador = empregador;
    }
 
    public List<VagaAgendamentoDTO> getListaVagaAgendamentoOrdenada()
@@ -320,5 +313,25 @@ public class VagaDTO implements Serializable
    public void setValorPago(Double valorPago)
    {
       this.valorPago = valorPago;
+   }
+
+   public Long getCodigoEndereco()
+   {
+      return codigoEndereco;
+   }
+
+   public void setCodigoEndereco(Long codigoEndereco)
+   {
+      this.codigoEndereco = codigoEndereco;
+   }
+
+   public EnderecoDTO getEndereco()
+   {
+      return endereco;
+   }
+
+   public void setEndereco(EnderecoDTO endereco)
+   {
+      this.endereco = endereco;
    }
 }

@@ -13,19 +13,19 @@ public class EncaminhamentoDTO implements Serializable
    private Long codigo;
 
    private Long codigoTrabalhador;
-   
+
    private TrabalhadorDTO trabalhador;
-   
+
    private Long codigoVaga;
-   
+
    private VagaDTO vaga;
-   
+
    private String flagAtivo;
-   
+
    private Date dataCancelamento;
-   
+
    private Long codigoUsuarioCancelamento;
-   
+
    private AuditoriaDTO auditoria;
 
    public Long getCodigo()

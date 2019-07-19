@@ -10,7 +10,7 @@ import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 public class TrabalhadorDTO implements Serializable
 {
    /**
-    * 
+    *
     */
    private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class TrabalhadorDTO implements Serializable
    private Long numeroSerieCtps;
 
    private Long numeroInscricaoPrefeitura;
-   
+
    private Long numeroInss;
 
    private AuditoriaDTO auditoria;
@@ -50,15 +50,21 @@ public class TrabalhadorDTO implements Serializable
 
    private String telefoneExtenso;
 
+   private String observacao;
+
    private Set<TrabalhadorCboDTO> listaTrabalhadorCbo;
 
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
 
    private Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda;
-   
+
    private Set<TrabalhadorLogDTO> listaTrabalhadorLog;
 
    private List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada;
+
+   private List<TrabalhadorRejeicaoDTO> listaTrabalhadorRejeicao;
+
+   private List<TrabalhadorPresencaDTO> listaTrabalhadorPresenca;
 
    public Long getCodigo()
    {
@@ -288,5 +294,31 @@ public class TrabalhadorDTO implements Serializable
    public void setListaTrabalhadorLogOrdenada(List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada)
    {
       this.listaTrabalhadorLogOrdenada = listaTrabalhadorLogOrdenada;
+   }
+
+   public String getObservacao()
+   {
+      return observacao;
+   }
+
+   public void setObservacao(String observacao)
+   {
+      this.observacao = observacao;
+   }
+
+   public List<TrabalhadorRejeicaoDTO> getListaTrabalhadorRejeicao() {
+      return listaTrabalhadorRejeicao;
+   }
+
+   public void setListaTrabalhadorRejeicao(List<TrabalhadorRejeicaoDTO> listaTrabalhadorRejeicao) {
+      this.listaTrabalhadorRejeicao = listaTrabalhadorRejeicao;
+   }
+
+   public List<TrabalhadorPresencaDTO> getListaTrabalhadorPresenca() {
+      return listaTrabalhadorPresenca;
+   }
+
+   public void setListaTrabalhadorPresenca(List<TrabalhadorPresencaDTO> listaTrabalhadorPresenca) {
+      this.listaTrabalhadorPresenca = listaTrabalhadorPresenca;
    }
 }

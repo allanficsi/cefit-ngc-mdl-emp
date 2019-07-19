@@ -31,10 +31,10 @@ public class Cbo implements Serializable
 
    @Column(name = "NM_COD_CBO")
    private String nomeCodigo;
-   
+
    @OneToMany(mappedBy = "cboEntity", fetch = FetchType.LAZY)
    private Set<Vaga> listaVaga;
-   
+
 
    public Long getCodigo()
    {
@@ -76,5 +76,5 @@ public class Cbo implements Serializable
       this.listaVaga = listaVaga;
    }
 
-   
+
 }

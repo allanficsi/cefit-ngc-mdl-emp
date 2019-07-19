@@ -2,6 +2,10 @@ package br.com.aptare.cefit.seguranca.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
+import br.com.aptare.cefit.trabalhador.dto.DocumentoDTO;
 
 public class UsuarioDTO implements Serializable
 {
@@ -21,9 +25,15 @@ public class UsuarioDTO implements Serializable
 
    private Date dataNascimento;
 
-   private Long cpf;
+   private Long cpf1;
+
+   private Date dataNascimento1;
 
    private Long codigoTrabalhador;
+
+   //private CadastroUnicoDTO  cadastroUnico;
+
+   private List<DocumentoDTO> listaDocumento;
 
    public Long getCodigo()
    {
@@ -95,14 +105,14 @@ public class UsuarioDTO implements Serializable
       this.dataNascimento = dataNascimento;
    }
 
-   public Long getCpf()
+   public Long getCpf1()
    {
-      return cpf;
+      return cpf1;
    }
 
-   public void setCpf(Long cpf)
+   public void setCpf1(Long cpf)
    {
-      this.cpf = cpf;
+      this.cpf1 = cpf;
    }
 
    public Long getCodigoTrabalhador()
@@ -114,4 +124,30 @@ public class UsuarioDTO implements Serializable
    {
       this.codigoTrabalhador = codigoTrabalhador;
    }
+
+   public List<DocumentoDTO> getListaDocumento()
+   {
+      return listaDocumento;
+   }
+
+   public void setListaDocumento(List<DocumentoDTO> listaDocumento)
+   {
+      this.listaDocumento = listaDocumento;
+   }
+
+   public Date getDataNascimento1() {
+      return dataNascimento1;
+   }
+
+   public void setDataNascimento1(Date dataNascimento1) {
+      this.dataNascimento1 = dataNascimento1;
+   }
+
+   //   public CadastroUnicoDTO getCadastroUnico() {
+//      return cadastroUnico;
+//   }
+//
+//   public void setCadastroUnico(CadastroUnicoDTO cadastroUnico) {
+//      this.cadastroUnico = cadastroUnico;
+//   }
 }
