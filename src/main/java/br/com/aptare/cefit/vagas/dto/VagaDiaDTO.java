@@ -10,13 +10,13 @@ public class VagaDiaDTO implements Serializable
    private Long codigo;
 
    private Long codigoVaga;
-
+   
    private Date data;
-
+   
    private String horarioEntrada;
 
    private String horarioSaida;
-
+   
 
    public Long getCodigo()
    {

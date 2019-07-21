@@ -1,14 +1,5 @@
 package br.com.aptare.cefit.vagas.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import org.hibernate.FlushMode;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
 import br.com.aptare.cefit.trabalhador.service.TrabalhadorRejeicaoService;
 import br.com.aptare.cefit.trabalhador.service.TrabalhadorService;
@@ -19,6 +10,14 @@ import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
 import br.com.aptare.fda.hibernate.CatalogoRestricoes;
+import org.hibernate.FlushMode;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class EncaminhamentoService extends AptareService<Encaminhamento>
 {
@@ -42,21 +41,21 @@ public class EncaminhamentoService extends AptareService<Encaminhamento>
    public Encaminhamento inserir(Session session, Encaminhamento entity) throws AptareException
    {
       super.inserir(session, entity);
-
+      
       // Alterar situacao da vaga
       Vaga vaga = new Vaga();
       vaga.setCodigo(entity.getCodigoVaga());
       vaga = VagaService.getInstancia().get(session, vaga, null, null);
-
+      
       if(vaga != null)
       {
          vaga.setSituacao(VagaService.SITUACAO_EM_ANDAMENTO);
          VagaService.getInstancia().alterar(session, vaga);
       }
-
+      
       return entity;
    }
-
+   
    public List<Trabalhador> listarTrabalhadoresDisponiveis(Vaga vaga) throws AptareException
    {
       Session session = getSession();
@@ -80,10 +79,10 @@ public class EncaminhamentoService extends AptareService<Encaminhamento>
       Vaga objVaga = new Vaga();
       objVaga.setCodigo(vaga.getCodigo());
       objVaga = VagaService.getInstancia().get(session, objVaga, new String[] {"listaVagaDia"}, null);
-
+      
       Date dataVaga = new ArrayList<VagaDia>(objVaga.getListaVagaDia()).get(0).getData();
-
-
+      
+      
       Long[] codigoNaoAtendidoIN = EncaminhamentoNaoAtendidoService.getInstancia().retornarCodigoNaoAtendido(session, objVaga.getCodigo());
       Long[] codigoRejeicaoIN = TrabalhadorRejeicaoService.getInstancia().retornarCodigoRejeicao(session, objVaga.getCodigoEmpregador());
       //Long[] codigoPresencaIN = TrabalhadorPresencaService.getInstancia().retornarCodigoPresenca(session, dataVaga);
@@ -99,9 +98,10 @@ public class EncaminhamentoService extends AptareService<Encaminhamento>
       trabalhador.setSituacaoIngresso(TrabalhadorService.APROVADO);
 
       List<Trabalhador> lista = TrabalhadorService.getInstancia().pesquisar(session, trabalhador, new String[] { "listaTrabalhadorCbo.cbo.listaVaga",
-                      "cadastroUnico.pessoaFisica.listaTelefone",
-                      "listaTrabalhadorPresenca", "auditoria.usuarioInclusao" },
-              new String[] { "listaTrabalhadorPresenca.dataInclusao" });
+                                                                                                                 "cadastroUnico.pessoaFisica.listaTelefone", 
+                                                                                                                 "listaTrabalhadorPresenca", "auditoria.usuarioInclusao",
+                                                                                                                 "auditoria.usuarilAlteracao*" },
+                                                                                                  new String[] { "listaTrabalhadorPresenca.dataInclusao" });
 
       return lista;
    }

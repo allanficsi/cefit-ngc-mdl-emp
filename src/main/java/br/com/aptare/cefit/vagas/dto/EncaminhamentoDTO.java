@@ -1,10 +1,10 @@
 package br.com.aptare.cefit.vagas.dto;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
+
+import java.io.Serializable;
+import java.util.Date;
 
 public class EncaminhamentoDTO implements Serializable
 {
@@ -13,19 +13,19 @@ public class EncaminhamentoDTO implements Serializable
    private Long codigo;
 
    private Long codigoTrabalhador;
-
+   
    private TrabalhadorDTO trabalhador;
-
+   
    private Long codigoVaga;
-
+   
    private VagaDTO vaga;
-
+   
    private String flagAtivo;
-
+   
    private Date dataCancelamento;
-
+   
    private Long codigoUsuarioCancelamento;
-
+   
    private AuditoriaDTO auditoria;
 
    public Long getCodigo()

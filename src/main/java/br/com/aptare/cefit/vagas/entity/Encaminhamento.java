@@ -1,26 +1,13 @@
 package br.com.aptare.cefit.vagas.entity;
 
+import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
+import br.com.aptare.seguranca.entidade.Auditoria;
+import org.hibernate.annotations.Proxy;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Proxy;
-
-import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
-import br.com.aptare.seguranca.entidade.Auditoria;
 
 @Entity
 @Table(schema = "SC_VAG", name = "TBL_ENC")
@@ -38,30 +25,30 @@ public class Encaminhamento implements Serializable
 
    @Column(name = "CD_TRB")
    private Long codigoTrabalhador;
-
+   
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_TRB", insertable = false, updatable = false)
    private Trabalhador trabalhador;
-
+   
    @Column(name = "CD_VAG")
    private Long codigoVaga;
-
+   
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_VAG", insertable = false, updatable = false)
    private Vaga vaga;
-
+   
    @Column(name = "FG_ATV_ENC")
    private String flagAtivo;
-
+   
    @Column(name = "DT_CNC_USR")
    private Date dataCancelamento;
-
+   
    @Column(name = "CD_CNC_USR")
    private Long codigoUsuarioCancelamento;
-
+   
    @Transient
    private HashMap<String, Object> filtroMap;
-
+   
    @Embedded
    private Auditoria auditoria;
 

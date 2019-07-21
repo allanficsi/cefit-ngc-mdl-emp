@@ -14,6 +14,8 @@ public class TrabalhadorCboDTO
    
    private String nome;
 
+   private Long codigoExperiencia;
+
    public Long getCodigo()
    {
       return codigo;
@@ -52,6 +54,14 @@ public class TrabalhadorCboDTO
    public void setNome(String nome)
    {
       this.nome = nome;
+   }
+
+   public Long getCodigoExperiencia() {
+      return codigoExperiencia;
+   }
+
+   public void setCodigoExperiencia(Long codigoExperiencia) {
+      this.codigoExperiencia = codigoExperiencia;
    }
 
    public CboDTO getCbo()

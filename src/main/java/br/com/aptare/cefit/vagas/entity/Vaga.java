@@ -1,32 +1,18 @@
 package br.com.aptare.cefit.vagas.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.Proxy;
-
 import br.com.aptare.cadastroUnico.entidade.Endereco;
 import br.com.aptare.cefit.empregador.entity.Empregador;
 import br.com.aptare.cefit.trabalhador.entity.Cbo;
 import br.com.aptare.cefit.trabalhador.entity.Trabalhador;
 import br.com.aptare.cefit.vagas.entity.filtro.FiltroVaga;
 import br.com.aptare.seguranca.entidade.Auditoria;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Proxy;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(schema = "SC_VAG", name = "TBL_VAG")

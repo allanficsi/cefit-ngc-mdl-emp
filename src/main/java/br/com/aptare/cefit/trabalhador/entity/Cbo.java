@@ -1,18 +1,13 @@
 package br.com.aptare.cefit.trabalhador.entity;
 
-import java.io.Serializable;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import br.com.aptare.cefit.vagas.entity.Vaga;
+import br.com.aptare.seguranca.entidade.Auditoria;
 import org.hibernate.annotations.Proxy;
 
-import br.com.aptare.cefit.vagas.entity.Vaga;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Set;
 
 @Entity
 @Table(schema = "SC_TRB", name = "TBL_CBO")
@@ -24,6 +19,8 @@ public class Cbo implements Serializable
 
    @Id
    @Column(name = "CD_CBO")
+   @GeneratedValue(strategy = GenerationType.AUTO, generator = "SQ_CBO")
+   @SequenceGenerator(name = "SQ_CBO", sequenceName = "SC_TRB.SQ_CBO")
    private Long codigo;
 
    @Column(name = "NM_CBO")
@@ -31,10 +28,31 @@ public class Cbo implements Serializable
 
    @Column(name = "NM_COD_CBO")
    private String nomeCodigo;
-
+   
+   @Column(name = "TP_IMO_CBO")
+   private String tipo;
+   
+   @Column(name = "FG_ATV_CBO")
+   private String flagAtivo;
+   
+   @Column(name = "FG_VLR_FIX_CBO")
+   private String flagValorFixo;
+   
+   @Column(name = "VL_SRV_CBO")
+   private Double valorServico;
+   
+   @Column(name = "VL_VST_CBO")
+   private Double valorVisita;
+   
+   @Embedded
+   private Auditoria auditoria;
+   
    @OneToMany(mappedBy = "cboEntity", fetch = FetchType.LAZY)
    private Set<Vaga> listaVaga;
-
+   
+   @Transient
+   private HashMap<Object, String> filtro;
+   
 
    public Long getCodigo()
    {
@@ -76,5 +94,73 @@ public class Cbo implements Serializable
       this.listaVaga = listaVaga;
    }
 
+   public String getTipo()
+   {
+      return tipo;
+   }
 
+   public void setTipo(String tipo)
+   {
+      this.tipo = tipo;
+   }
+
+   public String getFlagAtivo()
+   {
+      return flagAtivo;
+   }
+
+   public void setFlagAtivo(String flagAtivo)
+   {
+      this.flagAtivo = flagAtivo;
+   }
+
+   public Auditoria getAuditoria()
+   {
+      return auditoria;
+   }
+
+   public void setAuditoria(Auditoria auditoria)
+   {
+      this.auditoria = auditoria;
+   }
+
+   public HashMap<Object, String> getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(HashMap<Object, String> filtro)
+   {
+      this.filtro = filtro;
+   }
+
+   public String getFlagValorFixo()
+   {
+      return flagValorFixo;
+   }
+
+   public void setFlagValorFixo(String flagValorFixo)
+   {
+      this.flagValorFixo = flagValorFixo;
+   }
+
+   public Double getValorServico()
+   {
+      return valorServico;
+   }
+
+   public void setValorServico(Double valorServico)
+   {
+      this.valorServico = valorServico;
+   }
+
+   public Double getValorVisita()
+   {
+      return valorVisita;
+   }
+
+   public void setValorVisita(Double valorVisita)
+   {
+      this.valorVisita = valorVisita;
+   }
 }

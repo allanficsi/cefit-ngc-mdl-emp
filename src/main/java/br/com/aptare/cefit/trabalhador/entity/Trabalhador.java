@@ -1,29 +1,15 @@
 package br.com.aptare.cefit.trabalhador.entity;
 
+import br.com.aptare.cadastroUnico.entidade.CadastroUnico;
+import br.com.aptare.seguranca.entidade.Auditoria;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Proxy;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.Proxy;
-
-import br.com.aptare.cadastroUnico.entidade.CadastroUnico;
-import br.com.aptare.seguranca.entidade.Auditoria;
 
 @Entity
 @Table(schema = "SC_TRB", name = "TBL_TRB")
@@ -84,7 +70,7 @@ public class Trabalhador implements Serializable
 
    @Column(name = "NR_INSS")
    private Long numeroInss;
-
+   
    @Column(name = "OBS_TRB")
    private String observacao;
 
@@ -108,10 +94,10 @@ public class Trabalhador implements Serializable
 
    @Embedded
    private Auditoria auditoria;
-
+   
    @Transient
    private Long codigoCbo;
-
+   
    @Transient
    private Date dataHoraPresenca;
 
@@ -268,7 +254,7 @@ public class Trabalhador implements Serializable
       this.numeroInss = numeroInss;
    }
 
-   public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
+     public Set<TrabalhadorCbo> getListaTrabalhadorCbo()
    {
       return listaTrabalhadorCbo;
    }

@@ -1,16 +1,16 @@
 package br.com.aptare.cefit.trabalhador.dto;
 
+import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
+import br.com.aptare.cefit.common.dto.AuditoriaDTO;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
-import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-
 public class TrabalhadorDTO implements Serializable
 {
    /**
-    *
+    * 
     */
    private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class TrabalhadorDTO implements Serializable
    private Long numeroSerieCtps;
 
    private Long numeroInscricaoPrefeitura;
-
+   
    private Long numeroInss;
 
    private AuditoriaDTO auditoria;
@@ -49,7 +49,7 @@ public class TrabalhadorDTO implements Serializable
    private Boolean flagTrabalhadorFormal;
 
    private String telefoneExtenso;
-
+   
    private String observacao;
 
    private Set<TrabalhadorCboDTO> listaTrabalhadorCbo;
@@ -57,7 +57,7 @@ public class TrabalhadorDTO implements Serializable
    private Set<TrabalhadorDeficienciaDTO> listaTrabalhadorDeficiencia;
 
    private Set<TrabalhadorAgendaDTO> listaTrabalhadorAgenda;
-
+   
    private Set<TrabalhadorLogDTO> listaTrabalhadorLog;
 
    private List<TrabalhadorLogDTO> listaTrabalhadorLogOrdenada;

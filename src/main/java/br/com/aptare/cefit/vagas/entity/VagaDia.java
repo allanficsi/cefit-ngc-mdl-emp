@@ -1,20 +1,10 @@
 package br.com.aptare.cefit.vagas.entity;
 
+import org.hibernate.annotations.Proxy;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(schema = "SC_VAG", name = "TBL_VAG_DIA")
@@ -32,14 +22,14 @@ public class VagaDia implements Serializable
 
    @Column(name = "CD_VAG")
    private Long codigoVaga;
-
+   
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "CD_VAG", insertable = false, updatable = false)
    private Vaga vaga;
-
+   
    @Column(name = "DT_VAG")
    private Date data;
-
+   
    @Column(name = "NR_HOR1")
    private String horarioEntrada;
 

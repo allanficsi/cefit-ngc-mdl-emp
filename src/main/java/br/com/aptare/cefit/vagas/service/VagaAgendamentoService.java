@@ -1,15 +1,14 @@
 package br.com.aptare.cefit.vagas.service;
 
-import java.util.List;
-
-import org.hibernate.FlushMode;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import br.com.aptare.cefit.vagas.entity.VagaAgendamento;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import org.hibernate.FlushMode;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class VagaAgendamentoService extends AptareService<VagaAgendamento>
 {

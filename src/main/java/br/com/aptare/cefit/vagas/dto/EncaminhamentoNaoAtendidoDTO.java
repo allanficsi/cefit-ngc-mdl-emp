@@ -1,9 +1,9 @@
 package br.com.aptare.cefit.vagas.dto;
 
-import java.io.Serializable;
-
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
+
+import java.io.Serializable;
 
 public class EncaminhamentoNaoAtendidoDTO implements Serializable
 {

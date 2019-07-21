@@ -1,19 +1,9 @@
 package br.com.aptare.cefit.trabalhador.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Proxy;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(schema = "SC_TRB", name = "TBL_TRB_CBO")
@@ -45,6 +35,9 @@ public class TrabalhadorCbo implements Serializable
    
    @Column(name = "NM_TRB_CBO")
    private String nome;
+
+   @Column(name = "CD_EXP_CMP")
+   private Long codigoExperiencia;
 
    public Long getCodigo()
    {
@@ -79,6 +72,14 @@ public class TrabalhadorCbo implements Serializable
    public String getNome()
    {
       return nome;
+   }
+
+   public Long getCodigoExperiencia() {
+      return codigoExperiencia;
+   }
+
+   public void setCodigoExperiencia(Long codigoExperiencia) {
+      this.codigoExperiencia = codigoExperiencia;
    }
 
    public void setNome(String nome)

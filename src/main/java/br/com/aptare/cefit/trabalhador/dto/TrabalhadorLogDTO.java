@@ -1,10 +1,6 @@
 package br.com.aptare.cefit.trabalhador.dto;
 
-import br.com.aptare.cefit.cadastroUnico.dto.CadastroUnicoDTO;
-import br.com.aptare.cefit.common.dto.AuditoriaDTO;
-
 import java.util.Date;
-import java.util.Set;
 
 public class TrabalhadorLogDTO
 {

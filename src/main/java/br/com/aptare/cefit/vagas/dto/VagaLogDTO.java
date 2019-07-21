@@ -3,8 +3,6 @@ package br.com.aptare.cefit.vagas.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-
 public class VagaLogDTO implements Serializable
 {
    private static final long serialVersionUID = 1431211184645188934L;

@@ -1,7 +1,9 @@
 package br.com.aptare.cefit.vagas.service;
 
-import java.util.List;
-
+import br.com.aptare.cefit.vagas.entity.EncaminhamentoNaoAtendido;
+import br.com.aptare.fda.crud.service.AptareService;
+import br.com.aptare.fda.exception.AptareException;
+import br.com.aptare.fda.exception.TratamentoPadraoErro;
 import org.hibernate.Criteria;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
@@ -9,10 +11,7 @@ import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.aptare.cefit.vagas.entity.EncaminhamentoNaoAtendido;
-import br.com.aptare.fda.crud.service.AptareService;
-import br.com.aptare.fda.exception.AptareException;
-import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import java.util.List;
 
 public class EncaminhamentoNaoAtendidoService extends AptareService<EncaminhamentoNaoAtendido>
 {
@@ -83,5 +82,4 @@ public class EncaminhamentoNaoAtendidoService extends AptareService<Encaminhamen
 
       return retorno;
    }
-
 }

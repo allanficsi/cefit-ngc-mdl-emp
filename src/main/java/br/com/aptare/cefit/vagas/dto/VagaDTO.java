@@ -1,10 +1,5 @@
 package br.com.aptare.cefit.vagas.dto;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
 import br.com.aptare.cefit.cadastroUnico.dto.EnderecoDTO;
 import br.com.aptare.cefit.common.dto.AuditoriaDTO;
 import br.com.aptare.cefit.empregador.dto.EmpregadorDTO;
@@ -12,34 +7,39 @@ import br.com.aptare.cefit.trabalhador.dto.CboDTO;
 import br.com.aptare.cefit.trabalhador.dto.TrabalhadorDTO;
 import br.com.aptare.cefit.vagas.dto.filtro.FiltroVagaDTO;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 public class VagaDTO implements Serializable
 {
    private static final long serialVersionUID = 8059018496629414759L;
 
    private Long codigo;
-
+   
    private String descricao;
 
    private String tipoVaga;
-
+   
    private String tipoDescricaoVaga;
-
+   
    private Long codigoTrabalhador;
-
+   
    private TrabalhadorDTO trabalhadorEntity;
-
+   
    private Long codigoCbo;
-
+   
    private CboDTO cboEntity;
-
+   
    private String descricaoCbo;
-
+   
    private Long codigoEmpregador;
-
+   
    private EmpregadorDTO empregador;
-
+   
    private Date dataInicio;
-
+   
    private Date dataFim;
 
    private Date dataLimite;
@@ -49,27 +49,31 @@ public class VagaDTO implements Serializable
    private Integer direcionamento;
 
    private String descricaoSituacao;
-
+   
    private String observacao;
-
+   
    private Boolean flagRealizada;
 
    private Boolean flagControleExibicao;
-
+   
    private Double valorPago;
-
+   
    private Long codigoEndereco;
-
+   
    private EnderecoDTO endereco;
-
+   
    private List<VagaAgendamentoDTO> listaVagaAgendamentoOrdenada;
-
+   
    private Set<VagaDiaDTO> listaVagaDia;
 
    private AuditoriaDTO auditoria;
-
+   
+   private String descricaoEndereco;
+   
+   private String descricaoDia;
+   
    private FiltroVagaDTO filtro;
-
+   
 
    public Long getCodigo()
    {
@@ -80,7 +84,7 @@ public class VagaDTO implements Serializable
    {
       this.codigo = codigo;
    }
-
+   
    public String getDescricao()
    {
       return descricao;
@@ -333,5 +337,25 @@ public class VagaDTO implements Serializable
    public void setEndereco(EnderecoDTO endereco)
    {
       this.endereco = endereco;
+   }
+
+   public String getDescricaoEndereco()
+   {
+      return descricaoEndereco;
+   }
+
+   public void setDescricaoEndereco(String descricaoEndereco)
+   {
+      this.descricaoEndereco = descricaoEndereco;
+   }
+
+   public String getDescricaoDia()
+   {
+      return descricaoDia;
+   }
+
+   public void setDescricaoDia(String descricaoDia)
+   {
+      this.descricaoDia = descricaoDia;
    }
 }

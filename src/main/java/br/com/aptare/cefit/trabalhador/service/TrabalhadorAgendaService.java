@@ -1,15 +1,14 @@
 package br.com.aptare.cefit.trabalhador.service;
 
-import java.util.List;
-
-import org.hibernate.FlushMode;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import br.com.aptare.cefit.trabalhador.entity.TrabalhadorAgenda;
 import br.com.aptare.fda.crud.service.AptareService;
 import br.com.aptare.fda.exception.AptareException;
 import br.com.aptare.fda.exception.TratamentoPadraoErro;
+import org.hibernate.FlushMode;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
 
 public class TrabalhadorAgendaService extends AptareService<TrabalhadorAgenda> {
     private static TrabalhadorAgendaService instancia;
